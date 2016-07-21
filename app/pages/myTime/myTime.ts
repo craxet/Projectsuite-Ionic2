@@ -75,7 +75,6 @@ export class MyTimePage implements OnInit{
 
     getWorkingSteps(){
         this.workingSteps = this.myTimeService.getWorkingSteps(this.slidedDate.from,this.slidedDate.to,this.inclBooked,this.memberId,this.tenant);
-        console.log(this.workingSteps);
     }
 
     headerDateFn(record, recordIndex, records){
