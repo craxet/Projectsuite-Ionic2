@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>My Time</ion-title>
+        <ion-buttons end>
+            <button (click)="createBooking()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-buttons start>
+            <div class="month-or-week">
+                <button (click)="setCalendarViewType('week')">Month</button>
+                <span class="slash">/</span>
+                <button
+                        (click)="setCalendarViewType('week')">Week
+                </button>
+            </div>
+        </ion-buttons>
+        <ion-title>{{slidedDate.name}}</ion-title>
+        <ion-buttons end>
+            <button (click)="createBooking()">
+                <ion-icon name="ios-more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-slides #mySlider (ionDidChange)="onSlideChanged()">
+        <ion-slide>
+                <ion-list [virtualScroll]="workingSteps" [bufferRatio]="20" [headerFn]="headerDateFn">
+                    <ion-item-divider *virtualHeader="let header">{{ header }}</ion-item-divider>
+                    <ion-item *virtualItem="let item">
+                        <ion-list style="margin-bottom: -1px !important;">
+                            <ion-item *ngFor="let value of item.values">{{value.taskName}}</ion-item>
+                        </ion-list>
+                    </ion-item>
+                </ion-list>
+        </ion-slide>
+    </ion-slides>
+</ion-content>`
