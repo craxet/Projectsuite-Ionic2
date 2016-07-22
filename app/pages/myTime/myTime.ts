@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Slides} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import * as _ from 'lodash';
+import * as moment from '../../../node_modules/momentjs';
+//const moment: (value?: any) => moment.Moment = (<any>moment).default || moment;
 
 import {MyTimeService} from './myTime.service';
-
 
 
 @Component({
@@ -19,33 +20,33 @@ import {MyTimeService} from './myTime.service';
             color: #387ef5;
         }`
     ],
-    providers:[MyTimeService]
+    providers: [MyTimeService]
 })
 
-export class MyTimePage implements OnInit{
+export class MyTimePage implements OnInit {
 
-    @ViewChild('mySlider') slider:Slides;
-
-    slidedDate:any;
+    hidePrevButton:boolean;
+    hideNextButton:boolean;
+    selectedDate:{name:string,from: Date, to: Date};
     calendarViewType:string = 'month';
-    monthsShort:Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    monthsShort:Array<string> = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     dates:Array<{name: string, from: Date, to: Date}> = [];
     workingSteps:Array<any> = [];
     inclBooked:boolean = false;
     tenant:string = null;
     memberId:string = null;
 
-    constructor(private nav:NavController,private myTimeService: MyTimeService) {
+    constructor(private nav:NavController, private myTimeService:MyTimeService) {
         const today = new Date();
         if (this.calendarViewType === 'month') {
             const m = today.getMonth();
             const y = today.getFullYear();
-            this.slidedDate = {
+            this.selectedDate = {
                 name: this.monthsShort[m],
                 from: new Date(y, m, 1),
                 to: new Date(y, m + 1, 0)
             };
-            this.dates.push(this.slidedDate);
+            this.dates.push(this.selectedDate);
             this.dates.push({
                 name: this.monthsShort[m - 1],
                 from: new Date(y, m - 1, 1),
@@ -56,13 +57,40 @@ export class MyTimePage implements OnInit{
                 from: new Date(y, m - 2, 1),
                 to: new Date(y, m + 1 - 2, 0)
             });
+            this.hideNextButton = true;
         }
     }
 
-    onSlideChanged() {
-        let currentIndex = this.slider.getActiveIndex();
-        this.slidedDate = this.dates[currentIndex];
-        this.getWorkingSteps();
+    changeDate(direction) {
+        if (direction === 'prev') {
+            if (this.calendarViewType === 'month') {
+                const prevDateIdx = this.dates.indexOf(this.selectedDate) + 1;
+                if (prevDateIdx < this.dates.length) {
+                    this.selectedDate = this.dates[prevDateIdx];
+                }
+
+                if (this.selectedDate === this.dates[2]) {
+                    this.hidePrevButton = true;
+                    this.hideNextButton = false;
+                } else {
+                    this.hidePrevButton = false;
+                }
+            }
+        } else if (direction === 'next') {
+                if(this.calendarViewType === 'month'){
+                    const nextDateIdx = this.dates.indexOf(this.selectedDate) -1;
+                    if(nextDateIdx >= 0){
+                        this.selectedDate = this.dates[nextDateIdx];
+                    }
+
+                    if(this.selectedDate === this.dates[0]){
+                        this.hideNextButton = true;
+                        this.hidePrevButton = false;
+                    }else{
+                        this.hideNextButton = false;
+                    }
+                }
+        }
     }
 
     setCalendarViewType(type) {
@@ -73,11 +101,11 @@ export class MyTimePage implements OnInit{
 
     }
 
-    getWorkingSteps(){
-        this.workingSteps = this.myTimeService.getWorkingSteps(this.slidedDate.from,this.slidedDate.to,this.inclBooked,this.memberId,this.tenant);
+    getWorkingSteps() {
+        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
-    headerDateFn(record, recordIndex, records){
+    headerDateFn(record, recordIndex, records) {
         var datePipe = new DatePipe();
         //TODO use formatter in template
         return datePipe.transform(new Date(parseInt(record.date)), 'dd.MM.yyyy');

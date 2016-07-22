@@ -1,39 +1,35 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-navbar>
         <ion-title>My Time</ion-title>
         <ion-buttons end>
             <button (click)="createBooking()">
                 <ion-icon name="add"></ion-icon>
             </button>
         </ion-buttons>
-    </ion-toolbar>
+    </ion-navbar>
     <ion-toolbar no-border-top>
-        <ion-buttons start>
-            <div class="month-or-week">
-                <button (click)="setCalendarViewType('week')">Month</button>
-                <span class="slash">/</span>
-                <button
-                        (click)="setCalendarViewType('week')">Week
+        <ion-buttons [hidden]="hidePrevButton" start>
+                <button (click)="changeDate('prev')">
+                    <ion-icon name="arrow-dropleft"></ion-icon>
                 </button>
-            </div>
         </ion-buttons>
-        <ion-title>{{slidedDate.name}}</ion-title>
-        <ion-buttons end>
-            <button (click)="createBooking()">
-                <ion-icon name="ios-more"></ion-icon>
+        <ion-title>{{selectedDate.name}}</ion-title>
+        <ion-buttons [hidden]="hideNextButton" end>
+            <button (click)="changeDate('next')">
+                <ion-icon name="arrow-dropright"></ion-icon>
             </button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list *ngFor="let header of workingSteps">
+    <ion-list *ngFor="let headerDate of workingSteps">
         <ion-list-header>
-            <div style="text-align: left;">{{header.date | date:
+            <div style="text-align: left;">{{headerDate.date | date:
                 'dd.MM.yyyy'}}
             </div>
         </ion-list-header>
-        <ion-item-sliding *ngFor="let value of header.values">
-            <ion-item>{{value.taskName}}</ion-item>
+        <ion-item-sliding *ngFor="let step of headerDate.values">
+            <ion-item>{{step.taskName}}</ion-item>
             <ion-item-options>
                 <button primary>
                     <ion-icon name="text"></ion-icon>
