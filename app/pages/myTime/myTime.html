@@ -9,11 +9,16 @@
     </ion-navbar>
     <ion-toolbar no-border-top>
         <ion-buttons [hidden]="hidePrevButton" start>
-                <button (click)="changeDate('prev')">
-                    <ion-icon name="arrow-dropleft"></ion-icon>
-                </button>
+            <button (click)="changeDate('prev')">
+                <ion-icon name="arrow-dropleft"></ion-icon>
+            </button>
         </ion-buttons>
-        <ion-title>{{selectedDate.name}}</ion-title>
+        <ion-title>
+            <button dark clear (click)="showDateViewModePopover($event)">
+                {{selectedDate.name}}
+                <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
+            </button>
+        </ion-title>
         <ion-buttons [hidden]="hideNextButton" end>
             <button (click)="changeDate('next')">
                 <ion-icon name="arrow-dropright"></ion-icon>

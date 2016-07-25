@@ -179,9 +179,8 @@ export class MyTimeService {
 
 
         let query = _.chain(data).filter(function (item) {
-            return <any>from.getTime() <= <any>item.date <= <any>to.getTime();
+            return from.getTime() <= item.date && item.date <= to.getTime();
         }).groupBy('date').value();
-
         let list = [];
         _.forIn(query, function (value, key) {
             list.push({date: key, values: value});

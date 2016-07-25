@@ -1,14 +1,12 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {ViewChild} from '@angular/core';
-import {OnInit} from '@angular/core';
+import {Popover,NavController} from 'ionic-angular';
+import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import * as _ from 'lodash';
-import * as moment from '../../../node_modules/momentjs';
+//import * as moment from '../../../node_modules/momentjs';
 //const moment: (value?: any) => moment.Moment = (<any>moment).default || moment;
 
 import {MyTimeService} from './myTime.service';
-
+import {DateViewModePopover} from '../../components/dateViewModePopover/dateViewModePopover'
 
 @Component({
     templateUrl: 'build/pages/myTime/myTime.html',
@@ -18,7 +16,8 @@ import {MyTimeService} from './myTime.service';
         }
         .active{
             color: #387ef5;
-        }`
+        }
+        `
     ],
     providers: [MyTimeService]
 })
@@ -67,29 +66,30 @@ export class MyTimePage implements OnInit {
                 const prevDateIdx = this.dates.indexOf(this.selectedDate) + 1;
                 if (prevDateIdx < this.dates.length) {
                     this.selectedDate = this.dates[prevDateIdx];
+                    this.getWorkingSteps();
                 }
 
                 if (this.selectedDate === this.dates[2]) {
                     this.hidePrevButton = true;
                     this.hideNextButton = false;
                 } else {
-                    this.hidePrevButton = false;
+                    this.hidePrevButton = this.hideNextButton = false;
                 }
             }
         } else if (direction === 'next') {
-                if(this.calendarViewType === 'month'){
-                    const nextDateIdx = this.dates.indexOf(this.selectedDate) -1;
-                    if(nextDateIdx >= 0){
-                        this.selectedDate = this.dates[nextDateIdx];
-                    }
-
-                    if(this.selectedDate === this.dates[0]){
-                        this.hideNextButton = true;
-                        this.hidePrevButton = false;
-                    }else{
-                        this.hideNextButton = false;
-                    }
+            if (this.calendarViewType === 'month') {
+                const nextDateIdx = this.dates.indexOf(this.selectedDate) - 1;
+                if (nextDateIdx >= 0) {
+                    this.selectedDate = this.dates[nextDateIdx];
+                    this.getWorkingSteps();
                 }
+                if (this.selectedDate === this.dates[0]) {
+                    this.hideNextButton = true;
+                    this.hidePrevButton = false;
+                } else {
+                    this.hideNextButton = this.hidePrevButton = false;
+                }
+            }
         }
     }
 
@@ -101,18 +101,24 @@ export class MyTimePage implements OnInit {
 
     }
 
+    showDateViewModePopover(ev) {
+        let popover = Popover.create(DateViewModePopover);
+        this.nav.present(popover, {
+            ev: ev
+        });
+    }
+
     getWorkingSteps() {
         this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
-    headerDateFn(record, recordIndex, records) {
-        var datePipe = new DatePipe();
-        //TODO use formatter in template
-        return datePipe.transform(new Date(parseInt(record.date)), 'dd.MM.yyyy');
-    }
+    /* headerDateFn(record, recordIndex, records) {
+     var datePipe = new DatePipe();
+     //TODO use formatter in template
+     return datePipe.transform(new Date(parseInt(record.date)), 'dd.MM.yyyy');
+     }*/
 
     ngOnInit() {
         this.getWorkingSteps();
     }
-
 }
