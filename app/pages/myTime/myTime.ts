@@ -2,8 +2,8 @@ import {Popover,NavController} from 'ionic-angular';
 import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import * as _ from 'lodash';
-//import * as moment from '../../../node_modules/momentjs';
-//const moment: (value?: any) => moment.Moment = (<any>moment).default || moment;
+import * as moment from 'moment';
+//const momentCons: (value?: any) => moment.Moment = (<any>moment).default || moment;
 
 import {MyTimeService} from './myTime.service';
 import {DateViewModePopover} from '../../components/dateViewModePopover/dateViewModePopover'
@@ -36,6 +36,7 @@ export class MyTimePage implements OnInit {
     memberId:string = null;
 
     constructor(private nav:NavController, private myTimeService:MyTimeService) {
+        console.log(moment());
         const today = new Date();
         if (this.calendarViewType === 'month') {
             const m = today.getMonth();

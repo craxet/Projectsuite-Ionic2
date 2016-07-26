@@ -15,3 +15,9 @@
 ion-page.show-page ~ .nav-decor{
   background: white;
 }
+.popover-content{
+  min-height: initial;
+  left: 0 !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}

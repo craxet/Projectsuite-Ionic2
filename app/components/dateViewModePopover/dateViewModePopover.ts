@@ -1,16 +1,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-    templateUrl: 'build/components/dateViewModePopover/dateViewModePopover.html',
-    styles:[
-        `.popover-content{
-            min-height: auto !important;
-        }
-
-        `
-    ]
+    templateUrl: 'build/components/dateViewModePopover/dateViewModePopover.html'
 })
 export class DateViewModePopover{
-
+    dateViewMode:string;
     constructor() {}
 }
