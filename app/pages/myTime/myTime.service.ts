@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import Dictionary = _.Dictionary;
+import {Moment} from 'moment';
 
 @Injectable()
 export class MyTimeService {
-    getWorkingSteps(from:Date, to:Date, inclBooked:boolean, memberId:String, tenant:string) {
+    getWorkingSteps(from:Moment, to:Moment, inclBooked:boolean, memberId:String, tenant:string) {
         // allTenants: false
         let data = [{
             "id": "2016-07-19 15:53:51.641",
@@ -177,9 +177,8 @@ export class MyTimeService {
                 "number": 30159
             }];
 
-
         let query = _.chain(data).filter(function (item) {
-            return from.getTime() <= item.date && item.date <= to.getTime();
+            return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
         }).groupBy('date').value();
         let list = [];
         _.forIn(query, function (value, key) {

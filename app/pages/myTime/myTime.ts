@@ -37,11 +37,12 @@ export class MyTimePage implements OnInit {
     monthIndex:number = 0;
     selectedDate:{name:string, from: Moment, to: Moment};
     calView:CalViewType = CalViewType.MONTH;
-    dates:Array<{name: string, from: Date, to: Date}> = [];
     workingSteps:Array<any> = [];
     inclBooked:boolean = false;
     tenant:string = null;
     memberId:string = null;
+
+    private monthLevel:number = 2;
 
     constructor(private nav:NavController, private myTimeService:MyTimeService) {
         this.setNewDateRange();
@@ -52,7 +53,7 @@ export class MyTimePage implements OnInit {
             case CalViewType.DAY:
                 break;
             case CalViewType.MONTH:
-                if (this.monthIndex < 3) {
+                if (this.monthIndex < this.monthLevel) {
                     let newDate:Moment = null;
                     if (Direction.PREV === direction) {
                         this.monthIndex++;
@@ -63,15 +64,15 @@ export class MyTimePage implements OnInit {
                     } else {
                         newDate = moment();
                     }
-                    console.log(this.monthIndex);
                     this.selectedDate = {
                         name: newDate.format('MMMM'),
-                        from: newDate.startOf('month'), to: newDate.endOf('month')
+                        from: newDate.clone().startOf('month'), to: newDate.clone().endOf('month')
                     };
-                    this.hideNextButton = this.selectedDate.from.month() === moment().month();
-                    this.hidePrevButton = this.monthIndex >= 3;
                 }
-                this.monthIndex = this.monthIndex === 3 ? 0 : this.monthIndex;
+                this.hideNextButton = this.selectedDate.from.month() === moment().month();
+                this.hidePrevButton = this.monthIndex === this.monthLevel && !this.hideNextButton;
+                this.monthIndex = this.monthIndex === this.monthLevel ? 0 : this.monthIndex;
+                break;
             case CalViewType.MONTH:
                 break;
         }
@@ -89,7 +90,7 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        //this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
+        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
     /* headerDateFn(record, recordIndex, records) {
@@ -99,6 +100,6 @@ export class MyTimePage implements OnInit {
      }*/
 
     ngOnInit() {
-        //this.getWorkingSteps();
+        this.getWorkingSteps();
     }
 }
