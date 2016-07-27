@@ -6,11 +6,8 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 
 import {MyTimeService} from './myTime.service';
-import {DateViewModePopover} from '../../components/dateViewModePopover/dateViewModePopover'
-
-enum CalViewType{
-    DAY, WEEK, MONTH
-}
+import {DateViewModePopover} from '../../components/dateViewModePopover/dateViewModePopover';
+import {CalViewType} from '../../enums/enums';
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
@@ -83,7 +80,10 @@ export class MyTimePage implements OnInit {
     }
 
     showDateViewModePopover(ev) {
-        let popover = Popover.create(DateViewModePopover);
+        let popover = Popover.create(DateViewModePopover, {calView: this.calView});
+        popover.onDismiss(data=> {
+            this.calView = data;
+        });
         this.nav.present(popover, {
             ev: ev
         });
