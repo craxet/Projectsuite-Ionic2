@@ -44,6 +44,7 @@ export class MyTimePage implements OnInit {
 
     private monthLevel:number = 2;
     private weekLevel:number = 3;
+    private dayLevel:number = 7;
 
     constructor(private nav:NavController, private myTimeService:MyTimeService) {
         this.setNewDateRange();
@@ -52,18 +53,38 @@ export class MyTimePage implements OnInit {
     setNewDateRange(direction?) {
         switch (this.calView) {
             case CalViewType.DAY:
+                this.selectedDateClass = true;
+                if (this.dateIndex < this.dayLevel) {
+                    let newDate:Moment = null;
+                    if (Direction.PREV === direction) {
+                        this.dateIndex++;
+                        newDate = this.selectedDate.from.add(-1, 'day');
+                    } else if (Direction.NEXT === direction) {
+                        this.dateIndex++;
+                        newDate = this.selectedDate.from.add(1, 'day');
+                    } else {
+                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
+                    }
+                    this.selectedDate = {
+                        name: newDate.format('dddd DD.MM.YYYY'),
+                        from: newDate.clone().startOf('day'), to: newDate.clone().endOf('day')
+                    };
+                }
+                this.hideNextButton = this.selectedDate.from.day() === moment().day();
+                this.hidePrevButton = this.dateIndex === this.dayLevel && !this.hideNextButton;
+                this.dateIndex = this.dateIndex === this.dayLevel ? 0 : this.dateIndex;
                 break;
             case CalViewType.MONTH:
                 if (this.dateIndex < this.monthLevel) {
                     let newDate:Moment = null;
                     if (Direction.PREV === direction) {
                         this.dateIndex++;
-                        newDate = this.selectedDate.from.subtract(1, 'month');
+                        newDate = this.selectedDate.from.add(-1, 'month');
                     } else if (Direction.NEXT === direction) {
                         this.dateIndex++;
                         newDate = this.selectedDate.from.add(1, 'month');
                     } else {
-                        newDate = moment();
+                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                     }
                     this.selectedDate = {
                         name: newDate.format('MMMM'),
@@ -80,7 +101,7 @@ export class MyTimePage implements OnInit {
                     let newDate:Moment = null;
                     if (Direction.PREV === direction) {
                         this.dateIndex++;
-                        newDate = this.selectedDate.from.subtract(1, 'week');
+                        newDate = this.selectedDate.from.add(-1, 'week');
                     } else if (Direction.NEXT === direction) {
                         this.dateIndex++;
                         newDate = this.selectedDate.from.add(1, 'week');
