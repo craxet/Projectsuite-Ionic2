@@ -22,6 +22,7 @@ enum Direction{
         .active{
             color: #387ef5;
         }
+
         `
     ],
     providers: [MyTimeService]
@@ -31,7 +32,7 @@ export class MyTimePage implements OnInit {
 
     hidePrevButton:boolean;
     hideNextButton:boolean;
-    monthIndex:number = 0;
+    dateIndex:number = 0;
     selectedDate:{name:string, from: Moment, to: Moment};
     calView:CalViewType = CalViewType.MONTH;
     workingSteps:Array<any> = [];
@@ -39,7 +40,10 @@ export class MyTimePage implements OnInit {
     tenant:string = null;
     memberId:string = null;
 
+    selectedDateClass:boolean = false;
+
     private monthLevel:number = 2;
+    private weekLevel:number = 3;
 
     constructor(private nav:NavController, private myTimeService:MyTimeService) {
         this.setNewDateRange();
@@ -50,13 +54,13 @@ export class MyTimePage implements OnInit {
             case CalViewType.DAY:
                 break;
             case CalViewType.MONTH:
-                if (this.monthIndex < this.monthLevel) {
+                if (this.dateIndex < this.monthLevel) {
                     let newDate:Moment = null;
                     if (Direction.PREV === direction) {
-                        this.monthIndex++;
+                        this.dateIndex++;
                         newDate = this.selectedDate.from.subtract(1, 'month');
                     } else if (Direction.NEXT === direction) {
-                        this.monthIndex++;
+                        this.dateIndex++;
                         newDate = this.selectedDate.from.add(1, 'month');
                     } else {
                         newDate = moment();
@@ -67,10 +71,33 @@ export class MyTimePage implements OnInit {
                     };
                 }
                 this.hideNextButton = this.selectedDate.from.month() === moment().month();
-                this.hidePrevButton = this.monthIndex === this.monthLevel && !this.hideNextButton;
-                this.monthIndex = this.monthIndex === this.monthLevel ? 0 : this.monthIndex;
+                this.hidePrevButton = this.dateIndex === this.monthLevel && !this.hideNextButton;
+                this.dateIndex = this.dateIndex === this.monthLevel ? 0 : this.dateIndex;
                 break;
-            case CalViewType.MONTH:
+            case CalViewType.WEEK:
+                this.selectedDateClass = true;
+                if (this.dateIndex < this.weekLevel) {
+                    let newDate:Moment = null;
+                    if (Direction.PREV === direction) {
+                        this.dateIndex++;
+                        newDate = this.selectedDate.from.subtract(1, 'week');
+                    } else if (Direction.NEXT === direction) {
+                        this.dateIndex++;
+                        newDate = this.selectedDate.from.add(1, 'week');
+                    } else {
+                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
+                    }
+                    const startOfWeek = newDate.clone().startOf('isoWeek');
+                    const endOfWeek = newDate.clone().endOf('isoWeek');
+                    const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + newDate.format('(W.)');
+                    this.selectedDate = {
+                        name: name,
+                        from: startOfWeek, to: endOfWeek
+                    };
+                }
+                this.hideNextButton = this.selectedDate.from.week() === moment().week();
+                this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
+                this.dateIndex = this.dateIndex === this.weekLevel ? 0 : this.dateIndex;
                 break;
         }
     }
@@ -82,7 +109,9 @@ export class MyTimePage implements OnInit {
     showDateViewModePopover(ev) {
         let popover = Popover.create(DateViewModePopover, {calView: this.calView});
         popover.onDismiss(data=> {
+            this.dateIndex = 0;
             this.calView = data;
+            this.setNewDateRange();
         });
         this.nav.present(popover, {
             ev: ev
