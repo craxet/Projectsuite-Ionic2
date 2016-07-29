@@ -1,4 +1,4 @@
-import {Popover,NavController} from 'ionic-angular';
+import {Popover,NavController,Alert} from 'ionic-angular';
 import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
@@ -118,6 +118,16 @@ export class MyTimePage implements OnInit {
                 this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
                 break;
             case CalViewType.CUSTOM:
+                let alert = Alert.create();
+                alert.setTitle('Date Range');
+                alert.addButton({
+                    text: 'OK',
+                    handler: data => {
+                        console.log('closed');
+                    }
+                });
+                this.nav.present(alert);
+
                 //TODO just with cordova
                 /*DatePicker.show({
                  date: new Date(),
