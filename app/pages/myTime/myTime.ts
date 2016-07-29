@@ -2,6 +2,10 @@ import {Popover,NavController} from 'ionic-angular';
 import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
+
+//cordova plugin
+import {DatePicker} from 'ionic-native';
+
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -40,6 +44,7 @@ export class MyTimePage implements OnInit {
     tenant:string = null;
     memberId:string = null;
 
+    private newDate:Moment;
     private monthLevel:number;
     private weekLevel:number;
     private dayLevel:number;
@@ -49,26 +54,23 @@ export class MyTimePage implements OnInit {
         this.weekLevel = 3;
         //number od days until today
         this.dayLevel = moment().date() - 1;
-        console.log(this.dayLevel);
-        this.setNewDateRange();
     }
 
     setNewDateRange(direction?) {
         switch (this.calView) {
             case CalViewType.DAY:
-                let newDate:Moment = null;
                 if (Direction.PREV === direction) {
                     this.dateIndex++;
-                    newDate = this.selectedDate.from.add(-1, 'day');
+                    this.newDate = this.selectedDate.from.add(-1, 'day');
                 } else if (Direction.NEXT === direction) {
                     this.dateIndex--;
-                    newDate = this.selectedDate.from.add(1, 'day');
+                    this.newDate = this.selectedDate.from.add(1, 'day');
                 } else {
-                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
+                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
                 this.selectedDate = {
-                    name: newDate.format('ddd, DD.MM.YYYY'),
-                    from: newDate.clone().startOf('day'), to: newDate.clone().endOf('day')
+                    name: this.newDate.format('ddd, DD.MM.YYYY'),
+                    from: this.newDate.clone().startOf('day'), to: this.newDate.clone().endOf('day')
                 };
                 this.hideNextButton = this.selectedDate.from.isSame(moment({
                     hour: 0,
@@ -79,37 +81,35 @@ export class MyTimePage implements OnInit {
                 this.hidePrevButton = this.dateIndex === this.dayLevel && !this.hideNextButton;
                 break;
             case CalViewType.MONTH:
-                let newDate:Moment = null;
                 if (Direction.PREV === direction) {
                     this.dateIndex++;
-                    newDate = this.selectedDate.from.add(-1, 'month');
+                    this.newDate = this.selectedDate.from.add(-1, 'month');
                 } else if (Direction.NEXT === direction) {
                     this.dateIndex--;
-                    newDate = this.selectedDate.from.add(1, 'month');
+                    this.newDate = this.selectedDate.from.add(1, 'month');
                 } else {
-                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
+                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
                 this.selectedDate = {
-                    name: newDate.format('MMMM'),
-                    from: newDate.clone().startOf('month'), to: newDate.clone().endOf('month')
+                    name: this.newDate.format('MMMM'),
+                    from: this.newDate.clone().startOf('month'), to: this.newDate.clone().endOf('month')
                 };
                 this.hideNextButton = this.selectedDate.from.month() === moment().month();
                 this.hidePrevButton = this.dateIndex === this.monthLevel && !this.hideNextButton;
                 break;
             case CalViewType.WEEK:
-                let newDate:Moment = null;
                 if (Direction.PREV === direction) {
                     this.dateIndex++;
-                    newDate = this.selectedDate.from.add(-1, 'week');
+                    this.newDate = this.selectedDate.from.add(-1, 'week');
                 } else if (Direction.NEXT === direction) {
                     this.dateIndex--;
-                    newDate = this.selectedDate.from.add(1, 'week');
+                    this.newDate = this.selectedDate.from.add(1, 'week');
                 } else {
-                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
+                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
-                const startOfWeek = newDate.clone().startOf('isoWeek');
-                const endOfWeek = newDate.clone().endOf('isoWeek');
-                const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + newDate.format('(W.)');
+                const startOfWeek = this.newDate.clone().startOf('isoWeek');
+                const endOfWeek = this.newDate.clone().endOf('isoWeek');
+                const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + this.newDate.format('(W.)');
                 this.selectedDate = {
                     name: name,
                     from: startOfWeek, to: endOfWeek
@@ -117,7 +117,18 @@ export class MyTimePage implements OnInit {
                 this.hideNextButton = this.selectedDate.from.week() === moment().week();
                 this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
                 break;
+            case CalViewType.CUSTOM:
+                //TODO just with cordova
+                /*DatePicker.show({
+                 date: new Date(),
+                 mode: 'date'
+                 }).then(
+                 date => console.log("Got date: ", date),
+                 err => console.log("Error occurred while getting date:", err)
+                 );*/
+                break;
         }
+        this.getWorkingSteps();
     }
 
     createBooking() {
@@ -137,6 +148,7 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
+        console.log('called');
         this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
@@ -147,6 +159,6 @@ export class MyTimePage implements OnInit {
      }*/
 
     ngOnInit() {
-        this.getWorkingSteps();
+        this.setNewDateRange();
     }
 }

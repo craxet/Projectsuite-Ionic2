@@ -1,3 +1,3 @@
 export enum CalViewType{
-    DAY = <any>'DAY', WEEK = <any>'WEEK', MONTH = <any>'MONTH'
+    DAY = <any>'DAY', WEEK = <any>'WEEK', MONTH = <any>'MONTH', CUSTOM = <any> 'CUSTOM'
 }
