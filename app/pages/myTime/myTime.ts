@@ -40,85 +40,82 @@ export class MyTimePage implements OnInit {
     tenant:string = null;
     memberId:string = null;
 
-    selectedDateClass:boolean = false;
-
-    private monthLevel:number = 2;
-    private weekLevel:number = 3;
-    private dayLevel:number = 7;
+    private monthLevel:number;
+    private weekLevel:number;
+    private dayLevel:number;
 
     constructor(private nav:NavController, private myTimeService:MyTimeService) {
+        this.monthLevel = 2;
+        this.weekLevel = 3;
+        //number od days until today
+        this.dayLevel = moment().date() - 1;
+        console.log(this.dayLevel);
         this.setNewDateRange();
     }
 
     setNewDateRange(direction?) {
         switch (this.calView) {
             case CalViewType.DAY:
-                this.selectedDateClass = true;
-                if (this.dateIndex < this.dayLevel) {
-                    let newDate:Moment = null;
-                    if (Direction.PREV === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(-1, 'day');
-                    } else if (Direction.NEXT === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(1, 'day');
-                    } else {
-                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                    }
-                    this.selectedDate = {
-                        name: newDate.format('dddd DD.MM.YYYY'),
-                        from: newDate.clone().startOf('day'), to: newDate.clone().endOf('day')
-                    };
+                let newDate:Moment = null;
+                if (Direction.PREV === direction) {
+                    this.dateIndex++;
+                    newDate = this.selectedDate.from.add(-1, 'day');
+                } else if (Direction.NEXT === direction) {
+                    this.dateIndex--;
+                    newDate = this.selectedDate.from.add(1, 'day');
+                } else {
+                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
-                this.hideNextButton = this.selectedDate.from.day() === moment().day();
+                this.selectedDate = {
+                    name: newDate.format('ddd, DD.MM.YYYY'),
+                    from: newDate.clone().startOf('day'), to: newDate.clone().endOf('day')
+                };
+                this.hideNextButton = this.selectedDate.from.isSame(moment({
+                    hour: 0,
+                    minute: 0,
+                    seconds: 0,
+                    milliseconds: 0
+                }));
                 this.hidePrevButton = this.dateIndex === this.dayLevel && !this.hideNextButton;
-                this.dateIndex = this.dateIndex === this.dayLevel ? 0 : this.dateIndex;
                 break;
             case CalViewType.MONTH:
-                if (this.dateIndex < this.monthLevel) {
-                    let newDate:Moment = null;
-                    if (Direction.PREV === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(-1, 'month');
-                    } else if (Direction.NEXT === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(1, 'month');
-                    } else {
-                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                    }
-                    this.selectedDate = {
-                        name: newDate.format('MMMM'),
-                        from: newDate.clone().startOf('month'), to: newDate.clone().endOf('month')
-                    };
+                let newDate:Moment = null;
+                if (Direction.PREV === direction) {
+                    this.dateIndex++;
+                    newDate = this.selectedDate.from.add(-1, 'month');
+                } else if (Direction.NEXT === direction) {
+                    this.dateIndex--;
+                    newDate = this.selectedDate.from.add(1, 'month');
+                } else {
+                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
+                this.selectedDate = {
+                    name: newDate.format('MMMM'),
+                    from: newDate.clone().startOf('month'), to: newDate.clone().endOf('month')
+                };
                 this.hideNextButton = this.selectedDate.from.month() === moment().month();
                 this.hidePrevButton = this.dateIndex === this.monthLevel && !this.hideNextButton;
-                this.dateIndex = this.dateIndex === this.monthLevel ? 0 : this.dateIndex;
                 break;
             case CalViewType.WEEK:
-                this.selectedDateClass = true;
-                if (this.dateIndex < this.weekLevel) {
-                    let newDate:Moment = null;
-                    if (Direction.PREV === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(-1, 'week');
-                    } else if (Direction.NEXT === direction) {
-                        this.dateIndex++;
-                        newDate = this.selectedDate.from.add(1, 'week');
-                    } else {
-                        newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                    }
-                    const startOfWeek = newDate.clone().startOf('isoWeek');
-                    const endOfWeek = newDate.clone().endOf('isoWeek');
-                    const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + newDate.format('(W.)');
-                    this.selectedDate = {
-                        name: name,
-                        from: startOfWeek, to: endOfWeek
-                    };
+                let newDate:Moment = null;
+                if (Direction.PREV === direction) {
+                    this.dateIndex++;
+                    newDate = this.selectedDate.from.add(-1, 'week');
+                } else if (Direction.NEXT === direction) {
+                    this.dateIndex--;
+                    newDate = this.selectedDate.from.add(1, 'week');
+                } else {
+                    newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
                 }
+                const startOfWeek = newDate.clone().startOf('isoWeek');
+                const endOfWeek = newDate.clone().endOf('isoWeek');
+                const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + newDate.format('(W.)');
+                this.selectedDate = {
+                    name: name,
+                    from: startOfWeek, to: endOfWeek
+                };
                 this.hideNextButton = this.selectedDate.from.week() === moment().week();
                 this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
-                this.dateIndex = this.dateIndex === this.weekLevel ? 0 : this.dateIndex;
                 break;
         }
     }
