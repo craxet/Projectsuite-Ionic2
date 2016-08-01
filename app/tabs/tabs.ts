@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 
-import {MyTimePage} from '../pages/myTime/myTime';
+import {MyTimePage} from '../pages/my-time/my-time';
 import {AbsencePage} from '../pages/absence/absence';
 import {TimesheetPage} from '../pages/timesheet/timesheet';
 

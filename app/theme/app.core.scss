@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/v2/theming/
 
-
 // App Shared Imports
 // --------------------------------------------------
 // These are the imports which make up the design of this app.
@@ -11,11 +10,37 @@
 
 @import "../pages/item-details/item-details";*/
 
-
-ion-page.show-page ~ .nav-decor{
+ion-page.show-page ~ .nav-decor {
   background: white;
 }
-.popover-content{
+
+@media (min-width: 300px) and (min-height: 500px) {
+  ion-modal ion-backdrop {
+    visibility: visible;
+  }
+}
+
+.modal-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+// In you modal css
+.custom-dates-modal {
+  position: absolute;
+  top: calc(50% - 45vh); // half of vh
+  left: calc(50% + 10vw); // half of 100-vw
+  width: 80vw;
+  height: auto;
+}
+
+//TODO just for IOS
+.custom-dates-modal ion-toolbar{
+  border-radius: $alert-ios-border-radius $alert-ios-border-radius 0 0;
+}
+
+.popover-content {
   min-height: initial;
   left: 0 !important;
   width: 100% !important;

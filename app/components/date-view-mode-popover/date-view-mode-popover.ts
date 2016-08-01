@@ -4,7 +4,7 @@ import {NavParams,Events,ViewController } from 'ionic-angular';
 import {CalViewType} from '../../enums/enums';
 
 @Component({
-    templateUrl: 'build/components/dateViewModePopover/dateViewModePopover.html'
+    templateUrl: 'build/components/date-view-mode-popover/date-view-mode-popover.html'
 })
 export class DateViewModePopover {
     calView:CalViewType;

@@ -1,24 +1,25 @@
-import {Popover,NavController,Alert} from 'ionic-angular';
+import {Popover,NavController,Modal} from 'ionic-angular';
 import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
-//cordova plugin
+//cordova plugin DO I NEED IT ?
 import {DatePicker} from 'ionic-native';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-import {MyTimeService} from './myTime.service';
-import {DateViewModePopover} from '../../components/dateViewModePopover/dateViewModePopover';
+import {MyTimeService} from './my-time.service';
+import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
 import {CalViewType} from '../../enums/enums';
+import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
 }
 
 @Component({
-    templateUrl: 'build/pages/myTime/myTime.html',
+    templateUrl: 'build/pages/my-time/my-time.html',
     styles: [
         `.month-or-week span{
             color: #8c8c8c;
@@ -118,24 +119,11 @@ export class MyTimePage implements OnInit {
                 this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
                 break;
             case CalViewType.CUSTOM:
-                let alert = Alert.create();
-                alert.setTitle('Date Range');
-                alert.addButton({
-                    text: 'OK',
-                    handler: data => {
-                        console.log('closed');
-                    }
+                let modal = Modal.create(CustomDatesModal);
+                this.nav.present(modal);
+                modal.onDismiss(data => {
+                    console.log(data);
                 });
-                this.nav.present(alert);
-
-                //TODO just with cordova
-                /*DatePicker.show({
-                 date: new Date(),
-                 mode: 'date'
-                 }).then(
-                 date => console.log("Got date: ", date),
-                 err => console.log("Error occurred while getting date:", err)
-                 );*/
                 break;
         }
         this.getWorkingSteps();
@@ -158,7 +146,6 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        console.log('called');
         this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
