@@ -5,6 +5,10 @@ import {Modal, NavController,ViewController} from 'ionic-angular';
     templateUrl: 'build/components/custom-dates-modal/custom-dates-modal.html'
 })
 export class CustomDatesModal {
+
+    from:Date;
+    to:Date;
+
     constructor(
         private viewCtrl: ViewController) {}
 
