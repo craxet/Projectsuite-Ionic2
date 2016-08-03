@@ -40,10 +40,12 @@ export class MyTimePage implements OnInit {
     dateIndex:number = 0;
     selectedDate:{name:string, from: Moment, to: Moment};
     calView:CalViewType = CalViewType.MONTH;
+    lastCalView:CalViewType = CalViewType.MONTH;
     workingSteps:Array<any> = [];
     inclBooked:boolean = false;
     tenant:string = null;
     memberId:string = null;
+    selectedDateClass:boolean = false;
 
     private newDate:Moment;
     private monthLevel:number;
@@ -58,6 +60,7 @@ export class MyTimePage implements OnInit {
     }
 
     setNewDateRange(direction?) {
+        this.selectedDateClass = false;
         switch (this.calView) {
             case CalViewType.DAY:
                 if (Direction.PREV === direction) {
@@ -99,6 +102,7 @@ export class MyTimePage implements OnInit {
                 this.hidePrevButton = this.dateIndex === this.monthLevel && !this.hideNextButton;
                 break;
             case CalViewType.WEEK:
+                this.selectedDateClass = true;
                 if (Direction.PREV === direction) {
                     this.dateIndex++;
                     this.newDate = this.selectedDate.from.add(-1, 'week');
@@ -119,13 +123,36 @@ export class MyTimePage implements OnInit {
                 this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
                 break;
             case CalViewType.CUSTOM:
-                let modal = Modal.create(CustomDatesModal);
+                if (this.lastCalView === CalViewType.WEEK) {
+                    this.selectedDateClass = true;
+                } else {
+                    this.selectedDateClass = false;
+                }
+                let modal = Modal.create(CustomDatesModal, {}, {enableBackdropDismiss: false});
                 this.nav.present(modal);
                 modal.onDismiss(data => {
-                    console.log(data);
+                    if (data !== null) {
+                        this.selectedDateClass = true;
+                        this.hidePrevButton = true;
+                        this.hideNextButton = true;
+                        this.selectedDate = {
+                            name: data.from.format('DD.MM.YYYY') + ' - ' + data.to.format('DD.MM.YYYY'),
+                            from: data.from,
+                            to: data.to
+                        };
+                    } else {
+                        this.calView = this.lastCalView;
+                        if (this.calView === CalViewType.WEEK) {
+                            this.selectedDateClass = true;
+                        } else {
+                            this.selectedDateClass = false;
+                        }
+
+                    }
                 });
                 break;
         }
+
         this.getWorkingSteps();
     }
 
@@ -134,6 +161,7 @@ export class MyTimePage implements OnInit {
     }
 
     showDateViewModePopover(ev) {
+        this.lastCalView = this.calView;
         let popover = Popover.create(DateViewModePopover, {calView: this.calView});
         popover.onDismiss(data=> {
             this.dateIndex = 0;
