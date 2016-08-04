@@ -174,7 +174,7 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
+        //this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
     /* headerDateFn(record, recordIndex, records) {
