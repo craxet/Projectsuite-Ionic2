@@ -10,11 +10,11 @@
 
 @import "../pages/item-details/item-details";*/
 
-ion-page.show-page ~ .nav-decor {
+ion-page.custom-dates-modal.show-page ~ .nav-decor {
   background: white;
 }
 
-@media (min-width: 300px) and (min-height: 500px) {
+/*@media (min-width: 300px) and (min-height: 500px) {
   ion-modal ion-backdrop {
     visibility: visible;
   }
@@ -24,7 +24,8 @@ ion-page.show-page ~ .nav-decor {
   position: absolute;
   left: 0;
   top: 0;
-}
+}*/
+
 
 // In you modal css
 .custom-dates-modal {

@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons start>
+            <button (click)="cancel()">Cancel</button>
+        </ion-buttons>
+        <ion-title>New Working Step</ion-title>
+        <ion-buttons end>
+            <button>Create</button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>Booking Date</ion-label>
+            <ion-input type="text" [(ngModel)]="bookingDate"></ion-input>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

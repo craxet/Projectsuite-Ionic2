@@ -1,4 +1,4 @@
-import {Popover,NavController,Modal} from 'ionic-angular';
+import {PopoverController, ModalController} from 'ionic-angular';
 import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
@@ -13,6 +13,8 @@ import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
 import {CalViewType} from '../../enums/enums';
 import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
+import {NewBooking} from './new-booking/new-booking';
+
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
@@ -52,7 +54,7 @@ export class MyTimePage implements OnInit {
     private weekLevel:number;
     private dayLevel:number;
 
-    constructor(private nav:NavController, private myTimeService:MyTimeService) {
+    constructor(private modalCtrl: ModalController,private popoverCtrl: PopoverController,private myTimeService:MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -128,9 +130,9 @@ export class MyTimePage implements OnInit {
                 } else {
                     this.selectedDateClass = false;
                 }
-                let modal = Modal.create(CustomDatesModal, {}, {enableBackdropDismiss: false});
-                this.nav.present(modal);
-                modal.onDismiss(data => {
+                let modal = this.modalCtrl.create(CustomDatesModal, {}, {enableBackdropDismiss: false});
+                modal.present();
+                modal.onDidDismiss(data => {
                     if (data !== null) {
                         this.selectedDateClass = true;
                         this.hidePrevButton = true;
@@ -156,21 +158,20 @@ export class MyTimePage implements OnInit {
         this.getWorkingSteps();
     }
 
-    createBooking() {
-
+    createBooking(ev) {
+        let modal = this.modalCtrl.create(NewBooking);
+        modal.present({ev: ev});
     }
 
     showDateViewModePopover(ev) {
         this.lastCalView = this.calView;
-        let popover = Popover.create(DateViewModePopover, {calView: this.calView});
-        popover.onDismiss(data=> {
+        let popover = this.popoverCtrl.create(DateViewModePopover, {calView: this.calView});
+        popover.onDidDismiss(data=> {
             this.dateIndex = 0;
             this.calView = data;
             this.setNewDateRange();
         });
-        this.nav.present(popover, {
-            ev: ev
-        });
+        popover.present({ev: ev});
     }
 
     getWorkingSteps() {
@@ -180,7 +181,6 @@ export class MyTimePage implements OnInit {
                 console.log(error);
             }
         );
-        //TODO handle error
     }
 
     /* headerDateFn(record, recordIndex, records) {

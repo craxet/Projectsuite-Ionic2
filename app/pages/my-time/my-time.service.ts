@@ -8,8 +8,7 @@ import {Moment} from 'moment';
 
 @Injectable()
 export class MyTimeService {
-    constructor(private http:Http) {
-    }
+    constructor(private http:Http) {}
 
     getWorkingSteps(from:Moment, to:Moment, inclBooked:boolean, memberId:String, tenant:string) {
         // allTenants: false
