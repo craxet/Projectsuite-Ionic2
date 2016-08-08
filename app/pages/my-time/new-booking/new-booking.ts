@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Modal,ViewController} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
+import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 
@@ -10,10 +11,10 @@ import {MyTimeService} from '../my-time.service';
 
 export class NewBooking {
 
-    bookingDate: Date;
+    bookingDate: String;
 
     constructor(private viewCtrl:ViewController, private myTimeService:MyTimeService) {
-        this.bookingDate = new Date();
+        this.bookingDate = moment().format('DD.MM.YYYY');
     }
 
     cancel(){

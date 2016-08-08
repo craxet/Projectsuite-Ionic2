@@ -12,8 +12,14 @@
 <ion-content>
     <ion-list>
         <ion-item>
+            <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
             <ion-label>Booking Date</ion-label>
             <ion-input type="text" [(ngModel)]="bookingDate"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="ios-albums-outline" md="md-albums" item-left></ion-icon>
+            <ion-label>Task</ion-label>
+            <ion-input type="text" [(ngModel)]="task"></ion-input>
         </ion-item>
 
     </ion-list>
