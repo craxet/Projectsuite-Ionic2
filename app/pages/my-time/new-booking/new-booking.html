@@ -20,6 +20,9 @@
             <ion-icon ios="ios-albums-outline" md="md-albums" item-left></ion-icon>
             <ion-label>Task</ion-label>
             <ion-input type="text" [(ngModel)]="task"></ion-input>
+            <button clear item-right (click)="selectTask()">
+                <ion-icon ios="ios-add-circle" md="md-add-circle" item-right></ion-icon>
+            </button>
         </ion-item>
 
     </ion-list>

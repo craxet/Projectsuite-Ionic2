@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons start>
+            <button (click)="cancel()">Cancel</button>
+        </ion-buttons>
+        <ion-title>Task Selection</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-list-header>Task Group</ion-list-header>
+        <ion-item>
+            <ion-segment [(ngModel)]="relationship" primary>
+                <ion-segment-button value="my" (ionSelect)="selectedFriends()">
+                    My
+                </ion-segment-button>
+                <ion-segment-button value="team" (ionSelect)="selectedFriends()">
+                    Team
+                </ion-segment-button>
+                <ion-segment-button value="enemies" (ionSelect)="selectedEnemies()">
+                    Global
+                </ion-segment-button>
+                <ion-segment-button value="enemies" (ionSelect)="selectedEnemies()">
+                    Last Booked
+                </ion-segment-button>
+            </ion-segment>
+        </ion-item>
+    </ion-list>
+</ion-content>

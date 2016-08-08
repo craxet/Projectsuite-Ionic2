@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {ViewController} from 'ionic-angular';
+import {ViewController, ModalController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
+import {TaskSelection} from '../../../components/task-selection/task-selection';
 
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
@@ -13,12 +14,20 @@ export class NewBooking {
 
     bookingDate: String;
 
-    constructor(private viewCtrl:ViewController, private myTimeService:MyTimeService) {
+    constructor(private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
         this.bookingDate = moment().format('DD.MM.YYYY');
     }
 
-    cancel(){
+    cancel() {
         this.viewCtrl.dismiss();
+    }
+
+    selectTask() {
+        let modal = this.modalCtrl.create(TaskSelection);
+        modal.present();
+        modal.onDidDismiss(data => {
+            console.log(data);
+        });
     }
 
 }
