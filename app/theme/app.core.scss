@@ -26,7 +26,6 @@ ion-page.custom-dates-modal.show-page ~ .nav-decor {
   top: 0;
 }*/
 
-
 // In you modal css
 .custom-dates-modal {
   position: absolute;
@@ -36,31 +35,33 @@ ion-page.custom-dates-modal.show-page ~ .nav-decor {
   height: auto;
 }
 
-.custom-dates-modal ion-list{
-  margin: -1px 0 0 0 ;
+.custom-dates-modal ion-list {
+  margin: -1px 0 0 0;
 }
-.custom-dates-modal ion-grid,ion-col{
+
+.custom-dates-modal ion-grid, ion-col {
   padding: 0;
 }
-.custom-dates-modal ion-col .button{
+
+.custom-dates-modal ion-col .button {
   margin: 0;
   border-radius: 0;
   border-top: 1px solid #dbdbdf;
   color: $alert-ios-button-text-color;
 }
 
-.custom-dates-modal ion-col .button.cancel{
+.custom-dates-modal ion-col .button.cancel {
   border-radius: 0 0 0 $alert-ios-border-radius;
   border-right: 1px solid #dbdbdf;
 }
 
-.custom-dates-modal ion-col .button.ok{
+.custom-dates-modal ion-col .button.ok {
   border-radius: 0 0 $alert-ios-border-radius 0;
   font-weight: bold;
 }
 
 //TODO just for IOS
-.custom-dates-modal ion-toolbar{
+.custom-dates-modal ion-toolbar {
   border-radius: $alert-ios-border-radius $alert-ios-border-radius 0 0;
 }
 

@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import {Moment} from 'moment';
 
 @Injectable()
-export class MyTimeService {
+export class TaskSelectionService {
     constructor(private http:Http) {}
 
     getTasksByGroup(date:Moment){

@@ -16,14 +16,30 @@
             <ion-label>Booking Date</ion-label>
             <ion-input type="text" [(ngModel)]="bookingDate"></ion-input>
         </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Task</ion-list-header>
         <ion-item>
-            <ion-icon ios="ios-albums-outline" md="md-albums" item-left></ion-icon>
-            <ion-label>Task</ion-label>
-            <ion-input type="text" [(ngModel)]="task"></ion-input>
+            <!--<ion-icon ios="ios-albums-outline" md="md-albums" item-left></ion-icon>-->
+            <!--<ion-label>Task</ion-label>-->
+            <ion-input type="text" placeholder="Task Name" [(ngModel)]="task"></ion-input>
             <button clear item-right (click)="selectTask()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle" item-right></ion-icon>
             </button>
         </ion-item>
-
+        <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select [(ngModel)]="gaming">
+                <ion-option value="nes">Open</ion-option>
+                <ion-option value="snes">Closed</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Assignment</ion-label>
+            <ion-select [(ngModel)]="gaming">
+                <ion-option value="nes">Open</ion-option>
+                <ion-option value="snes">Closed</ion-option>
+            </ion-select>
+        </ion-item>
     </ion-list>
 </ion-content>

@@ -7,11 +7,16 @@ import * as moment from 'moment';
 })
 export class TaskSelection {
 
+    taskGroup: String;
 
     constructor(private viewCtrl:ViewController) {}
 
     cancel(){
         this.viewCtrl.dismiss();
+    }
+
+    selectedTaskGroup(){
+
     }
 
 }
