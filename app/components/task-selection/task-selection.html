@@ -4,6 +4,9 @@
             <button (click)="cancel()">Cancel</button>
         </ion-buttons>
         <ion-title>Task Selection</ion-title>
+        <ion-buttons end>
+            <button (click)="selectTask()">Select</button>
+        </ion-buttons>
     </ion-toolbar>
     <ion-toolbar no-border-top>
         <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
@@ -29,9 +32,12 @@
             </ion-segment>
         </ion-item>
     </ion-list>
-    <ion-list>
-        <ion-item *ngFor="let task of tasks" (click)="selectTask(item)">
-            {{task.name}}
+    <ion-list radio-group [(ngModel)]="selectedTaskTemp">
+        <ion-item *ngFor="let task of tasks">
+            <ion-label>{{task.name}}
+                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+            </ion-label>
+            <ion-radio value="{{task.id}}" (ionSelect)="selectRadioTaskItem(task)"></ion-radio>
         </ion-item>
     </ion-list>
 </ion-content>

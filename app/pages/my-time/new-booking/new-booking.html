@@ -20,7 +20,7 @@
     <ion-list>
         <ion-list-header>Task</ion-list-header>
         <ion-item>
-            <ion-input type="text" placeholder="Task Name" [(ngModel)]="task"></ion-input>
+            <ion-input type="text" placeholder="Task Name" [(ngModel)]="task && task.name"></ion-input>
             <button clear item-right (click)="selectTask()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle" item-right></ion-icon>
             </button>

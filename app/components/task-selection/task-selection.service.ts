@@ -13,7 +13,7 @@ export class TaskSelectionService {
     constructor(private http: Http) {}
 
     getTasksByGroup(date: Moment, taskGroup: TaskGroup) {
-        return this.get('test-data/tasks.json').map(res => {
+        return this.http.get('test-data/tasks.json').map(res => {
             let body = res.json();
             switch (taskGroup) {
                 case TaskGroup.MY_TASKS:
@@ -25,6 +25,9 @@ export class TaskSelectionService {
                 case TaskGroup.TEAM_TASKS:
                     return [];
             }
-        })
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
     }
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import * as _ from 'lodash';
@@ -8,9 +8,10 @@ import {Moment} from 'moment';
 
 @Injectable()
 export class MyTimeService {
-    constructor(private http:Http) {}
+    constructor(private http: Http) {
+    }
 
-    getWorkingSteps(from:Moment, to:Moment, inclBooked:boolean, memberId:String, tenant:string) {
+    getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
         return this.http.get('test-data/working-steps.json').map(res => {
             let body = res.json();
@@ -22,6 +23,9 @@ export class MyTimeService {
                 list.push({date: key, values: value});
             });
             return list;
-        }).catch(error =>{console.log('service',error); return Observable.throw(error);});
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
     }
 }

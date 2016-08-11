@@ -21,6 +21,7 @@ export class NewBooking {
     duration: number;
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
+    task: Object = null;
 
     constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
         this.bookingDate = moment().format('DD.MM.YYYY');
@@ -36,7 +37,10 @@ export class NewBooking {
         let modal = this.modalCtrl.create(TaskSelection);
         modal.present();
         modal.onDidDismiss(data => {
-            console.log(data);
+            if (data !== null) {
+                this.task = data;
+            }
+
         });
     }
 
