@@ -12,11 +12,15 @@ export class TaskSelection {
     constructor(private viewCtrl:ViewController) {}
 
     cancel(){
-        this.viewCtrl.dismiss();
+        this.viewCtrl.dismiss(null);
     }
 
     selectedTaskGroup(){
 
+    }
+
+    selectTask(task){
+        this.viewCtrl.dismiss(task);
     }
 
 }
