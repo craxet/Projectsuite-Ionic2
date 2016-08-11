@@ -6,25 +6,25 @@
         <ion-title>Task Selection</ion-title>
     </ion-toolbar>
     <ion-toolbar no-border-top>
-            <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list no-lines>
+    <ion-list>
         <ion-list-header>Task Group</ion-list-header>
         <ion-item>
             <ion-segment [(ngModel)]="taskGroup" primary>
                 <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
                     My
                 </ion-segment-button>
-                <ion-segment-button value="teamTasks" (ionSelect)="selectedFriends()">
-                    Team
+                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedTaskGroup()">
+                    Last Booked
                 </ion-segment-button>
-                <ion-segment-button value="globalTasks" (ionSelect)="selectedEnemies()">
+                <ion-segment-button value="globalTasks" (ionSelect)="selectedTaskGroup()">
                     Global
                 </ion-segment-button>
-                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
-                    Last Booked
+                <ion-segment-button value="teamTasks" (ionSelect)="selectedTaskGroup()">
+                    Team
                 </ion-segment-button>
             </ion-segment>
         </ion-item>

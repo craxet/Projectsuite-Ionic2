@@ -50,9 +50,7 @@ export class NewBooking {
             text: 'Done',
             handler: (data) => {
                 this.duration = data.duration.value;
-                console.log('before',data.duration.value);
                 this.durationTemp = this.durationType == DurationType.MINUTES ? (data.duration.value / 60).toFixed(2) : data.duration.value.toString();
-                console.log('after',this.durationTemp);
             }
         });
         picker.addColumn({
