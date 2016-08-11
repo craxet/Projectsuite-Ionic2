@@ -1,23 +1,26 @@
 import {Component} from '@angular/core';
-import {ViewController, ModalController, PickerController} from 'ionic-angular';
+import {ViewController, ModalController, PickerController,ActionSheetController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
 
+enum DurationType{
+    HOURS = <any>'hours', MINUTES = <any>'minutes'
+}
+
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
     providers: [MyTimeService]
 })
-
 export class NewBooking {
 
     bookingDate: String;
     duration: number;
+    durationType: DurationType = DurationType.HOURS;
 
-    constructor(private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
+    constructor(private actionSheetController : ActionSheetController ,private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
         this.bookingDate = moment().format('DD.MM.YYYY');
-        // this.duration =
     }
 
     cancel() {
@@ -32,7 +35,7 @@ export class NewBooking {
         });
     }
 
-    openPicker() {
+    openDurationPicker() {
         let picker = this.pickerCtrl.create();
         picker.addButton({
             text: 'Cancel',
@@ -49,6 +52,29 @@ export class NewBooking {
             options: this.generateDurationValues('minutes')
         });
         picker.present();
+    }
+
+    openDurationTypeActionSheet(){
+        let actionSheet = this.actionSheetController.create({
+            title: 'Duration Type',
+            buttons: [
+                {
+                    text: 'Hours',
+                    handler: () => {
+                        this.durationType = DurationType.HOURS;
+                    }
+                },{
+                    text: 'Minutes',
+                    handler: () => {
+                        this.durationType = DurationType.MINUTES;
+                    }
+                },{
+                    text: 'Cancel',
+                    role: 'cancel',
+                }
+            ]
+        });
+        actionSheet.present();
     }
 
     //value is always in hours but text is either in hours or minutes

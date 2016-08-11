@@ -68,11 +68,9 @@
         </ion-item>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            <!--<div class="datetime-text">{{duration}}</div>-->
-            <button aria-haspopup="true" type="button" category="item-cover" class="item-cover"
-                    (click)="openPicker()"></button>
-            <button clear item-right>
-                <span class="duration-type-label" >Hours</span>
+            <div class="datetime-text">{{duration}}</div>
+            <button clear item-right (click)="openDurationTypeActionSheet()">
+                <span class="duration-type-label" >{{durationType}}</span>
                 <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
             </button>
         </ion-item>
