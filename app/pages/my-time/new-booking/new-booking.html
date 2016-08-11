@@ -45,32 +45,36 @@
     <ion-list>
         <ion-list-header>Duration</ion-list-header>
         <ion-item>
-            <ion-segment [(ngModel)]="taskGroup" primary>
-                <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
+            <ion-segment [(ngModel)]="durationTemp" primary>
+                <ion-segment-button value="0.25" (ionSelect)="selectedDurationSegment(0.25)">
                     15 m
                 </ion-segment-button>
-                <ion-segment-button value="teamTasks" (ionSelect)="selectedFriends()">
+                <ion-segment-button value="0.50" (ionSelect)="selectedDurationSegment(0.50)">
                     30 m
                 </ion-segment-button>
-                <ion-segment-button value="globalTasks" (ionSelect)="selectedEnemies()">
+                <ion-segment-button value="0.75" (ionSelect)="selectedDurationSegment(0.75)">
                     45 m
                 </ion-segment-button>
-                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                <ion-segment-button value="1" (ionSelect)="selectedDurationSegment(1)">
                     1 h
                 </ion-segment-button>
-                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                <ion-segment-button value="1.5" (ionSelect)="selectedDurationSegment(1.5)">
                     1,5 h
                 </ion-segment-button>
-                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                <ion-segment-button value="2" (ionSelect)="selectedDurationSegment(2)">
                     2 h
+                </ion-segment-button>
+                <ion-segment-button value="3" (ionSelect)="selectedDurationSegment(3)">
+                    3 h
                 </ion-segment-button>
             </ion-segment>
         </ion-item>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            <div class="datetime-text">{{duration}}</div>
+            <div class="duration-input text-input" (click)="openDurationPicker()">{{durationType === 'hours'? (duration | number: '.2'): duration}}
+            </div>
             <button clear item-right (click)="openDurationTypeActionSheet()">
-                <span class="duration-type-label" >{{durationType}}</span>
+                <span class="duration-type-label">{{durationType}}</span>
                 <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
             </button>
         </ion-item>
