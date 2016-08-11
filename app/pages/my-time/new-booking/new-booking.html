@@ -42,4 +42,39 @@
             </ion-select>
         </ion-item>
     </ion-list>
+    <ion-list>
+        <ion-list-header>Duration</ion-list-header>
+        <ion-item>
+            <ion-segment [(ngModel)]="taskGroup" primary>
+                <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
+                    15 m
+                </ion-segment-button>
+                <ion-segment-button value="teamTasks" (ionSelect)="selectedFriends()">
+                    30 m
+                </ion-segment-button>
+                <ion-segment-button value="globalTasks" (ionSelect)="selectedEnemies()">
+                    45 m
+                </ion-segment-button>
+                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                    1 h
+                </ion-segment-button>
+                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                    1,5 h
+                </ion-segment-button>
+                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedEnemies()">
+                    2 h
+                </ion-segment-button>
+            </ion-segment>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
+            <!--<div class="datetime-text">{{duration}}</div>-->
+            <button aria-haspopup="true" type="button" category="item-cover" class="item-cover"
+                    (click)="openPicker()"></button>
+            <button clear item-right>
+                <span class="duration-type-label" >Hours</span>
+                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
 </ion-content>
