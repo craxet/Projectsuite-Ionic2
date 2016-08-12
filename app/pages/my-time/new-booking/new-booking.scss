@@ -1,19 +1,8 @@
-// for ios
-.duration-type-label{
-  color: $list-ios-header-color;
-  text-transform: capitalize;
-}
-.div-input{
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.div-task-input {
+.ion-item-value {
   font-size: 13px;
-  white-space: normal;
 }
 
-.div-input-placeholder{
+.label-placeholder{
   font-size: $item-ios-body-text-font-size;
   color: $label-ios-text-color;
 }

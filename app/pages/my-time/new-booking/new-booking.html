@@ -19,13 +19,13 @@
     </ion-list>
     <ion-list>
         <ion-list-header>Task</ion-list-header>
-        <ion-item>
-            <div class="div-input div-task-input text-input" [class.div-input-placeholder]="task == null">{{task ==
-                null?"Task name":task.name}}
+        <ion-item text-wrap>
+            <ion-label [class.label-placeholder]="task == null">{{task == null?"Task name":task.name}}</ion-label>
+            <div item-content>
+                <button clear (click)="selectTask()">
+                    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                </button>
             </div>
-            <button clear item-right (click)="selectTask()">
-                <ion-icon ios="ios-add-circle" md="md-add-circle" item-right></ion-icon>
-            </button>
         </ion-item>
         <ion-item>
             <ion-label>Category</ion-label>
@@ -44,6 +44,18 @@
     </ion-list>
     <ion-list>
         <ion-list-header>Duration</ion-list-header>
+        <ion-item>
+            <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
+            <ion-label (click)="openDurationPicker()">{{durationType === 'hours'? (duration
+                | number: '.2'): duration}}
+            </ion-label>
+            <div item-content text-capitalize>
+                {{durationType}}
+            </div>
+            <button clear item-right (click)="openDurationTypeActionSheet()">
+                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+            </button>
+        </ion-item>
         <ion-item>
             <ion-segment [(ngModel)]="durationTemp" primary>
                 <ion-segment-button value="0.25" (ionSelect)="selectedDurationSegment(0.25)">
@@ -68,16 +80,6 @@
                     3 h
                 </ion-segment-button>
             </ion-segment>
-        </ion-item>
-        <ion-item>
-            <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            <div class="div-input text-input" (click)="openDurationPicker()">{{durationType === 'hours'? (duration
-                | number: '.2'): duration}}
-            </div>
-            <button clear item-right (click)="openDurationTypeActionSheet()">
-                <span class="duration-type-label">{{durationType}}</span>
-                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
-            </button>
         </ion-item>
     </ion-list>
 </ion-content>
