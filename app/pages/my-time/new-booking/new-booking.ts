@@ -24,7 +24,7 @@ export class NewBooking {
     task: Object = null;
 
     constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
-        this.bookingDate = moment().format('DD.MM.YYYY');
+        this.bookingDate = moment().toDate().toISOString();
         this.durationTemp = '0.25';
         this.duration = 0.25;
     }
