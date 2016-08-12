@@ -20,7 +20,9 @@
     <ion-list>
         <ion-list-header>Task</ion-list-header>
         <ion-item>
-            <ion-input type="text" placeholder="Task Name" [(ngModel)]="task && task.name"></ion-input>
+            <div class="div-input div-task-input text-input" [class.div-input-placeholder]="task == null">{{task ==
+                null?"Task name":task.name}}
+            </div>
             <button clear item-right (click)="selectTask()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle" item-right></ion-icon>
             </button>
@@ -69,7 +71,7 @@
         </ion-item>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            <div class="duration-input text-input" (click)="openDurationPicker()">{{durationType === 'hours'? (duration
+            <div class="div-input text-input" (click)="openDurationPicker()">{{durationType === 'hours'? (duration
                 | number: '.2'): duration}}
             </div>
             <button clear item-right (click)="openDurationTypeActionSheet()">

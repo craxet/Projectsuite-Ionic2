@@ -3,7 +3,17 @@
   color: $list-ios-header-color;
   text-transform: capitalize;
 }
-.duration-input{
+.div-input{
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.div-task-input {
+  font-size: 13px;
+  white-space: normal;
+}
+
+.div-input-placeholder{
+  font-size: $item-ios-body-text-font-size;
+  color: $label-ios-text-color;
 }
