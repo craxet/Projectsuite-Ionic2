@@ -24,7 +24,7 @@ export class NewBooking {
     task: Object = null;
 
     constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
-        this.bookingDate = moment().toDate().toISOString();
+        this.bookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         this.duration = 0.25;
     }
@@ -44,6 +44,7 @@ export class NewBooking {
         });
     }
 
+    //TODO duration value in input field ist not mapped after picker will be opened
     openDurationPicker() {
         let picker = this.pickerCtrl.create();
         picker.addButton({
