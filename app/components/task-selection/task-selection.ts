@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController,AlertController} from 'ionic-angular';
+import {ViewController, AlertController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {TaskSelectionService} from './task-selection.service';
@@ -16,7 +16,7 @@ export class TaskSelection implements OnInit {
     selectedTask: any = null;
     selectedTaskTemp;
 
-    constructor(private viewCtrl: ViewController,private alertCtrl: AlertController,private taskSelectionService: TaskSelectionService) {
+    constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, private taskSelectionService: TaskSelectionService) {
     }
 
     cancel() {
@@ -40,15 +40,19 @@ export class TaskSelection implements OnInit {
         }
     }
 
-    selectRadioTaskItem(task){
+    selectRadioTaskItem(task) {
         this.selectedTask = task;
     }
 
-    getTasks() {
+
+    getTasks(refresher?) {
         this.taskSelectionService.getTasksByGroup(moment(), this.taskGroup).subscribe(
-            data => this.tasks = data,
+            data => {
+                refresher && refresher.complete();
+                this.tasks = data
+            },
             error => {
-                console.log('getTasks',error)
+                console.log('getTasks', error)
             });
     }
 

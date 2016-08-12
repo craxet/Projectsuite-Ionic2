@@ -12,8 +12,9 @@ import {TaskGroup} from '../../enums/enums';
 export class TaskSelectionService {
     constructor(private http: Http) {}
 
+    //TODO there is a delay set
     getTasksByGroup(date: Moment, taskGroup: TaskGroup) {
-        return this.http.get('test-data/tasks.json').map(res => {
+        return this.http.get('test-data/tasks.json').delay(1000).map(res => {
             let body = res.json();
             switch (taskGroup) {
                 case TaskGroup.MY_TASKS:
@@ -28,6 +29,6 @@ export class TaskSelectionService {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
-        });
+        })
     }
 }

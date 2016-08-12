@@ -9,35 +9,33 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar no-border-top>
-        <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-segment [(ngModel)]="taskGroup" primary padding>
+            <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
+                My
+            </ion-segment-button>
+            <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedTaskGroup()">
+                Last
+            </ion-segment-button>
+            <ion-segment-button value="globalTasks" (ionSelect)="selectedTaskGroup()">
+                Global
+            </ion-segment-button>
+            <ion-segment-button value="teamTasks" (ionSelect)="selectedTaskGroup()">
+                Team
+            </ion-segment-button>
+        </ion-segment>
     </ion-toolbar>
 </ion-header>
 <ion-content>
+    <ion-refresher (ionRefresh)="getTasks($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list>
-        <ion-list-header>Task Group</ion-list-header>
-        <ion-item>
-            <ion-segment [(ngModel)]="taskGroup" primary>
-                <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
-                    My
-                </ion-segment-button>
-                <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedTaskGroup()">
-                    Last Booked
-                </ion-segment-button>
-                <ion-segment-button value="globalTasks" (ionSelect)="selectedTaskGroup()">
-                    Global
-                </ion-segment-button>
-                <ion-segment-button value="teamTasks" (ionSelect)="selectedTaskGroup()">
-                    Team
-                </ion-segment-button>
-            </ion-segment>
-        </ion-item>
-    </ion-list>
-    <ion-list radio-group [(ngModel)]="selectedTaskTemp">
         <ion-item *ngFor="let task of tasks">
-            <ion-label>{{task.name}}
-                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
-            </ion-label>
-            <ion-radio value="{{task.id}}" (ionSelect)="selectRadioTaskItem(task)"></ion-radio>
+            <p>{{task.name}}</p>
+            <h5>Project</h5>
+            <p>{{task.project.name}}</p>
+                <!--<ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>-->
         </ion-item>
     </ion-list>
 </ion-content>
