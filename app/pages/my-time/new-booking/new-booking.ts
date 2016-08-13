@@ -34,7 +34,7 @@ export class NewBooking {
     }
 
     selectTask() {
-        let modal = this.modalCtrl.create(TaskSelection);
+        let modal = this.modalCtrl.create(TaskSelection,{task: this.task});
         modal.present();
         modal.onDidDismiss(data => {
             if (data !== null) {

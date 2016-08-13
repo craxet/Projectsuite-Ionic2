@@ -30,12 +30,21 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-list>
-        <ion-item *ngFor="let task of tasks">
-            <p>{{task.name}}</p>
-            <h5>Project</h5>
-            <p>{{task.project.name}}</p>
+    <ion-list radio-group [(ngModel)]="selectedTaskTemp">
+        <ion-item text-wrap class="task-item" *ngFor="let task of tasks">
+            <ion-label>
+
+                <h4>{{task.name}}</h4>
+                <div class="task-item-project">
+                    <p><strong>Project</strong></p>
+                    <p>{{task.project.name}}</p>
+                </div>
+                <p><strong>ID </strong>{{task.number}} , <strong>Start </strong>{{task.start |
+                    amDateFormat:"MM.DD.YYYY"}} ,
+                    <strong>End </strong>{{task.start | amDateFormat:"MM.DD.YYYY"}}</p>
                 <!--<ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>-->
+            </ion-label>
+            <ion-radio value="{{task.id}}" checked="{{task.checked}}" (ionSelect)="selectRadioTaskItem(task)"></ion-radio>
         </ion-item>
     </ion-list>
 </ion-content>

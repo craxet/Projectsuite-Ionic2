@@ -1,13 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, AlertController} from 'ionic-angular';
+import {ViewController, AlertController, NavParams} from 'ionic-angular';
+import {DateFormatPipe} from 'angular2-moment';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 import {TaskSelectionService} from './task-selection.service';
 import {TaskGroup} from '../../enums/enums';
 
 @Component({
     templateUrl: 'build/components/task-selection/task-selection.html',
-    providers: [TaskSelectionService]
+    providers: [TaskSelectionService],
+    pipes: [DateFormatPipe]
 })
 export class TaskSelection implements OnInit {
 
@@ -16,7 +19,7 @@ export class TaskSelection implements OnInit {
     selectedTask: any = null;
     selectedTaskTemp;
 
-    constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, private taskSelectionService: TaskSelectionService) {
+    constructor(private params: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private taskSelectionService: TaskSelectionService) {
     }
 
     cancel() {
@@ -48,8 +51,12 @@ export class TaskSelection implements OnInit {
     getTasks(refresher?) {
         this.taskSelectionService.getTasksByGroup(moment(), this.taskGroup).subscribe(
             data => {
+                this.tasks = _.map(data, (task: any)=> {
+                    let taskParam = this.params.get('task');
+                    task.checked = taskParam !== null && taskParam.id === task.id;
+                    return task;
+                });
                 refresher && refresher.complete();
-                this.tasks = data
             },
             error => {
                 console.log('getTasks', error)
