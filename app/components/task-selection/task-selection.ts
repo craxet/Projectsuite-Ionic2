@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, AlertController, NavParams} from 'ionic-angular';
+import {ViewController, AlertController, NavParams, LoadingController, Refresher} from 'ionic-angular';
 import {DateFormatPipe} from 'angular2-moment';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -18,6 +18,7 @@ export class TaskSelection implements OnInit {
     tasks: Array<any> = [];
     selectedTask: any = null;
     selectedTaskTemp;
+    isLoading: boolean = false;
 
     constructor(private params: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private taskSelectionService: TaskSelectionService) {
     }
@@ -57,7 +58,8 @@ export class TaskSelection implements OnInit {
     }
 
 
-    getTasks(refresher?) {
+    getTasks(refresher?: Refresher) {
+        this.isLoading = _.isUndefined(refresher) ? true : false;
         this.taskSelectionService.getTasksByGroup(moment(), this.taskGroup).subscribe(
             data => {
                 this.tasks = _.map(data, (task: any)=> {
@@ -65,9 +67,11 @@ export class TaskSelection implements OnInit {
                     task.checked = taskParam !== null && taskParam.id === task.id;
                     return task;
                 });
+                this.isLoading = false;
                 refresher && refresher.complete();
             },
             error => {
+                this.isLoading = false;
                 console.log('getTasks', error)
             });
     }
