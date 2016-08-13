@@ -5,3 +5,7 @@
 .task-item-project{
   padding: 4px 0;
 }
+
+.not-bookable-task{
+  border-right: 3px solid $not-bookable-item;
+}

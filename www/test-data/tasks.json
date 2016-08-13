@@ -133,7 +133,7 @@
       "isFunctionality": false,
       "type": "I",
       "actualPD": 8.189,
-      "bookable": true
+      "bookable": false
     },
     {
       "id": "2016-05-01 14:48:56.086",
@@ -493,7 +493,7 @@
       "isFunctionality": false,
       "type": "I",
       "actualPD": 0.438,
-      "bookable": true
+      "bookable": false
     }
   ]
 }

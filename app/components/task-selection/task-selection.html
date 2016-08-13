@@ -31,7 +31,7 @@
     </ion-refresher>
     <ion-searchbar class="task-search" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-list radio-group [(ngModel)]="selectedTaskTemp">
-        <ion-item text-wrap class="task-item" *ngFor="let task of tasks">
+        <ion-item [class.not-bookable-task]="!task.bookable" text-wrap class="task-item" *ngFor="let task of tasks">
             <ion-label>
 
                 <h4>{{task.name}}</h4>
