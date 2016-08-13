@@ -39,7 +39,16 @@ export class TaskSelection implements OnInit {
             });
             alert.present();
         } else {
-            this.viewCtrl.dismiss(this.selectedTask);
+            if (!this.selectedTask.bookable) {
+                let alert = this.alertCtrl.create({
+                    title: 'Not bookable Task',
+                    subTitle: 'Task <strong>' + this.selectedTask.name + '</strong> is not bookable',
+                    buttons: ['OK']
+                });
+                alert.present();
+            } else {
+                this.viewCtrl.dismiss(this.selectedTask);
+            }
         }
     }
 
