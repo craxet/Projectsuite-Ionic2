@@ -28,7 +28,7 @@ export class TaskSelection implements OnInit {
     }
 
     selectedTaskGroup() {
-
+        this.getTasks();
     }
 
     selectTask() {
