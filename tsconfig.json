@@ -3,8 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
+    "experimentalDecorators": true
   },
   "filesGlob": [
     "**/*.ts",
@@ -18,8 +17,5 @@
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
-  },
-  "files": [
-    "typings/index.d.ts"
-  ]
+  }
 }
