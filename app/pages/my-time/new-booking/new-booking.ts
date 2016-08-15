@@ -95,7 +95,7 @@ export class NewBooking {
     }
 
     formatDuration(duration){
-        return this.durationType === DurationType.HOURS ? duration.toFixed(2) : duration;
+        return this.durationType === DurationType.HOURS ? parseFloat(duration).toFixed(2) : duration;
     }
 
     selectedDurationSegment(value) {
@@ -109,7 +109,7 @@ export class NewBooking {
         const max = durationType == DurationType.HOURS ? 24 : 1415.4;
         let i = count;
         for (i; i < max; i += count) {
-            array.push({text: durationType == DurationType.HOURS ? i.toFixed(2) : i, value: i});
+            array.push({text: durationType == DurationType.HOURS ? i.toFixed(2) : i, value: i.toFixed(2)});
         }
         return array;
     }
