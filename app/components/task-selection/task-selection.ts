@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ViewController, AlertController, NavParams, LoadingController, Refresher} from 'ionic-angular';
 import {DateFormatPipe} from 'angular2-moment';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 import {TaskSelectionService} from './task-selection.service';
 import {TaskGroup} from '../../enums/enums';
@@ -19,8 +18,12 @@ export class TaskSelection implements OnInit {
     selectedTask: any = null;
     selectedTaskTemp;
     isLoading: boolean = false;
+    searchedValue: string = '';
+
+    private tasksCopy: Array<any> = [];
 
     constructor(private params: NavParams, private viewCtrl: ViewController, private alertCtrl: AlertController, private taskSelectionService: TaskSelectionService) {
+        this.taskGroup = this.params.get('task') !== null ? this.params.get('task').taskGroup : this.taskGroup;
     }
 
     cancel() {
@@ -28,6 +31,8 @@ export class TaskSelection implements OnInit {
     }
 
     changedTaskGroup() {
+        this.selectedTask = null;
+        this.searchedValue = '';
         this.getTasks();
     }
 
@@ -60,17 +65,16 @@ export class TaskSelection implements OnInit {
     }
 
 
-    getTasks(refresher?: Refresher) {
-        this.isLoading = _.isUndefined(refresher) ? true : false;
-        let taskParam = this.params.get('task');
-        this.taskGroup = taskParam !== null ? taskParam.taskGroup : this.taskGroup;
+    getTasks(refresher: Refresher = null) {
+        this.isLoading = refresher === null ? true : false;
         this.taskSelectionService.getTasksByGroup(moment(), this.taskGroup).subscribe(
             data => {
-                this.tasks = _.map(data, (task: any)=> {
-                    task.checked = taskParam !== null && taskParam.id === task.id;
+                this.tasks = data.map((task: any)=> {
+                    task.checked = this.params.get('task') !== null && this.params.get('task').id === task.id;
                     this.selectedTask = task.checked ? task : this.selectedTask;
                     return task;
                 });
+                this.tasksCopy = this.tasks.slice(0);
                 this.isLoading = false;
                 refresher && refresher.complete();
             },
@@ -78,6 +82,19 @@ export class TaskSelection implements OnInit {
                 this.isLoading = false;
                 console.log('getTasks', error)
             });
+    }
+
+    searchTasksLocally() {
+        this.isLoading = true;
+        this.tasks = this.tasksCopy.slice(0);
+        if (this.searchedValue.length !== 0) {
+            this.tasks = this.tasksCopy.slice(0);
+            //TODO if the size of tasks is large, you need to use spinner
+            this.tasks = this.tasks.filter((task)=> {
+                return (task.name.toLowerCase().indexOf(this.searchedValue.trim().toLowerCase()) > -1);
+            });
+        }
+        this.isLoading = false;
     }
 
     ngOnInit() {

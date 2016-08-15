@@ -29,7 +29,7 @@
     <ion-refresher (ionRefresh)="getTasks($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()"></ion-searchbar>
     <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
         <ion-spinner></ion-spinner>
     </div>
