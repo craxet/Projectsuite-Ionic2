@@ -19,10 +19,10 @@
     </ion-list>
     <ion-list>
         <ion-list-header>Task</ion-list-header>
-        <ion-item class="ion-item-value" text-wrap>
+        <ion-item (click)="selectTask()" class="ion-item-value" text-wrap>
             <ion-label [class.label-placeholder]="task == null">{{task == null?"Task name":task.name}}</ion-label>
             <div item-content>
-                <button clear (click)="selectTask()">
+                <button clear >
                     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
                 </button>
             </div>
