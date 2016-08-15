@@ -48,6 +48,8 @@ export class TaskSelection implements OnInit {
                 });
                 alert.present();
             } else {
+                //store task group of selected task for repeated selection
+                this.selectedTask.taskGroup = this.taskGroup;
                 this.viewCtrl.dismiss(this.selectedTask);
             }
         }
@@ -60,11 +62,13 @@ export class TaskSelection implements OnInit {
 
     getTasks(refresher?: Refresher) {
         this.isLoading = _.isUndefined(refresher) ? true : false;
+        let taskParam = this.params.get('task');
+        this.taskGroup = taskParam !== null ? taskParam.taskGroup : this.taskGroup;
         this.taskSelectionService.getTasksByGroup(moment(), this.taskGroup).subscribe(
             data => {
                 this.tasks = _.map(data, (task: any)=> {
-                    let taskParam = this.params.get('task');
                     task.checked = taskParam !== null && taskParam.id === task.id;
+                    this.selectedTask = task.checked ? task : this.selectedTask;
                     return task;
                 });
                 this.isLoading = false;
