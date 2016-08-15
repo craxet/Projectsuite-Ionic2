@@ -94,6 +94,10 @@ export class NewBooking {
         actionSheet.present();
     }
 
+    formatDuration(duration){
+        return this.durationType === DurationType.HOURS ? duration.toFixed(2) : duration;
+    }
+
     selectedDurationSegment(value) {
         this.duration = this.durationType == DurationType.MINUTES ? value * 60 : value;
     }

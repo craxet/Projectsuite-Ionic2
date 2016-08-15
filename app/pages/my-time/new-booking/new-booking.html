@@ -46,9 +46,7 @@
         <ion-list-header>Duration</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-          <!--  <ion-label (click)="openDurationPicker()">{{durationType === 'hours'? (duration
-                | number: '.2'): duration}}
-            </ion-label>-->
+            <ion-label (click)="openDurationPicker()">{{formatDuration(duration)}}</ion-label>
             <div item-content text-capitalize>
                 {{durationType}}
             </div>

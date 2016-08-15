@@ -28,9 +28,8 @@
 </ion-header>
 <ion-content>
     <ion-list *ngFor="let headerDate of workingSteps">
-        <ion-list-header [hidden]="calView === 'DAY'">
-            <div style="text-align: left;">{{headerDate.date | date:
-                'dd.MM.yyyy'}}
+        <ion-list-header>
+            <div style="text-align: left;">{{headerDate.date | amDateFormat:"MM.DD.YYYY"}}
             </div>
         </ion-list-header>
         <ion-item-sliding *ngFor="let step of headerDate.values">

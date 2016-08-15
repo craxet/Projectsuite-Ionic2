@@ -8,6 +8,7 @@ import {DatePicker} from 'ionic-native';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {DateFormatPipe} from 'angular2-moment';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
@@ -32,7 +33,8 @@ enum Direction{
 
         `
     ],
-    providers: [MyTimeService]
+    providers: [MyTimeService],
+    pipes: [DateFormatPipe]
 })
 
 export class MyTimePage implements OnInit {
@@ -181,6 +183,10 @@ export class MyTimePage implements OnInit {
                 console.log(error);
             }
         );
+    }
+
+    isNotCalViewDay(){
+        return this.calView !== CalViewType.DAY;
     }
 
     /* headerDateFn(record, recordIndex, records) {

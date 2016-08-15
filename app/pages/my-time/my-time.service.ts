@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
@@ -20,7 +20,7 @@ export class MyTimeService {
             }).groupBy('date').value();
             let list = [];
             _.forIn(query, function (value, key) {
-                list.push({date: key, values: value});
+                list.push({date: parseInt(key), values: value});
             });
             return list;
         }).catch(error => {
