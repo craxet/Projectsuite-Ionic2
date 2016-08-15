@@ -22,7 +22,7 @@
         <ion-item (click)="selectTask()" class="ion-item-value" text-wrap>
             <ion-label [class.label-placeholder]="task == null">{{task == null?"Task name":task.name}}</ion-label>
             <div item-content>
-                <button clear >
+                <button clear>
                     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
                 </button>
             </div>
@@ -47,10 +47,8 @@
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
             <ion-label (click)="openDurationPicker()">{{formatDuration(duration)}}</ion-label>
-            <div item-content text-capitalize>
-                {{durationType}}
-            </div>
             <button clear item-right (click)="openDurationTypeActionSheet()">
+                <span text-capitalize>{{durationType}}</span>
                 <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
             </button>
         </ion-item>
