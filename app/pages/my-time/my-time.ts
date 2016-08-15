@@ -185,9 +185,6 @@ export class MyTimePage implements OnInit {
         );
     }
 
-    isNotCalViewDay(){
-        return this.calView !== CalViewType.DAY;
-    }
 
     /* headerDateFn(record, recordIndex, records) {
      var datePipe = new DatePipe();
