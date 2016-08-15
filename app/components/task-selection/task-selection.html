@@ -9,17 +9,17 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="taskGroup" primary padding>
-            <ion-segment-button value="myTasks" (ionSelect)="selectedTaskGroup()">
+        <ion-segment [(ngModel)]="taskGroup" (ionChange)="changedTaskGroup()" primary padding>
+            <ion-segment-button value="myTasks">
                 My
             </ion-segment-button>
-            <ion-segment-button value="lastBookedTasks" (ionSelect)="selectedTaskGroup()">
+            <ion-segment-button value="lastBookedTasks">
                 Last
             </ion-segment-button>
-            <ion-segment-button value="globalTasks" (ionSelect)="selectedTaskGroup()">
+            <ion-segment-button value="globalTasks">
                 Global
             </ion-segment-button>
-            <ion-segment-button value="teamTasks" (ionSelect)="selectedTaskGroup()">
+            <ion-segment-button value="teamTasks">
                 Team
             </ion-segment-button>
         </ion-segment>
@@ -30,10 +30,13 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    <div text-center [hidden]="!isLoading">
-        <ion-spinner id="task-spinner"></ion-spinner>
+    <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
+        <ion-spinner></ion-spinner>
     </div>
-    <ion-list [hidden]="isLoading" radio-group [(ngModel)]="selectedTaskTemp">
+    <div text-center class="center-vertically-in-list" [hidden]="isLoading || tasks.length !== 0">
+        <span class="no-items-found">No Tasks found</span>
+    </div>
+    <ion-list [hidden]="isLoading || tasks.length === 0" radio-group [(ngModel)]="selectedTaskTemp">
         <ion-item [class.not-bookable-task]="!task.bookable" text-wrap class="task-item" *ngFor="let task of tasks">
             <ion-label>
                 <h4>{{task.name}}</h4>

@@ -1,14 +1,19 @@
-.task-search .toolbar-background{
-  //background: white;
-}
-
+//ios
 .task-item-project{
   padding: 4px 0;
 }
 
+//ios
 .not-bookable-task{
   border-right: 3px solid $not-bookable-item;
 }
-#task-spinner{
+
+//ios
+.center-vertically-in-list{
   margin-top: 170px;
+}
+
+//ios
+.no-items-found{
+  color: $loading-ios-spinner-color;
 }

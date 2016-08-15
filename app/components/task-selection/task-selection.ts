@@ -27,7 +27,7 @@ export class TaskSelection implements OnInit {
         this.viewCtrl.dismiss(null);
     }
 
-    selectedTaskGroup() {
+    changedTaskGroup() {
         this.getTasks();
     }
 
