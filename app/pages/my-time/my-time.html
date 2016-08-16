@@ -35,13 +35,12 @@
         <ion-item-sliding *ngFor="let step of headerDate.values">
             <ion-item>{{step.taskName}}</ion-item>
             <ion-item-options>
-                <button primary>
-                    <ion-icon name="text"></ion-icon>
-                    Text
+                <button danger (click)="deleteWorkingStep(step)">
+                    <ion-icon name="close"></ion-icon>
+                    Delete
                 </button>
-                <button secondary>
-                    <ion-icon name="call"></ion-icon>
-                    Call
+                <button>
+                    Edit
                 </button>
             </ion-item-options>
         </ion-item-sliding>

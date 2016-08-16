@@ -8,7 +8,6 @@ import {DatePicker} from 'ionic-native';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {DateFormatPipe} from 'angular2-moment';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
@@ -56,7 +55,7 @@ export class MyTimePage implements OnInit {
     private weekLevel:number;
     private dayLevel:number;
 
-    constructor(private modalCtrl: ModalController,private popoverCtrl: PopoverController,private myTimeService:MyTimeService) {
+    constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -177,14 +176,39 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => this.workingSteps = data,
-            error => {
-                console.log(error);
-            }
-        );
+        //TODO temoporary wihout observable
+        /*this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
+         data => this.workingSteps = data,
+         error => {
+         console.log(error);
+         }
+         );*/
+        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
+    deleteWorkingStep(workingStep) {
+        let prompt = this.alertController.create({
+            title: 'Delete',
+            message: "Do you really want to delete this Working Step",
+            buttons: [
+                {
+                    text: 'No, I do not',
+                    role: 'cancel',
+                },
+                {
+                    text: 'Yes, I do',
+                    handler: data => {
+                        console.log(workingStep);
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    editWorkingStep() {
+
+    }
 
     /* headerDateFn(record, recordIndex, records) {
      var datePipe = new DatePipe();
