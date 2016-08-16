@@ -2,8 +2,8 @@
   "data": [
     {
       "id": "2016-07-19 15:53:51.641",
-      "date": 1468879200000,
-      "taskName": "CR 123456 Test123 dfdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf",
+      "date": 1471298400000,
+      "taskName": "My Test Task",
       "projectName": "Allgemeine Tätigkeiten",
       "tenant": "A",
       "duration": 0.25,
@@ -20,7 +20,43 @@
     },
     {
       "id": "2016-07-19 15:53:39.439",
-      "date": 1468879200000,
+      "date": 1471298400000,
+      "taskName": "CR 123464 This is an API test :)",
+      "projectName": "Allgemeine Tätigkeiten",
+      "tenant": "A",
+      "duration": 3.00,
+      "durationType": 1,
+      "category": {
+        "name": "Fachl. Review",
+        "value": "D"
+      },
+      "activity": "try it",
+      "booked": false,
+      "editableExpired": false,
+      "taskId": "2016-06-16 13:59:28.51",
+      "number": 31357
+    },
+    {
+      "id": "2016-07-19 15:53:51.641",
+      "date": 1471298400000,
+      "taskName": "My Test Task 2",
+      "projectName": "Allgemeine Tätigkeiten",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": {
+        "name": "Rüstzeiten",
+        "value": "Z"
+      },
+      "activity": "big projects",
+      "booked": false,
+      "editableExpired": false,
+      "taskId": "2016-06-15 14:46:23.096",
+      "number": 31350
+    },
+    {
+      "id": "2016-07-19 15:53:39.439",
+      "date": 1471212000000,
       "taskName": "CR 123464 This is an API test :)",
       "projectName": "Allgemeine Tätigkeiten",
       "tenant": "A",
@@ -38,7 +74,7 @@
     },
     {
       "id": "2016-07-19 15:53:24.007",
-      "date": 1468879200000,
+      "date": 1471212000000,
       "taskName": "CR 123457 Test123",
       "projectName": "Allgemeine Tätigkeiten",
       "tenant": "A",

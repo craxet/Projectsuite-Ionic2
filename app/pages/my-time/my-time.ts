@@ -1,5 +1,5 @@
-import {PopoverController, ModalController} from 'ionic-angular';
-import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
+import {PopoverController, ModalController, AlertController} from 'ionic-angular';
+import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
@@ -37,24 +37,24 @@ enum Direction{
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton:boolean;
-    hideNextButton:boolean;
-    dateIndex:number = 0;
-    selectedDate:{name:string, from: Moment, to: Moment};
-    calView:CalViewType = CalViewType.MONTH;
-    lastCalView:CalViewType = CalViewType.MONTH;
-    workingSteps:Array<any> = [];
-    inclBooked:boolean = false;
-    tenant:string = null;
-    memberId:string = null;
-    selectedDateClass:boolean = false;
+    hidePrevButton: boolean;
+    hideNextButton: boolean;
+    dateIndex: number = 0;
+    selectedDate: {name: string, from: Moment, to: Moment};
+    calView: CalViewType = CalViewType.MONTH;
+    lastCalView: CalViewType = CalViewType.MONTH;
+    workingSteps: Array<any> = [];
+    inclBooked: boolean = false;
+    tenant: string = null;
+    memberId: string = null;
+    selectedDateClass: boolean = false;
 
-    private newDate:Moment;
-    private monthLevel:number;
-    private weekLevel:number;
-    private dayLevel:number;
+    private newDate: Moment;
+    private monthLevel: number;
+    private weekLevel: number;
+    private dayLevel: number;
 
-    constructor(private modalCtrl: ModalController,private popoverCtrl: PopoverController,private myTimeService:MyTimeService) {
+    constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -175,19 +175,39 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => this.workingSteps = data,
-            error => {
-                console.log(error);
-            }
-        );
+        //TODO temoporary wihout observable
+        /*this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
+         data => this.workingSteps = data,
+         error => {
+         console.log(error);
+         }
+         );*/
+        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
-    /* headerDateFn(record, recordIndex, records) {
-     var datePipe = new DatePipe();
-     //TODO use formatter in template
-     return datePipe.transform(new Date(parseInt(record.date)), 'dd.MM.yyyy');
-     }*/
+    deleteWorkingStep(workingStep) {
+        let prompt = this.alertController.create({
+            title: 'Delete',
+            message: "Do you really want to delete this Working Step",
+            buttons: [
+                {
+                    text: 'No, I do not',
+                    role: 'cancel',
+                },
+                {
+                    text: 'Yes, I do',
+                    handler: data => {
+                        console.log(workingStep);
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    editWorkingStep() {
+
+    }
 
     ngOnInit() {
         this.setNewDateRange();
