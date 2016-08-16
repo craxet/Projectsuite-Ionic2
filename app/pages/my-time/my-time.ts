@@ -1,5 +1,5 @@
-import {PopoverController, ModalController} from 'ionic-angular';
-import {Component,ViewChild,OnInit,OnChanges} from '@angular/core';
+import {PopoverController, ModalController, AlertController} from 'ionic-angular';
+import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
@@ -8,6 +8,7 @@ import {DatePicker} from 'ionic-native';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {DateFormatPipe} from 'angular2-moment';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
@@ -209,12 +210,6 @@ export class MyTimePage implements OnInit {
     editWorkingStep() {
 
     }
-
-    /* headerDateFn(record, recordIndex, records) {
-     var datePipe = new DatePipe();
-     //TODO use formatter in template
-     return datePipe.transform(new Date(parseInt(record.date)), 'dd.MM.yyyy');
-     }*/
 
     ngOnInit() {
         this.setNewDateRange();
