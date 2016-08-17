@@ -41,12 +41,13 @@ export class MyTimeService {
             _.forIn(query, function (value, key) {
                 list.push({date: parseInt(key), values: value});
             });
-        }, 2000);
+        }, 1500);
 
         return list;
     }
 
-    removeWorkingStep(id: string) {
-
+    removeWorkingStep(workingStep) {
+        //TODO temporary service
+        return workingStep;
     }
 }

@@ -177,7 +177,7 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        //TODO temoporary wihout observable
+        //TODO temoporary without observable
         /*this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
          data => this.workingSteps = data,
          error => {
@@ -190,7 +190,7 @@ export class MyTimePage implements OnInit {
     deleteWorkingStep(workingStep) {
         let prompt = this.alertController.create({
             title: 'Delete',
-            message: "Do you really want to delete this Working Step",
+            message: "Do you really want to delete the Working Step",
             buttons: [
                 {
                     text: 'No, I do not',
@@ -199,7 +199,9 @@ export class MyTimePage implements OnInit {
                 {
                     text: 'Yes, I do',
                     handler: data => {
-                        console.log(workingStep);
+                        console.log(this.myTimeService.removeWorkingStep(workingStep));
+                        _.remove(this.workingSteps,['id',this.myTimeService.removeWorkingStep(workingStep).id]);
+                        //TODO call getWorkingSteps in callback if observable are implemented
                     }
                 }
             ]
