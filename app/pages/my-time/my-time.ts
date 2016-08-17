@@ -39,22 +39,22 @@ enum Direction{
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton:boolean;
-    hideNextButton:boolean;
-    dateIndex:number = 0;
-    selectedDate:{name:string, from: Moment, to: Moment};
-    calView:CalViewType = CalViewType.MONTH;
-    lastCalView:CalViewType = CalViewType.MONTH;
-    workingSteps:Array<any> = [];
-    inclBooked:boolean = false;
-    tenant:string = null;
-    memberId:string = null;
-    selectedDateClass:boolean = false;
+    hidePrevButton: boolean;
+    hideNextButton: boolean;
+    dateIndex: number = 0;
+    selectedDate: {name: string, from: Moment, to: Moment};
+    calView: CalViewType = CalViewType.MONTH;
+    lastCalView: CalViewType = CalViewType.MONTH;
+    workingSteps: Array<any> = [];
+    inclBooked: boolean = false;
+    tenant: string = null;
+    memberId: string = null;
+    selectedDateClass: boolean = false;
 
-    private newDate:Moment;
-    private monthLevel:number;
-    private weekLevel:number;
-    private dayLevel:number;
+    private newDate: Moment;
+    private monthLevel: number;
+    private weekLevel: number;
+    private dayLevel: number;
 
     constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
@@ -178,13 +178,13 @@ export class MyTimePage implements OnInit {
 
     getWorkingSteps() {
         //TODO temoporary wihout observable
-        /*this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-         data => this.workingSteps = data,
-         error => {
-         console.log(error);
-         }
-         );*/
-        this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
+        this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
+            data => this.workingSteps = data,
+            error => {
+                console.log(error);
+            }
+        );
+        // this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
     deleteWorkingStep(workingStep) {

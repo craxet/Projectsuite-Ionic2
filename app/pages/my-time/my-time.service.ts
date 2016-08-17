@@ -19,31 +19,19 @@ export class MyTimeService {
     getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
         //TODO temporary without observable
-        /* return this.http.get('test-data/working-steps.json').map(res => {
-         let body = res.json();
-         let query = _.chain(body.data).filter(function (item) {
-         return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
-         }).groupBy('date').value();
-         let list = [];
-         _.forIn(query, function (value, key) {
-         list.push({date: key, values: value});
-         });
-         return list;
-         }).catch(error => {
-         console.log('service', error);
-         return Observable.throw(error);
-         });*/
-        let list = [];
-        setTimeout(()=> {
-            let query = _.chain(this.workingSteps).filter(function (item) {
+        return this.http.get('http://localhost:3000/workingSteps').map(res => {
+            let query = _.chain(res.json()).filter(function (item) {
                 return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
             }).groupBy('date').value();
+            let list = [];
             _.forIn(query, function (value, key) {
-                list.push({date: parseInt(key), values: value});
+                list.push({date: key, values: value});
             });
-        }, 2000);
-
-        return list;
+            return list;
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
     }
 
     removeWorkingStep(id: string) {
