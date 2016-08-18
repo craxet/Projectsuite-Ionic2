@@ -10,7 +10,7 @@ var gulp = require('gulp'),
  * Add ':before' or ':after' to any Ionic project command name to run the specified
  * tasks before or after the command.
  */
-gulp.task('serve:before', ['watch']);
+gulp.task('serve:before', ['json.server','watch']);
 gulp.task('emulate:before', ['build']);
 gulp.task('deploy:before', ['build']);
 gulp.task('build:before', ['build']);
@@ -33,6 +33,8 @@ var copyHTML = require('ionic-gulp-html-copy');
 var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 var tslint = require('ionic-gulp-tslint');
+
+var jsonServer = require('json-server')
 
 var isRelease = argv.indexOf('--release') > -1;
 
@@ -62,6 +64,19 @@ gulp.task('build', ['clean'], function(done){
       }).on('end', done);
     }
   );
+});
+
+
+
+gulp.task('json.server',function () {
+    var server = jsonServer.create();
+    var router = jsonServer.router('db.json');
+    var middlewares = jsonServer.defaults();
+    server.use(middlewares)
+    server.use(router)
+    server.listen(3000, function () {
+        console.log('JSON Server is running')
+    })
 });
 
 gulp.task('sass', buildSass);
