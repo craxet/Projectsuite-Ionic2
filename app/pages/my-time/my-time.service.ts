@@ -34,7 +34,12 @@ export class MyTimeService {
         });
     }
 
-    removeWorkingStep(id: string) {
-
+    deleteWorkingStep(workingStep) {
+        return this.http.delete('http://localhost:3000/workingSteps?id=2016-07-19+15:53:51.641').map(res =>{
+            res.json();
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
     }
 }

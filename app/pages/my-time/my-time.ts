@@ -177,14 +177,12 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps() {
-        //TODO temoporary wihout observable
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {this.workingSteps = data},
             error => {
                 console.log(error);
             }
         );
-        // this.workingSteps = this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant);
     }
 
     deleteWorkingStep(workingStep) {
@@ -198,8 +196,12 @@ export class MyTimePage implements OnInit {
                 },
                 {
                     text: 'Yes, I do',
-                    handler: data => {
-                        console.log(workingStep);
+                    handler:()=> {
+                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(()=>{
+                            console.log('DELETED');
+                        },error =>{
+                            console.log(error);
+                        });
                     }
                 }
             ]
