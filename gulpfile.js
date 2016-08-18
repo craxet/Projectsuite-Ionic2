@@ -10,7 +10,7 @@ var gulp = require('gulp'),
  * Add ':before' or ':after' to any Ionic project command name to run the specified
  * tasks before or after the command.
  */
-gulp.task('serve:before', ['json.server','watch']);
+gulp.task('serve:before', ['watch']);
 gulp.task('emulate:before', ['build']);
 gulp.task('deploy:before', ['build']);
 gulp.task('build:before', ['build']);
@@ -34,7 +34,7 @@ var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 var tslint = require('ionic-gulp-tslint');
 
-var jsonServer = require('json-server')
+var jsonServer = require('json-server');
 
 var isRelease = argv.indexOf('--release') > -1;
 
