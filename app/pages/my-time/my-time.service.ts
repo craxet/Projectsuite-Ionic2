@@ -25,7 +25,7 @@ export class MyTimeService {
             }).groupBy('date').value();
             let list = [];
             _.forIn(query, function (value, key) {
-                list.push({date: key, values: value});
+                list.push({date: parseInt(key), values: value});
             });
             return list;
         }).catch(error => {
