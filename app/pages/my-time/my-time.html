@@ -33,7 +33,24 @@
             </div>
         </ion-list-header>
         <ion-item-sliding *ngFor="let step of headerDate.values">
-            <ion-item>{{step.taskName}}</ion-item>
+            <ion-item>
+                <ion-grid>
+                    <ion-row wrap center>
+                        <ion-col width-90>
+                            <p><strong>Task</strong></p>
+                            <p>{{step.taskName}}</p>
+                            <p><strong>Project</strong></p>
+                            <p>{{step.projectName}}</p>
+                            <p><strong>Activity</strong></p>
+                            <p>{{step.activity}}</p>
+                            <p><strong>Category </strong>{{step.category.name}}</p>
+                        </ion-col>
+                        <ion-col>
+                            <h2>{{step.duration}}</h2>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
             <ion-item-options>
                 <button danger (click)="deleteWorkingStep(step)">
                     <ion-icon name="close"></ion-icon>

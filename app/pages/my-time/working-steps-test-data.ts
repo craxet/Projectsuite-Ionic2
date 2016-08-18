@@ -4,7 +4,7 @@
 
 export var WorkingStepsData = [
     {
-        "id": "2016-07-19 15:53:51.641",
+        "id": "2016-07-19 15:53:51.123",
         "date": 1471298400000,
         "taskName": "My Test Task",
         "projectName": "Allgemeine Tätigkeiten",
@@ -58,7 +58,7 @@ export var WorkingStepsData = [
         "number": 31350
     },
     {
-        "id": "2016-07-19 15:53:39.439",
+        "id": "2016-07-19 15:53:39.430",
         "date": 1471212000000,
         "taskName": "CR 123464 This is an API test :)",
         "projectName": "Allgemeine Tätigkeiten",

@@ -39,22 +39,22 @@ enum Direction{
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton: boolean;
-    hideNextButton: boolean;
-    dateIndex: number = 0;
-    selectedDate: {name: string, from: Moment, to: Moment};
-    calView: CalViewType = CalViewType.MONTH;
-    lastCalView: CalViewType = CalViewType.MONTH;
-    workingSteps: Array<any> = [];
-    inclBooked: boolean = false;
-    tenant: string = null;
-    memberId: string = null;
-    selectedDateClass: boolean = false;
+    hidePrevButton:boolean;
+    hideNextButton:boolean;
+    dateIndex:number = 0;
+    selectedDate:{name:string, from: Moment, to: Moment};
+    calView:CalViewType = CalViewType.MONTH;
+    lastCalView:CalViewType = CalViewType.MONTH;
+    workingSteps:Array<any> = [];
+    inclBooked:boolean = false;
+    tenant:string = null;
+    memberId:string = null;
+    selectedDateClass:boolean = false;
 
-    private newDate: Moment;
-    private monthLevel: number;
-    private weekLevel: number;
-    private dayLevel: number;
+    private newDate:Moment;
+    private monthLevel:number;
+    private weekLevel:number;
+    private dayLevel:number;
 
     constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
@@ -190,7 +190,7 @@ export class MyTimePage implements OnInit {
     deleteWorkingStep(workingStep) {
         let prompt = this.alertController.create({
             title: 'Delete',
-            message: "Do you really want to delete this Working Step",
+            message: "Do you really want to delete the Working Step",
             buttons: [
                 {
                     text: 'No, I do not',
