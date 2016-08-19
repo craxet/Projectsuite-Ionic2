@@ -198,7 +198,7 @@ export class MyTimePage implements OnInit {
                     text: 'Yes, I do',
                     handler:()=> {
                         this.myTimeService.deleteWorkingStep(workingStep).subscribe(()=>{
-                            console.log('DELETED');
+                            this.getWorkingSteps();
                         },error =>{
                             console.log(error);
                         });
