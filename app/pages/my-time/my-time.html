@@ -27,40 +27,41 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list *ngFor="let headerDate of workingSteps">
-        <ion-list-header *ngIf="calView != 'DAY'">
-            <div style="text-align: left;">{{headerDate.date | amDateFormat:"MM.DD.YYYY"}}
-            </div>
-        </ion-list-header>
-        <ion-item-sliding *ngFor="let step of headerDate.values">
-            <ion-item>
-                <ion-grid>
-                    <ion-row wrap center>
-                        <ion-col width-90>
-                            <p><strong>Task</strong></p>
-                            <p>{{step.taskName}}</p>
-                            <p><strong>Project</strong></p>
-                            <p>{{step.projectName}}</p>
-                            <p><strong>Activity</strong></p>
-                            <p>{{step.activity}}</p>
-                            <!--<p><strong>Category </strong>{{step.category.name}}</p>-->
-                        </ion-col>
-                        <ion-col width-10>
-                            <h2>{{step.duration | duration}}</h2>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-item>
-            <ion-item-options>
-                <button danger (click)="deleteWorkingStep(step)">
-                    <ion-icon name="close"></ion-icon>
-                    Delete
-                </button>
-                <button>
-                    Edit
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
+    <ion-list>
+        <ion-item-group *ngFor="let headerDate of workingSteps">
+            <ion-item-divider>
+                {{headerDate.date | amDateFormat:"MM.DD.YYYY"}}
+            </ion-item-divider>
+            <ion-item-sliding *ngFor="let step of headerDate.values">
+                <ion-item>
+                    <ion-grid>
+                        <ion-row wrap center>
+                            <ion-col width-90>
+                                <p><strong>Task</strong></p>
+                                <p>{{step.taskName}}</p>
+                                <p><strong>Project</strong></p>
+                                <p>{{step.projectName}}</p>
+                                <p><strong>Activity</strong></p>
+                                <p>{{step.activity}}</p>
+                                <!--<p><strong>Category </strong>{{step.category.name}}</p>-->
+                            </ion-col>
+                            <ion-col width-10>
+                                <h2>{{step.duration | duration}}</h2>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <ion-item-options>
+                    <button danger (click)="deleteWorkingStep(step)">
+                        <ion-icon name="close"></ion-icon>
+                        Delete
+                    </button>
+                    <button>
+                        Edit
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-item-group>
     </ion-list>
     <!--<ion-list [virtualScroll]="workingSteps" [bufferRatio]="20" [headerFn]="headerDateFn">
         <ion-item-group *virtualItem="let item">
