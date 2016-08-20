@@ -9,6 +9,7 @@ import {DatePicker} from 'ionic-native';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
+import {DurationPipe} from '../../pipes/duration-pipe.ts';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
@@ -34,7 +35,7 @@ enum Direction{
         `
     ],
     providers: [MyTimeService],
-    pipes: [DateFormatPipe]
+    pipes: [DateFormatPipe,DurationPipe]
 })
 
 export class MyTimePage implements OnInit {

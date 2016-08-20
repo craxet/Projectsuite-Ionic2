@@ -27,7 +27,6 @@ export class MyTimeService {
             _.forIn(query, function (value, key) {
                 list.push({date: parseInt(key), values: value});
             });
-            console.log(list);
             return list;
         }).catch(error => {
             console.log('service', error);
