@@ -200,7 +200,7 @@ export class MyTimePage implements OnInit {
                     handler: ()=> {
                         loader.present();
                         this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
-                            this.removeWorkingStepLocally(workingStep);
+                            this.deleteWorkingStepLocally(workingStep);
                             loader.dismiss();
                         }, error=> {
                             loader.dismiss();
@@ -213,7 +213,7 @@ export class MyTimePage implements OnInit {
         prompt.present();
     }
 
-    removeWorkingStepLocally(workingStep) {
+    deleteWorkingStepLocally(workingStep) {
         this.workingSteps.forEach((item, index, array)=> {
             if (item.date === workingStep.date) {
                 item.values.splice(item.values.findIndex((el)=> {
