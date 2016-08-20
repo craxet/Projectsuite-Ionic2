@@ -30,11 +30,20 @@
     <ion-list>
         <ion-item-group *ngFor="let headerDate of workingSteps">
             <ion-item-divider>
-                {{headerDate.date | amDateFormat:"MM.DD.YYYY"}}
+                <ion-grid no-padding>
+                    <ion-row style="padding-right:8px" >
+                        <ion-col width-90>
+                            {{headerDate.date | amDateFormat:"MM.DD.YYYY"}}
+                        </ion-col>
+                        <ion-col width-10>
+                            <strong>{{headerDate.sumOfDuration | duration}}</strong>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-item-divider>
             <ion-item-sliding *ngFor="let step of headerDate.values">
                 <ion-item>
-                    <ion-grid>
+                    <ion-grid no-padding no-margin>
                         <ion-row wrap center>
                             <ion-col width-90>
                                 <p><strong>Task</strong></p>
@@ -46,7 +55,7 @@
                                 <!--<p><strong>Category </strong>{{step.category.name}}</p>-->
                             </ion-col>
                             <ion-col width-10>
-                                <h2>{{step.duration | duration}}</h2>
+                                <h4>{{step.duration | duration}}</h4>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

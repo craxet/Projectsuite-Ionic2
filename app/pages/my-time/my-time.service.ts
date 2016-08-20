@@ -25,7 +25,7 @@ export class MyTimeService {
             }).groupBy('date').value();
             let list = [];
             _.forIn(query, function (value, key) {
-                list.push({date: parseInt(key), values: value});
+                list.push({date: parseInt(key),sumOfDuration: _.sumBy(value,'duration'),values: value});
             });
             console.log(list);
             return list;
