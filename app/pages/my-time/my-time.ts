@@ -1,4 +1,4 @@
-import {PopoverController, ModalController, AlertController} from 'ionic-angular';
+import {LoadingController, PopoverController, ModalController, AlertController} from 'ionic-angular';
 import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
@@ -39,24 +39,24 @@ enum Direction{
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton:boolean;
-    hideNextButton:boolean;
-    dateIndex:number = 0;
-    selectedDate:{name:string, from: Moment, to: Moment};
-    calView:CalViewType = CalViewType.MONTH;
-    lastCalView:CalViewType = CalViewType.MONTH;
-    workingSteps:Array<any> = [];
-    inclBooked:boolean = false;
-    tenant:string = null;
-    memberId:string = null;
-    selectedDateClass:boolean = false;
+    hidePrevButton: boolean;
+    hideNextButton: boolean;
+    dateIndex: number = 0;
+    selectedDate: {name: string, from: Moment, to: Moment};
+    calView: CalViewType = CalViewType.MONTH;
+    lastCalView: CalViewType = CalViewType.MONTH;
+    workingSteps: Array<any> = [];
+    inclBooked: boolean = false;
+    tenant: string = null;
+    memberId: string = null;
+    selectedDateClass: boolean = false;
 
-    private newDate:Moment;
-    private monthLevel:number;
-    private weekLevel:number;
-    private dayLevel:number;
+    private newDate: Moment;
+    private monthLevel: number;
+    private weekLevel: number;
+    private dayLevel: number;
 
-    constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
+    constructor(private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -178,7 +178,9 @@ export class MyTimePage implements OnInit {
 
     getWorkingSteps() {
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => {this.workingSteps = data},
+            data => {
+                this.workingSteps = data
+            },
             error => {
                 console.log(error);
             }
@@ -186,6 +188,7 @@ export class MyTimePage implements OnInit {
     }
 
     deleteWorkingStep(workingStep) {
+        let loader = this.loadingController.create();
         let prompt = this.alertController.create({
             title: 'Delete',
             message: "Do you really want to delete the Working Step",
@@ -196,17 +199,28 @@ export class MyTimePage implements OnInit {
                 },
                 {
                     text: 'Yes, I do',
-                    handler:()=> {
-                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(()=>{
-                            console.log('DELETED');
-                        },error =>{
-                            console.log(error);
-                        });
+                    handler: ()=> {
+                        loader.present();
+                        this.removeWorkingStepLocally(workingStep);
+                        loader.dismiss();
                     }
                 }
             ]
         });
         prompt.present();
+    }
+
+    removeWorkingStepLocally(workingStep) {
+        this.workingSteps.forEach((item, index, array)=> {
+            if (item.date === workingStep.date) {
+                item.values.splice(item.values.findIndex((el)=> {
+                    return el.id === workingStep.id;
+                }), 1);
+                if (item.values.length === 0) {
+                    array.splice(index, 1);
+                }
+            }
+        });
     }
 
     editWorkingStep() {
