@@ -36,8 +36,7 @@ export class MyTimeService {
     }
 
     deleteWorkingStep(workingStep) {
-        return this.http.delete('http://localhost:3000/workingSteps/'+workingStep.id).map(res =>{
-            res.json();
+        return this.http.delete('http://localhost:3000/workingSteps/' + workingStep.id).map(() => {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);

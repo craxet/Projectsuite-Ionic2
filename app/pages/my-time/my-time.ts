@@ -178,9 +178,7 @@ export class MyTimePage implements OnInit {
 
     getWorkingSteps() {
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => {
-                this.workingSteps = data
-            },
+            data => this.workingSteps = data,
             error => {
                 console.log(error);
             }
@@ -201,8 +199,13 @@ export class MyTimePage implements OnInit {
                     text: 'Yes, I do',
                     handler: ()=> {
                         loader.present();
-                        this.removeWorkingStepLocally(workingStep);
-                        loader.dismiss();
+                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
+                            this.removeWorkingStepLocally(workingStep);
+                            loader.dismiss();
+                        }, error=> {
+                            loader.dismiss();
+                            console.log(error);
+                        });
                     }
                 }
             ]
