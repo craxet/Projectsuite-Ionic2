@@ -21,11 +21,12 @@ export class MyTimeService {
         //TODO temporary without observable
         return this.http.get('http://localhost:3000/workingSteps').map(res => {
             let query = _.chain(res.json()).filter(function (item) {
-                return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
+                return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime()
+                && inclBooked ? (item.booked === true || item.booked === false) : item.booked === false;
             }).groupBy('date').value();
             let list = [];
             _.forIn(query, function (value, key) {
-                list.push({date: parseInt(key),sumOfDuration: _.sumBy(value,'duration'),values: value});
+                list.push({date: parseInt(key), sumOfDuration: _.sumBy(value, 'duration'), values: value});
             });
             return list;
         }).catch(error => {

@@ -32,6 +32,9 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="working-step">
+    <ion-refresher (ionRefresh)="getWorkingSteps($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-list>
         <ion-item-group *ngFor="let headerDate of workingSteps">
             <ion-item-divider>

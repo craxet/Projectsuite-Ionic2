@@ -1,5 +1,5 @@
-import {LoadingController, PopoverController, ModalController, AlertController} from 'ionic-angular';
-import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
+import {LoadingController, PopoverController, ModalController, AlertController, Refresher} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
@@ -48,6 +48,7 @@ export class MyTimePage implements OnInit {
     tenant: string = null;
     memberId: string = null;
     selectedDateClass: boolean = false;
+    isWorkingStepsLoading: boolean = false;
 
     private newDate: Moment;
     private monthLevel: number;
@@ -164,8 +165,12 @@ export class MyTimePage implements OnInit {
     }
 
     openMoreModal() {
-        let modal = this.modalCtrl.create(WorkingStepMoreModal);
+        let modal = this.modalCtrl.create(WorkingStepMoreModal, {inclBooked: this.inclBooked});
         modal.present();
+        modal.onDidDismiss(data => {
+            this.inclBooked = data.inclBooked;
+            this.getWorkingSteps();
+        });
     }
 
     showDateViewModePopover(ev) {
@@ -179,11 +184,18 @@ export class MyTimePage implements OnInit {
         popover.present({ev: ev});
     }
 
-    getWorkingSteps() {
+    getWorkingSteps(refresher: Refresher = null) {
+        this.isWorkingStepsLoading = refresher === null ? true : false;
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => this.workingSteps = data,
+            data => {
+                this.workingSteps = data
+                this.isWorkingStepsLoading = false;
+                refresher && refresher.complete();
+            },
             error => {
                 console.log(error);
+                this.isWorkingStepsLoading = false;
+                refresher && refresher.complete();
             }
         );
     }
