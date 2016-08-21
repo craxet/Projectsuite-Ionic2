@@ -175,8 +175,10 @@ export class MyTimePage implements OnInit {
         });
         modal.present();
         modal.onDidDismiss(data => {
-            this.inclBooked = data.inclBooked;
-            this.getWorkingSteps();
+            if (data && this.inclBooked !== data.inclBooked) {
+                this.inclBooked = data.inclBooked;
+                this.getWorkingSteps();
+            }
         });
     }
 
@@ -197,7 +199,6 @@ export class MyTimePage implements OnInit {
             data => {
                 this.workingSteps = data.list;
                 this.totalSumOfWorkingSteps = data.totalSum;
-                console.log(data.first);
                 this.firstLastDateOfWorkingSteps = data.firstLast;
                 this.areWorkingStepsLoading = false;
                 refresher && refresher.complete();

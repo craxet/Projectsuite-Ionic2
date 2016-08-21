@@ -39,7 +39,7 @@
         <ion-spinner></ion-spinner>
     </div>
     <div text-center class="center-vertically-in-list" [hidden]="areWorkingStepsLoading || workingSteps.length !== 0">
-        <span class="no-items-found">No Tasks found</span>
+        <span class="no-items-found">No Working Step found</span>
     </div>
     <ion-list [hidden]="areWorkingStepsLoading || workingSteps.length === 0">
         <ion-item-group *ngFor="let headerDate of workingSteps">
