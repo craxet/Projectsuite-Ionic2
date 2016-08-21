@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, ModalController, PickerController, ActionSheetController} from 'ionic-angular';
+import {ViewController, ModalController, PickerController, ActionSheetController,AlertController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
@@ -20,14 +20,14 @@ export class NewBooking implements OnInit {
 
     bookingDate: string;
     minBookingDate: string;
-    isMinBookingDateLoading:boolean = true;
+    isMinBookingDateLoading: boolean = true;
     maxBookingDate: string
     duration: number;
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
     task: Object = null;
 
-    constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService) {
+    constructor(private alertCtrl: AlertController,private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService) {
         this.maxBookingDate = moment().toISOString();
         this.bookingDate = this.maxBookingDate;
         this.durationTemp = '0.25';
@@ -36,6 +36,19 @@ export class NewBooking implements OnInit {
 
     cancel() {
         this.viewCtrl.dismiss();
+    }
+
+    createWorkingStep() {
+        if (this.task === null) {
+            let alert = this.alertCtrl.create({
+                title: 'No Task selected',
+                subTitle: 'Select a Task please!',
+                buttons: ['OK']
+            });
+            alert.present();
+        } else {
+            this.viewCtrl.dismiss();
+        }
     }
 
     selectTask() {
