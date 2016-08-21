@@ -17,19 +17,12 @@
     <ion-list>
         <ion-list-header>Total Sum of Working Steps</ion-list-header>
         <ion-item>
-            <ion-label class="label-text">22.10.2015 - 24.12.2016</ion-label>
+            <ion-label class="label-text">{{firstLastDateOfWorkingSteps.first | amDateFormat: 'DD.MM.YYYY'}} -
+                {{firstLastDateOfWorkingSteps.last | amDateFormat: 'DD.MM.YYYY'}}
+            </ion-label>
             <div item-content>
-                <h2 style="padding-right: 8px">23.56</h2>
+                <h2 style="padding-right: 8px">{{totalSumOfWorkingSteps | duration}} h</h2>
             </div>
-
-            <!-- <ion-grid>
-                 <ion-row>
-                     <ion-col width-80>
-                     </ion-col>
-                     <ion-col width-10>
-                     </ion-col>
-                 </ion-row>
-             </ion-grid>-->
         </ion-item>
     </ion-list>
 </ion-content>

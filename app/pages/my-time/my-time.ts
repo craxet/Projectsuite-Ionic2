@@ -44,6 +44,8 @@ export class MyTimePage implements OnInit {
     calView: CalViewType = CalViewType.MONTH;
     lastCalView: CalViewType = CalViewType.MONTH;
     workingSteps: Array<any> = [];
+    totalSumOfWorkingSteps: number;
+    firstLastDateOfWorkingSteps: {first: Moment, last: Moment};
     inclBooked: boolean = false;
     tenant: string = null;
     memberId: string = null;
@@ -165,7 +167,12 @@ export class MyTimePage implements OnInit {
     }
 
     openMoreModal() {
-        let modal = this.modalCtrl.create(WorkingStepMoreModal, {inclBooked: this.inclBooked});
+        let modal = this.modalCtrl.create(WorkingStepMoreModal, {
+            inclBooked: this.inclBooked,
+            selectedDate: this.selectedDate,
+            totalSumOfWorkingSteps: this.totalSumOfWorkingSteps,
+            firstLastDateOfWorkingSteps: this.firstLastDateOfWorkingSteps
+        });
         modal.present();
         modal.onDidDismiss(data => {
             this.inclBooked = data.inclBooked;
@@ -188,7 +195,10 @@ export class MyTimePage implements OnInit {
         this.areWorkingStepsLoading = refresher === null ? true : false;
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {
-                this.workingSteps = data
+                this.workingSteps = data.list;
+                this.totalSumOfWorkingSteps = data.totalSum;
+                console.log(data.first);
+                this.firstLastDateOfWorkingSteps = data.firstLast;
                 this.areWorkingStepsLoading = false;
                 refresher && refresher.complete();
             },

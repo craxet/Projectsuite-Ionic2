@@ -4,6 +4,7 @@ import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 
 import {WorkingStepsData} from './working-steps-test-data';
@@ -25,10 +26,22 @@ export class MyTimeService {
                 && inclBooked ? (item.booked === true || item.booked === false) : item.booked === false;
             }).groupBy('date').value();
             let list = [];
+            let totalSum = 0;
             _.forIn(query, function (value, key) {
-                list.push({date: parseInt(key), sumOfDuration: _.sumBy(value, 'duration'), values: value});
+                let sumOfDuration = _.sumBy(value, 'duration');
+                totalSum += sumOfDuration;
+                list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
-            return list;
+            console.log(moment(parseInt(_.minBy(list, 'date').date)));
+
+            return {
+                list: list,
+                totalSum: totalSum,
+                firstLast: {
+                    first: moment(parseInt(_.minBy(list, 'date').date)),
+                    last: moment(parseInt(_.minBy(list, 'date').date))
+                }
+            };
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
