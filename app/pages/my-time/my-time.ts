@@ -195,6 +195,7 @@ export class MyTimePage implements OnInit {
 
     getWorkingSteps(refresher: Refresher = null) {
         this.areWorkingStepsLoading = refresher === null ? true : false;
+        console.log(this.selectedDate);
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {
                 this.workingSteps = data.list;
