@@ -48,7 +48,7 @@ export class MyTimePage implements OnInit {
     tenant: string = null;
     memberId: string = null;
     selectedDateClass: boolean = false;
-    isWorkingStepsLoading: boolean = false;
+    areWorkingStepsLoading: boolean = false;
 
     private newDate: Moment;
     private monthLevel: number;
@@ -185,16 +185,16 @@ export class MyTimePage implements OnInit {
     }
 
     getWorkingSteps(refresher: Refresher = null) {
-        this.isWorkingStepsLoading = refresher === null ? true : false;
+        this.areWorkingStepsLoading = refresher === null ? true : false;
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {
                 this.workingSteps = data
-                this.isWorkingStepsLoading = false;
+                this.areWorkingStepsLoading = false;
                 refresher && refresher.complete();
             },
             error => {
                 console.log(error);
-                this.isWorkingStepsLoading = false;
+                this.areWorkingStepsLoading = false;
                 refresher && refresher.complete();
             }
         );

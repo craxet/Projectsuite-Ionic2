@@ -35,7 +35,13 @@
     <ion-refresher (ionRefresh)="getWorkingSteps($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-list>
+    <div text-center class="center-vertically-in-list" [hidden]="!areWorkingStepsLoading">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div text-center class="center-vertically-in-list" [hidden]="areWorkingStepsLoading || workingSteps.length !== 0">
+        <span class="no-items-found">No Tasks found</span>
+    </div>
+    <ion-list [hidden]="areWorkingStepsLoading || workingSteps.length === 0">
         <ion-item-group *ngFor="let headerDate of workingSteps">
             <ion-item-divider>
                 <ion-grid no-padding>
