@@ -3,9 +3,6 @@ import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
-//cordova plugin DO I NEED IT ?
-import {DatePicker} from 'ionic-native';
-
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
@@ -16,7 +13,7 @@ import {DateViewModePopover} from '../../components/date-view-mode-popover/date-
 import {CalViewType} from '../../enums/enums';
 import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
 import {NewBooking} from './new-booking/new-booking';
-
+import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
@@ -35,7 +32,7 @@ enum Direction{
         `
     ],
     providers: [MyTimeService],
-    pipes: [DateFormatPipe,DurationPipe]
+    pipes: [DateFormatPipe, DurationPipe]
 })
 
 export class MyTimePage implements OnInit {
@@ -161,9 +158,14 @@ export class MyTimePage implements OnInit {
         this.getWorkingSteps();
     }
 
-    createBooking(ev) {
+    createBooking() {
         let modal = this.modalCtrl.create(NewBooking);
-        modal.present({ev: ev});
+        modal.present();
+    }
+
+    openMoreModal() {
+        let modal = this.modalCtrl.create(WorkingStepMoreModal);
+        modal.present();
     }
 
     showDateViewModePopover(ev) {

@@ -36,6 +36,11 @@
 
 @import "../pages/my-time/my-time";
 
+//background of ion-content
+ion-content{
+  background-color: $content-ios-outer-background;
+}
+
 ion-page.custom-dates-modal.show-page ~ .nav-decor {
   background: white;
 }
