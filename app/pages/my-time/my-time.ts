@@ -155,7 +155,7 @@ export class MyTimePage implements OnInit {
                 });
                 break;
         }
-
+        //TODO cancel request if prev or next button will be quickly selected
         this.getWorkingSteps();
     }
 
