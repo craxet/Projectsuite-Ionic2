@@ -7,7 +7,7 @@ import {DurationPipe} from '../../pipes/duration-pipe.ts';
 
 @Component({
     templateUrl: 'build/components/working-step-more/working-step-more-modal.html',
-    pipes: [DurationPipe,DateFormatPipe]
+    pipes: [DurationPipe, DateFormatPipe]
 })
 export class WorkingStepMoreModal {
 

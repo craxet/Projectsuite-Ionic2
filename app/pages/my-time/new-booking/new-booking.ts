@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ViewController, ModalController, PickerController, ActionSheetController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
+import {BookingDeadlineService} from '../../../services/booking-deadline.service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
@@ -12,19 +13,23 @@ enum DurationType{
 
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
-    providers: [MyTimeService],
+    providers: [MyTimeService, BookingDeadlineService],
     pipes: [DurationTypePipe]
 })
-export class NewBooking {
+export class NewBooking implements OnInit {
 
     bookingDate: string;
+    minBookingDate: string;
+    isMinBookingDateLoading:boolean = true;
+    maxBookingDate: string
     duration: number;
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
     task: Object = null;
 
-    constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService) {
-        this.bookingDate = moment().toISOString();
+    constructor(private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService) {
+        this.maxBookingDate = moment().toISOString();
+        this.bookingDate = this.maxBookingDate;
         this.durationTemp = '0.25';
         this.duration = 0.25;
     }
@@ -34,7 +39,7 @@ export class NewBooking {
     }
 
     selectTask() {
-        let modal = this.modalCtrl.create(TaskSelection,{task: this.task});
+        let modal = this.modalCtrl.create(TaskSelection, {task: this.task});
         modal.present();
         modal.onDidDismiss(data => {
             if (data !== null) {
@@ -94,7 +99,7 @@ export class NewBooking {
         actionSheet.present();
     }
 
-    formatDuration(duration){
+    formatDuration(duration) {
         return this.durationType === DurationType.HOURS ? parseFloat(duration).toFixed(2) : duration;
     }
 
@@ -113,5 +118,15 @@ export class NewBooking {
             array.push({text: durationType == DurationType.HOURS ? i.toFixed(2) : i, value: i.toFixed(2)});
         }
         return array;
+    }
+
+    ngOnInit() {
+        this.bookingDeadlineService.getBookingDeadline().subscribe(
+            data => {
+                this.isMinBookingDateLoading = false;
+                this.minBookingDate = data.date.toISOString();
+            }, error=> {
+                console.log(error);
+            });
     }
 }
