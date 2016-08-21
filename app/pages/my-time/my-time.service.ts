@@ -57,4 +57,12 @@ export class MyTimeService {
             return Observable.throw(error);
         });
     }
+
+    createWorkingStep(newWorkingStep){
+        return this.http.post('http://localhost:3000/workingSteps/',{}).map(()=>{
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
+    }
 }
