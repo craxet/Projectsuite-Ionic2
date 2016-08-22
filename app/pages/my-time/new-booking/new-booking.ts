@@ -28,11 +28,13 @@ export class NewBooking implements OnInit {
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
     task: Object = null;
-    taskCategory: {name: string, value: string} = null;
+    taskCategory: Object = null;
     taskCategories: Array<any> = [];
     taskAssigments: Array<any> = [];
     taskAssigment: Object = null;
     hideAssigment: boolean = true;
+
+    workingStep: {bookingDate: string,duration: number,task: Object,taskCategory:Object,taskAssigment:Object,activity:string};
 
     constructor(private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
         this.maxBookingDate = moment().toISOString();
@@ -78,8 +80,8 @@ export class NewBooking implements OnInit {
                         this.taskAssigments = data[1];
                         this.areTaskCategoriesAndAssigmentsLoading = false;
                         this.hideAssigment = this.taskAssigments.length === 0;
-                        if(!this.hideAssigment){
-                           this.taskAssigment = this.taskAssigments.length !== 0? this.taskAssigments[0].value: null;
+                        if (!this.hideAssigment) {
+                            this.taskAssigment = this.taskAssigments.length !== 0 ? this.taskAssigments[0].value : null;
                         }
                     }, error => {
                         console.log(error);
