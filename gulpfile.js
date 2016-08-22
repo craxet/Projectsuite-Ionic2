@@ -34,7 +34,7 @@ var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 var tslint = require('ionic-gulp-tslint');
 
-var jsonServer = require('json-server')
+var jsonServer = require('json-server');
 
 var isRelease = argv.indexOf('--release') > -1;
 

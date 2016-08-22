@@ -34,6 +34,15 @@
 
 @import "../components/task-selection/task-selection";
 
+@import "../pages/my-time/my-time";
+
+@import "../components/working-step-more/working-step-more-modal.scss";
+
+//background of ion-content
+ion-content{
+  background-color: $content-ios-outer-background;
+}
+
 ion-page.custom-dates-modal.show-page ~ .nav-decor {
   background: white;
 }

@@ -4,6 +4,7 @@ import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 
 import {WorkingStepsData} from './working-steps-test-data';
@@ -21,13 +22,28 @@ export class MyTimeService {
         //TODO temporary without observable
         return this.http.get('http://localhost:3000/workingSteps').map(res => {
             let query = _.chain(res.json()).filter(function (item) {
-                return from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
+                let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
+                if (!inclBooked) {
+                    return dateQuery && item.booked === false;
+                } else {
+                    return dateQuery;
+                }
             }).groupBy('date').value();
             let list = [];
+            let totalSum = 0;
             _.forIn(query, function (value, key) {
-                list.push({date: parseInt(key), values: value});
+                let sumOfDuration = _.sumBy(value, 'duration');
+                totalSum += sumOfDuration;
+                list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
-            return list;
+            return {
+                list: list,
+                totalSum: totalSum,
+                firstLast: {
+                    first: moment(parseInt(_.minBy(list, 'date').date)),
+                    last: moment(parseInt(_.maxBy(list, 'date').date))
+                }
+            };
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
@@ -35,8 +51,15 @@ export class MyTimeService {
     }
 
     deleteWorkingStep(workingStep) {
-        return this.http.delete('http://localhost:3000/workingSteps/'+workingStep.id).map(res =>{
-            res.json();
+        return this.http.delete('http://localhost:3000/workingSteps/' + workingStep.id).map(() => {
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
+    }
+
+    createWorkingStep(newWorkingStep){
+        return this.http.post('http://localhost:3000/workingSteps/',{}).map(()=>{
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);

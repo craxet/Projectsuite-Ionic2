@@ -1,21 +1,19 @@
-import {PopoverController, ModalController, AlertController} from 'ionic-angular';
-import {Component, ViewChild, OnInit, OnChanges} from '@angular/core';
+import {LoadingController, PopoverController, ModalController, AlertController, Refresher} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
-
-//cordova plugin DO I NEED IT ?
-import {DatePicker} from 'ionic-native';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
+import {DurationPipe} from '../../pipes/duration-pipe.ts';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
 import {CalViewType} from '../../enums/enums';
 import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
 import {NewBooking} from './new-booking/new-booking';
-
+import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
@@ -34,33 +32,37 @@ enum Direction{
         `
     ],
     providers: [MyTimeService],
-    pipes: [DateFormatPipe]
+    pipes: [DateFormatPipe, DurationPipe]
 })
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton:boolean;
-    hideNextButton:boolean;
-    dateIndex:number = 0;
-    selectedDate:{name:string, from: Moment, to: Moment};
-    calView:CalViewType = CalViewType.MONTH;
-    lastCalView:CalViewType = CalViewType.MONTH;
-    workingSteps:Array<any> = [];
-    inclBooked:boolean = false;
-    tenant:string = null;
-    memberId:string = null;
-    selectedDateClass:boolean = false;
+    hidePrevButton: boolean;
+    hideNextButton: boolean;
+    dateIndex: number = 0;
+    selectedDate: {name: string, from: Moment, to: Moment};
+    calView: CalViewType = CalViewType.MONTH;
+    lastCalView: CalViewType = CalViewType.MONTH;
+    workingSteps: Array<any> = [];
+    totalSumOfWorkingSteps: number;
+    firstLastDateOfWorkingSteps: {first: Moment, last: Moment};
+    inclBooked: boolean = false;
+    tenant: string = null;
+    memberId: string = null;
+    selectedDateClass: boolean = false;
+    areWorkingStepsLoading: boolean = false;
 
-    private newDate:Moment;
-    private monthLevel:number;
-    private weekLevel:number;
-    private dayLevel:number;
+    private newDate: Moment;
+    private monthLevel: number;
+    private weekLevel: number;
+    private dayLevel: number;
 
-    constructor(private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
+    constructor(private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
         this.dayLevel = moment().date() - 1;
+        console.log(moment().add(-20,'day').toDate().getTime())
     }
 
     setNewDateRange(direction?) {
@@ -156,13 +158,29 @@ export class MyTimePage implements OnInit {
                 });
                 break;
         }
-
+        //TODO cancel request if prev or next button will be quickly selected
         this.getWorkingSteps();
     }
 
-    createBooking(ev) {
+    createBooking() {
         let modal = this.modalCtrl.create(NewBooking);
-        modal.present({ev: ev});
+        modal.present();
+    }
+
+    openMoreModal() {
+        let modal = this.modalCtrl.create(WorkingStepMoreModal, {
+            inclBooked: this.inclBooked,
+            selectedDate: this.selectedDate,
+            totalSumOfWorkingSteps: this.totalSumOfWorkingSteps,
+            firstLastDateOfWorkingSteps: this.firstLastDateOfWorkingSteps
+        });
+        modal.present();
+        modal.onDidDismiss(data => {
+            if (data && this.inclBooked !== data.inclBooked) {
+                this.inclBooked = data.inclBooked;
+                this.getWorkingSteps();
+            }
+        });
     }
 
     showDateViewModePopover(ev) {
@@ -176,16 +194,26 @@ export class MyTimePage implements OnInit {
         popover.present({ev: ev});
     }
 
-    getWorkingSteps() {
+    getWorkingSteps(refresher: Refresher = null) {
+        this.areWorkingStepsLoading = refresher === null ? true : false;
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
-            data => {this.workingSteps = data},
+            data => {
+                this.workingSteps = data.list;
+                this.totalSumOfWorkingSteps = data.totalSum;
+                this.firstLastDateOfWorkingSteps = data.firstLast;
+                this.areWorkingStepsLoading = false;
+                refresher && refresher.complete();
+            },
             error => {
                 console.log(error);
+                this.areWorkingStepsLoading = false;
+                refresher && refresher.complete();
             }
         );
     }
 
     deleteWorkingStep(workingStep) {
+        let loader = this.loadingController.create();
         let prompt = this.alertController.create({
             title: 'Delete',
             message: "Do you really want to delete the Working Step",
@@ -196,10 +224,13 @@ export class MyTimePage implements OnInit {
                 },
                 {
                     text: 'Yes, I do',
-                    handler:()=> {
-                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(()=>{
-                            this.getWorkingSteps();
-                        },error =>{
+                    handler: ()=> {
+                        loader.present();
+                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
+                            this.deleteWorkingStepLocally(workingStep);
+                            loader.dismiss();
+                        }, error=> {
+                            loader.dismiss();
                             console.log(error);
                         });
                     }
@@ -207,6 +238,19 @@ export class MyTimePage implements OnInit {
             ]
         });
         prompt.present();
+    }
+
+    deleteWorkingStepLocally(workingStep) {
+        this.workingSteps.forEach((item, index, array)=> {
+            if (item.date === workingStep.date) {
+                item.values.splice(item.values.findIndex((el)=> {
+                    return el.id === workingStep.id;
+                }), 1);
+                if (item.values.length === 0) {
+                    array.splice(index, 1);
+                }
+            }
+        });
     }
 
     editWorkingStep() {

@@ -37,7 +37,7 @@
         <span class="no-items-found">No Tasks found</span>
     </div>
     <ion-list [hidden]="isLoading || tasks.length === 0" radio-group [(ngModel)]="selectedTaskTemp">
-        <ion-item [class.not-bookable-task]="!task.bookable" text-wrap class="task-item" *ngFor="let task of tasks">
+        <ion-item [class.not-bookable-task]="!task.bookable" text-wrap  *ngFor="let task of tasks">
             <ion-label>
                 <h4>{{task.name}}</h4>
                 <div class="task-item-project">
