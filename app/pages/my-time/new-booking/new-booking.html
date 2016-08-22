@@ -28,16 +28,17 @@
         </button>
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-select [(ngModel)]="gaming">
-                <ion-option value="nes">Open</ion-option>
-                <ion-option value="snes">Closed</ion-option>
+            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}" [(ngModel)]="taskCategory">
+                <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}</ion-option>
             </ion-select>
+            <div item-right [hidden]="!areTaskCategoriesAndAssigmentsLoading">
+                <ion-spinner></ion-spinner>
+            </div>
         </ion-item>
-        <ion-item>
-            <ion-label>Assignment</ion-label>
-            <ion-select [(ngModel)]="gaming">
-                <ion-option value="nes">Open</ion-option>
-                <ion-option value="snes">Closed</ion-option>
+        <ion-item [hidden]="hideAssigment">
+            <ion-label>Assigment</ion-label>
+            <ion-select [(ngModel)]="taskAssigment">
+                <ion-option *ngFor="let assigment of taskAssigments" value="{{assigment.value}}">{{assigment.name}}</ion-option>
             </ion-select>
         </ion-item>
     </ion-list>

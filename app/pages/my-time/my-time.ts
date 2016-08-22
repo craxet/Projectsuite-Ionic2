@@ -62,7 +62,6 @@ export class MyTimePage implements OnInit {
         this.weekLevel = 3;
         //number od days until today
         this.dayLevel = moment().date() - 1;
-        console.log(moment().add(-20,'day').toDate().getTime())
     }
 
     setNewDateRange(direction?) {

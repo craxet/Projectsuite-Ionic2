@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, ModalController, PickerController, ActionSheetController,AlertController} from 'ionic-angular';
+import {ViewController, ModalController, PickerController, ActionSheetController, AlertController} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
+import {NewBookingService} from './new-booking.service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
@@ -13,7 +14,7 @@ enum DurationType{
 
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
-    providers: [MyTimeService, BookingDeadlineService],
+    providers: [MyTimeService, BookingDeadlineService, NewBookingService],
     pipes: [DurationTypePipe]
 })
 export class NewBooking implements OnInit {
@@ -21,13 +22,19 @@ export class NewBooking implements OnInit {
     bookingDate: string;
     minBookingDate: string;
     isMinBookingDateLoading: boolean = true;
+    areTaskCategoriesAndAssigmentsLoading: boolean = false;
     maxBookingDate: string
     duration: number;
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
     task: Object = null;
+    taskCategory: {name: string, value: string} = null;
+    taskCategories: Array<any> = [];
+    taskAssigments: Array<any> = [];
+    taskAssigment: Object = null;
+    hideAssigment: boolean = true;
 
-    constructor(private alertCtrl: AlertController,private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService) {
+    constructor(private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
         this.maxBookingDate = moment().toISOString();
         this.bookingDate = this.maxBookingDate;
         this.durationTemp = '0.25';
@@ -46,6 +53,13 @@ export class NewBooking implements OnInit {
                 buttons: ['OK']
             });
             alert.present();
+        } else if (this.taskCategory === null) {
+            let alert = this.alertCtrl.create({
+                title: 'No Category selected',
+                subTitle: 'Select a Category please!',
+                buttons: ['OK']
+            });
+            alert.present();
         } else {
             this.viewCtrl.dismiss();
         }
@@ -57,6 +71,20 @@ export class NewBooking implements OnInit {
         modal.onDidDismiss(data => {
             if (data !== null) {
                 this.task = data;
+                this.areTaskCategoriesAndAssigmentsLoading = true;
+                this.newBookingService.getTaskCategoriesAndAssigments(data, this.bookingDate).subscribe(
+                    data=> {
+                        this.taskCategories = data[0];
+                        this.taskAssigments = data[1];
+                        this.areTaskCategoriesAndAssigmentsLoading = false;
+                        this.hideAssigment = this.taskAssigments.length === 0;
+                        if(!this.hideAssigment){
+                           this.taskAssigment = this.taskAssigments.length !== 0? this.taskAssigments[0].value: null;
+                        }
+                    }, error => {
+                        console.log(error);
+                        this.areTaskCategoriesAndAssigmentsLoading = false;
+                    });
             }
 
         });
