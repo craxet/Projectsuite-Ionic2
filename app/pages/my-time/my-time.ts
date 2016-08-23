@@ -163,6 +163,12 @@ export class MyTimePage implements OnInit {
 
     createBooking() {
         let modal = this.modalCtrl.create(NewBooking);
+        modal.onDidDismiss((data)=>{
+            console.log(data);
+            if(data === 'created'){
+                this.getWorkingSteps();
+            }
+        });
         modal.present();
     }
 

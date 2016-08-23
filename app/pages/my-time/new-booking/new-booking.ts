@@ -1,5 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, ModalController, PickerController, ActionSheetController, AlertController,LoadingController,ToastController } from 'ionic-angular';
+import {
+    ViewController,
+    ModalController,
+    PickerController,
+    ActionSheetController,
+    AlertController,
+    LoadingController,
+    ToastController
+} from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
@@ -16,7 +24,7 @@ enum DurationType{
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
     providers: [MyTimeService, BookingDeadlineService, NewBookingService],
-    pipes: [DurationTypePipe,DurationPipe]
+    pipes: [DurationTypePipe, DurationPipe]
 })
 export class NewBooking implements OnInit {
 
@@ -31,10 +39,17 @@ export class NewBooking implements OnInit {
     hideAssigment: boolean = true;
     workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
 
-    constructor(private toastController : ToastController,private loadingCtrl:LoadingController,private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
+    constructor(private toastController: ToastController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
-        this.workingStep = {bookingDate :this.maxBookingDate, duration: 0.25, task: null, taskCategory: null,taskAssigment: null,activity:''};
+        this.workingStep = {
+            bookingDate: this.maxBookingDate,
+            duration: 0.25,
+            task: null,
+            taskCategory: null,
+            taskAssigment: null,
+            activity: ''
+        };
     }
 
     cancel() {
@@ -42,6 +57,12 @@ export class NewBooking implements OnInit {
     }
 
     createWorkingStep() {
+        let loader = this.loadingCtrl.create();
+        let toast = this.toastController.create({
+            message: 'New Booking was successfully created',
+            duration: 3000,
+            position: 'top'
+        });
         if (this.workingStep.task === null) {
             let alert = this.alertCtrl.create({
                 title: 'No Task selected',
@@ -57,17 +78,13 @@ export class NewBooking implements OnInit {
             });
             alert.present();
         } else {
-            let loader = this.loadingCtrl.create();
-            let toast = this.toastController.create({
-                message: 'New Booking was successfully created',
-                duration: 3000,
-                position: 'top'
-            });
             loader.present();
-            this.myTimeService.createWorkingStep(this.workingStep).subscribe(()=> {
-                loader.dismiss();
-                toast.present();
+            loader.onDidDismiss(data=> {
                 this.viewCtrl.dismiss('created');
+            });
+            this.myTimeService.createWorkingStep(this.workingStep).subscribe(()=> {
+                // toast.present();
+                loader.dismiss();
             }, error=> {
                 console.log(error);
             });
