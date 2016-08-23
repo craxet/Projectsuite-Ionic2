@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ViewController, ModalController, PickerController, ActionSheetController, AlertController} from 'ionic-angular';
+import {ViewController, ModalController, PickerController, ActionSheetController, AlertController,LoadingController,ToastController } from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
+import {DurationPipe} from '../../../pipes/duration-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
 import {NewBookingService} from './new-booking.service';
 
@@ -15,32 +16,25 @@ enum DurationType{
 @Component({
     templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
     providers: [MyTimeService, BookingDeadlineService, NewBookingService],
-    pipes: [DurationTypePipe]
+    pipes: [DurationTypePipe,DurationPipe]
 })
 export class NewBooking implements OnInit {
 
-    bookingDate: string;
     minBookingDate: string;
     isMinBookingDateLoading: boolean = true;
     areTaskCategoriesAndAssigmentsLoading: boolean = false;
     maxBookingDate: string
-    duration: number;
     durationType: DurationType = DurationType.HOURS;
     durationTemp: string;
-    task: Object = null;
-    taskCategory: Object = null;
     taskCategories: Array<any> = [];
     taskAssigments: Array<any> = [];
-    taskAssigment: Object = null;
     hideAssigment: boolean = true;
+    workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
 
-    workingStep: {bookingDate: string,duration: number,task: Object,taskCategory:Object,taskAssigment:Object,activity:string};
-
-    constructor(private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
+    constructor(private toastController : ToastController,private loadingCtrl:LoadingController,private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
         this.maxBookingDate = moment().toISOString();
-        this.bookingDate = this.maxBookingDate;
         this.durationTemp = '0.25';
-        this.duration = 0.25;
+        this.workingStep = {bookingDate :this.maxBookingDate, duration: 0.25, task: null, taskCategory: null,taskAssigment: null,activity:''};
     }
 
     cancel() {
@@ -48,14 +42,14 @@ export class NewBooking implements OnInit {
     }
 
     createWorkingStep() {
-        if (this.task === null) {
+        if (this.workingStep.task === null) {
             let alert = this.alertCtrl.create({
                 title: 'No Task selected',
                 subTitle: 'Select a Task please!',
                 buttons: ['OK']
             });
             alert.present();
-        } else if (this.taskCategory === null) {
+        } else if (this.workingStep.taskCategory === null) {
             let alert = this.alertCtrl.create({
                 title: 'No Category selected',
                 subTitle: 'Select a Category please!',
@@ -63,25 +57,38 @@ export class NewBooking implements OnInit {
             });
             alert.present();
         } else {
-            this.viewCtrl.dismiss();
+            let loader = this.loadingCtrl.create();
+            let toast = this.toastController.create({
+                message: 'New Booking was successfully created',
+                duration: 3000,
+                position: 'top'
+            });
+            loader.present();
+            this.myTimeService.createWorkingStep(this.workingStep).subscribe(()=> {
+                loader.dismiss();
+                toast.present();
+                this.viewCtrl.dismiss('created');
+            }, error=> {
+                console.log(error);
+            });
         }
     }
 
     selectTask() {
-        let modal = this.modalCtrl.create(TaskSelection, {task: this.task});
+        let modal = this.modalCtrl.create(TaskSelection, {task: this.workingStep.task});
         modal.present();
         modal.onDidDismiss(data => {
             if (data !== null) {
-                this.task = data;
+                this.workingStep.task = data;
                 this.areTaskCategoriesAndAssigmentsLoading = true;
-                this.newBookingService.getTaskCategoriesAndAssigments(data, this.bookingDate).subscribe(
+                this.newBookingService.getTaskCategoriesAndAssigments(data, this.workingStep.bookingDate).subscribe(
                     data=> {
                         this.taskCategories = data[0];
                         this.taskAssigments = data[1];
                         this.areTaskCategoriesAndAssigmentsLoading = false;
                         this.hideAssigment = this.taskAssigments.length === 0;
                         if (!this.hideAssigment) {
-                            this.taskAssigment = this.taskAssigments.length !== 0 ? this.taskAssigments[0].value : null;
+                            this.workingStep.taskAssigment = this.taskAssigments.length !== 0 ? this.taskAssigments[0].value : null;
                         }
                     }, error => {
                         console.log(error);
@@ -102,7 +109,7 @@ export class NewBooking implements OnInit {
         picker.addButton({
             text: 'Done',
             handler: (data) => {
-                this.duration = data.duration.value;
+                this.workingStep.duration = data.duration.value;
                 this.durationTemp = this.durationType == DurationType.MINUTES ? (data.duration.value / 60).toFixed(2) : data.duration.value.toString();
             }
         });
@@ -121,7 +128,7 @@ export class NewBooking implements OnInit {
                     text: 'Hours',
                     handler: () => {
                         if (this.durationType == DurationType.MINUTES) {
-                            this.duration /= 60;
+                            this.workingStep.duration /= 60;
                             this.durationType = DurationType.HOURS
                         }
                     }
@@ -129,7 +136,7 @@ export class NewBooking implements OnInit {
                     text: 'Minutes',
                     handler: () => {
                         if (this.durationType == DurationType.HOURS) {
-                            this.duration *= 60;
+                            this.workingStep.duration *= 60;
                             this.durationType = DurationType.MINUTES
                         }
                     }
@@ -147,7 +154,7 @@ export class NewBooking implements OnInit {
     }
 
     selectedDurationSegment(value) {
-        this.duration = this.durationType == DurationType.MINUTES ? value * 60 : value;
+        this.workingStep.duration = this.durationType == DurationType.MINUTES ? value * 60 : value;
     }
 
     //value is always in hours but text is either in hours or minutes

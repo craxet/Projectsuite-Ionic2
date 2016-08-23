@@ -224,6 +224,20 @@
       "editableExpired": false,
       "task": "2015-10-13 14:59:17.2478",
       "number": 30159
+    },
+    {
+      "date": 1471973882132,
+      "taskName": "CR 177190 P6 - Optimierung Benutzerfreundlichkeit Teil 1",
+      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": "B",
+      "activity": "test 123",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234,
+      "id": "9d9f9fc2-4918-4e0f-a7a5-305143311b5c"
     }
   ],
   "tasks": [

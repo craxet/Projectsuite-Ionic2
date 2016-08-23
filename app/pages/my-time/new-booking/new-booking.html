@@ -14,7 +14,7 @@
         <ion-list-header>Booking Date</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
-            <ion-datetime disabled="{{isMinBookingDateLoading}}" displayFormat="D. MMMM YYYY" [(ngModel)]="bookingDate"
+            <ion-datetime disabled="{{isMinBookingDateLoading}}" displayFormat="D. MMMM YYYY" [(ngModel)]="workingStep.bookingDate"
                           min="{{minBookingDate}}" max="{{maxBookingDate}}"></ion-datetime>
             <div item-right [hidden]="!isMinBookingDateLoading">
                 <ion-spinner></ion-spinner>
@@ -24,11 +24,11 @@
     <ion-list>
         <ion-list-header>Task</ion-list-header>
         <button ion-item detail-push (click)="selectTask()" class="ion-item-value" text-wrap>
-            <ion-label [class.label-placeholder]="task == null">{{task == null?"Task name":task.name}}</ion-label>
+            <ion-label [class.label-placeholder]="workingStep.task == null">{{workingStep.task == null?"Task name":workingStep.task.name}}</ion-label>
         </button>
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}" [(ngModel)]="taskCategory">
+            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}" [(ngModel)]="workingStep.taskCategory">
                 <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}</ion-option>
             </ion-select>
             <div item-right [hidden]="!areTaskCategoriesAndAssigmentsLoading">
@@ -37,7 +37,7 @@
         </ion-item>
         <ion-item [hidden]="hideAssigment">
             <ion-label>Assigment</ion-label>
-            <ion-select [(ngModel)]="taskAssigment">
+            <ion-select [(ngModel)]="workingStep.taskAssigment">
                 <ion-option *ngFor="let assigment of taskAssigments" value="{{assigment.value}}">{{assigment.name}}</ion-option>
             </ion-select>
         </ion-item>
@@ -51,11 +51,7 @@
         </ion-list-header>
         <button ion-item (click)="openDurationPicker()">
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            {{formatDuration(duration)}}
-            <!--<button outline item-right>
-
-
-            </button>-->
+            {{workingStep.duration | duration}}
         </button>
         <ion-item>
             <ion-segment [(ngModel)]="durationTemp" primary>
@@ -86,7 +82,7 @@
     <ion-list>
         <ion-list-header>Activity</ion-list-header>
         <ion-item>
-            <ion-textarea maxlength="60" placeholder="Describe your Activity"></ion-textarea>
+            <ion-textarea maxlength="60" placeholder="Describe your Activity" [(ngModel)]="workingStep.activity"></ion-textarea>
         </ion-item>
     </ion-list>
 </ion-content>

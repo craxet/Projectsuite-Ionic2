@@ -58,8 +58,24 @@ export class MyTimeService {
         });
     }
 
-    createWorkingStep(newWorkingStep){
-        return this.http.post('http://localhost:3000/workingSteps/',{}).map(()=>{
+    createWorkingStep(newWorkingStep) {
+        //TODO taskId property was renamed to task because of json-server
+        console.log('newWorkingStep',newWorkingStep);
+        let req = {
+            id: moment().toISOString,
+            date: moment(newWorkingStep.bookingDate).toDate().getTime(),
+            taskName: newWorkingStep.task.name,
+            projectName: newWorkingStep.task.project.name,
+            tenant: 'A',
+            duration: newWorkingStep.duration,
+            durationType: 1,
+            category: newWorkingStep.taskCategory,
+            activity: newWorkingStep.activity,
+            booked: false,
+            task: newWorkingStep.task.id,
+            number: '1234'
+        }
+        return this.http.post('http://localhost:3000/workingSteps/', req).map(()=> {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
