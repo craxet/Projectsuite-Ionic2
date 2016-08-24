@@ -58,6 +58,18 @@ export class MyTimeService {
         });
     }
 
+    editWorkingStep(workingStep){
+        let req ={
+
+        };
+        return this.http.put('http://localhost:3000/workingSteps/',req).map(()=>{
+            return req;
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
+    }
+
     createWorkingStep(newWorkingStep) {
         //TODO taskId property was renamed to task because of json-server
         let req = {

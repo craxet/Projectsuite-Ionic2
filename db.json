@@ -430,48 +430,6 @@
       "task": "2016-06-14 15:38:35.733",
       "number": 1234,
       "id": "affe250c-994a-4a89-a1d6-b8db762e68e2"
-    },
-    {
-      "id": "2016-08-24T14:41:34.463Z",
-      "date": 1472049682520,
-      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": "B",
-      "activity": "",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-24T14:42:12.056Z",
-      "date": 1472049724685,
-      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": "A",
-      "activity": "",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-24T14:42:40.641Z",
-      "date": 1472049750795,
-      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": "B",
-      "activity": "",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
     }
   ],
   "tasks": [

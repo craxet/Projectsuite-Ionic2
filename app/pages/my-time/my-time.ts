@@ -252,6 +252,18 @@ export class MyTimePage implements OnInit {
         prompt.present();
     }
 
+    editWorkingStep(step){
+        let modal = this.modalCtrl.create(NewBooking);
+        modal.onDidDismiss((data)=> {
+            if (data) {
+                //TODO create function that add edit working step to array on right position;
+                // this.workingSteps.push(data);
+                this.getWorkingSteps();
+            }
+        });
+        modal.present();
+    }
+
     deleteWorkingStepLocally(workingStep) {
         this.workingSteps.forEach((item, index, array)=> {
             if (item.date === workingStep.date) {
