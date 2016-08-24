@@ -71,13 +71,15 @@ export class NewBooking implements OnInit {
             });
             alert.present();
         } else {
-            let loader = this.loadingCtrl.create();
+            let loader = this.loadingCtrl.create({
+                content: 'Creating...'
+            });
             loader.present();
             loader.onDidDismiss(data=> {
-                this.viewCtrl.dismiss('created');
+                this.viewCtrl.dismiss(data);
             });
-            this.myTimeService.createWorkingStep(this.workingStep).subscribe(()=> {
-                loader.dismiss();
+            this.myTimeService.createWorkingStep(this.workingStep).subscribe(data=> {
+                loader.dismiss(data);
             }, error=> {
                 console.log(error);
             });

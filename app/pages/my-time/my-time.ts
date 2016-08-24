@@ -168,14 +168,9 @@ export class MyTimePage implements OnInit {
     createBooking() {
         let modal = this.modalCtrl.create(NewBooking);
         modal.onDidDismiss((data)=> {
-            console.log(data);
-            if (data === 'created') {
-                let toast = this.toastCtrl.create({
-                    message: 'New Booking was successfully created',
-                    duration: 3000,
-                    position: 'top'
-                });
-                toast.present();
+            if (data) {
+                //TODO create function that add created working step to array on right position;
+                // this.workingSteps.push(data);
                 this.getWorkingSteps();
             }
         });
@@ -228,7 +223,9 @@ export class MyTimePage implements OnInit {
     }
 
     deleteWorkingStep(workingStep) {
-        let loader = this.loadingController.create();
+        let loader = this.loadingController.create({
+            content: 'Deleting...'
+        });
         let prompt = this.alertController.create({
             title: 'Delete',
             message: "Do you really want to delete the Working Step",

@@ -64,24 +64,6 @@
       "number": 31350
     },
     {
-      "id": "2016-07-19 15:53:39.430",
-      "date": 1471212000000,
-      "taskName": "CR 123464 This is an API test :)",
-      "projectName": "Allgemeine Tätigkeiten",
-      "tenant": "A",
-      "duration": 3,
-      "durationType": 1,
-      "category": {
-        "name": "Fachl. Review",
-        "value": "D"
-      },
-      "activity": "try it",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-16 13:59:28.51",
-      "number": 31357
-    },
-    {
       "id": "2016-07-19 15:54:20.068",
       "date": 1468015200000,
       "taskName": "CR 123461 This is an API test",
@@ -434,6 +416,62 @@
       "task": "2016-03-21 14:01:28.463",
       "number": 1234,
       "id": "4e95aa08-2edd-4ee1-9318-389371925c88"
+    },
+    {
+      "date": 1471953886503,
+      "taskName": "Load Test FCS",
+      "projectName": "Y6 - GUI and Business Logic V16.5",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": "B",
+      "activity": "my testttttttttttttttttt",
+      "booked": false,
+      "task": "2016-06-14 15:38:35.733",
+      "number": 1234,
+      "id": "affe250c-994a-4a89-a1d6-b8db762e68e2"
+    },
+    {
+      "id": "2016-08-24T14:41:34.463Z",
+      "date": 1472049682520,
+      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
+      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": "B",
+      "activity": "",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-24T14:42:12.056Z",
+      "date": 1472049724685,
+      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
+      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": "A",
+      "activity": "",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-24T14:42:40.641Z",
+      "date": 1472049750795,
+      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
+      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": "B",
+      "activity": "",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
     }
   ],
   "tasks": [

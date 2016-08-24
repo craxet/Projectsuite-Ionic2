@@ -61,7 +61,7 @@ export class MyTimeService {
     createWorkingStep(newWorkingStep) {
         //TODO taskId property was renamed to task because of json-server
         let req = {
-            id: moment().toISOString,
+            id: moment().toISOString(),
             date: moment(newWorkingStep.bookingDate).toDate().getTime(),
             taskName: newWorkingStep.task.name,
             projectName: newWorkingStep.task.project.name,
@@ -75,6 +75,7 @@ export class MyTimeService {
             number: '1234'
         }
         return this.http.post('http://localhost:3000/workingSteps/', req).map(()=> {
+            return req;
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
