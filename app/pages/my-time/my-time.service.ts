@@ -60,7 +60,6 @@ export class MyTimeService {
 
     createWorkingStep(newWorkingStep) {
         //TODO taskId property was renamed to task because of json-server
-        console.log('newWorkingStep',newWorkingStep);
         let req = {
             id: moment().toISOString,
             date: moment(newWorkingStep.bookingDate).toDate().getTime(),

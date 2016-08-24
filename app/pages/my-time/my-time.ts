@@ -1,4 +1,7 @@
-import {LoadingController, PopoverController, ModalController, AlertController, Refresher} from 'ionic-angular';
+import {
+    LoadingController, PopoverController, ModalController, AlertController, Refresher,
+    ToastController
+} from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
@@ -57,7 +60,7 @@ export class MyTimePage implements OnInit {
     private weekLevel: number;
     private dayLevel: number;
 
-    constructor(private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
+    constructor(private toastCtrl: ToastController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -166,6 +169,12 @@ export class MyTimePage implements OnInit {
         modal.onDidDismiss((data)=>{
             console.log(data);
             if(data === 'created'){
+                let toast = this.toastCtrl.create({
+                    message: 'New Booking was successfully created',
+                    duration: 3000,
+                    position: 'top'
+                });
+                toast.present();
                 this.getWorkingSteps();
             }
         });
