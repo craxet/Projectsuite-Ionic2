@@ -42,7 +42,7 @@
         <span class="no-items-found">No Working Step found</span>
     </div>
     <ion-list [hidden]="areWorkingStepsLoading || workingSteps.length === 0">
-        <ion-item-group *ngFor="let headerDate of workingSteps">
+        <ion-item-group *ngFor="let headerDate of workingSteps | orderBy: ['-date']">
             <ion-item-divider>
                 <ion-grid no-padding>
                     <ion-row style="padding-right:8px">

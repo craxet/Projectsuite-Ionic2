@@ -9,7 +9,8 @@ import {Moment} from 'moment';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
-import {DurationPipe} from '../../pipes/duration-pipe.ts';
+import {DurationPipe} from '../../pipes/duration-pipe';
+import {OrderByPipe} from '../../pipes/order-by-pipe';
 
 import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
@@ -35,7 +36,7 @@ enum Direction{
         `
     ],
     providers: [MyTimeService],
-    pipes: [DateFormatPipe, DurationPipe]
+    pipes: [DateFormatPipe, DurationPipe, OrderByPipe]
 })
 
 export class MyTimePage implements OnInit {
@@ -60,7 +61,7 @@ export class MyTimePage implements OnInit {
     private weekLevel: number;
     private dayLevel: number;
 
-    constructor(private toastCtrl: ToastController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
+    constructor(private toastCtrl: ToastController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -166,9 +167,9 @@ export class MyTimePage implements OnInit {
 
     createBooking() {
         let modal = this.modalCtrl.create(NewBooking);
-        modal.onDidDismiss((data)=>{
+        modal.onDidDismiss((data)=> {
             console.log(data);
-            if(data === 'created'){
+            if (data === 'created') {
                 let toast = this.toastCtrl.create({
                     message: 'New Booking was successfully created',
                     duration: 3000,
