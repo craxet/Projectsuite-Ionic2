@@ -8,6 +8,7 @@ import {
     LoadingController, NavParams
 } from 'ionic-angular';
 import * as moment from 'moment';
+import * as _ from  'lodash';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
@@ -46,10 +47,10 @@ export class WorkingStep implements OnInit {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         const ws = params.get('workingStep');
-        console.log(ws);
         if (ws) {
             this.workingStep = {};
             //edit working step - set attributes that do not need loading time
+            this.workingStep.id = ws.id;
             this.workingStep.duration = ws.duration;
             this.workingStep.activity = ws.activity;
         } else {
@@ -70,7 +71,7 @@ export class WorkingStep implements OnInit {
         this.viewCtrl.dismiss();
     }
 
-    createWorkingStep() {
+    createOrEditWorkingStep() {
         if (this.workingStep.task === null) {
             let alert = this.alertCtrl.create({
                 title: 'No Task selected',
@@ -86,26 +87,39 @@ export class WorkingStep implements OnInit {
             });
             alert.present();
         } else {
-            let loader = this.loadingCtrl.create({
-                content: 'Creating...'
-            });
-            loader.present();
-            loader.onDidDismiss(data=> {
-                this.viewCtrl.dismiss(data);
-            });
-
-            //TODO pass taskCategory and taskAssigment like object not like value
-            /*let found = this.taskCategories.find((cat)=> {
-                return cat.value = value;
-            });*/
-
-            this.myTimeService.createWorkingStep(this.workingStep).subscribe(data=> {
-                loader.dismiss(data);
-            }, error=> {
-                console.log(error);
-            });
+            //TODO pass taskCategory like object not like value because of json-server
+            this.workingStep.taskCategory = _.find(this.taskCategories, ['value', this.workingStep.taskCategory]);
+            if (this.params.get('workingStep')) {
+                let loader = this.loadingCtrl.create({
+                    content: 'Editing...'
+                });
+                loader.present();
+                loader.onDidDismiss(data=> {
+                    this.viewCtrl.dismiss(data);
+                });
+                this.myTimeService.editWorkingStep(this.workingStep).subscribe(
+                    data=> {
+                        loader.dismiss(data);
+                    }, error=> {
+                        console.log(error);
+                    });
+            } else {
+                let loader = this.loadingCtrl.create({
+                    content: 'Creating...'
+                });
+                loader.present();
+                loader.onDidDismiss(data=> {
+                    this.viewCtrl.dismiss(data);
+                });
+                this.myTimeService.createWorkingStep(this.workingStep).subscribe(data=> {
+                    loader.dismiss(data);
+                }, error=> {
+                    console.log(error);
+                });
+            }
         }
     }
+
 
     selectTask() {
         let modal = this.modalCtrl.create(TaskSelection, {task: this.workingStep.task});
@@ -222,7 +236,7 @@ export class WorkingStep implements OnInit {
             this.workingStepService.getTaskCategoriesAndAssigments(ws.task, ws.date).subscribe(
                 data => {
                     this.taskCategories = data[0];
-                    this.workingStep.taskCategory = ws.category;
+                    this.workingStep.taskCategory = ws.category.value;
                     this.taskAssigments = data[1];
                     this.hideAssigment = this.taskAssigments.length === 0;
                     if (!this.hideAssigment) {

@@ -58,16 +58,9 @@ export class MyTimeService {
         });
     }
 
-    editWorkingStep(workingStep){
-        let req ={
-
-        };
-        return this.http.put('http://localhost:3000/workingSteps/',req).map(()=>{
-            return req;
-        }).catch(error => {
-            console.log('service', error);
-            return Observable.throw(error);
-        });
+    editWorkingStep(workingStep) {
+        //TODO just with json-server
+        return Observable.forkJoin(this.deleteWorkingStep(workingStep), this.createWorkingStep(workingStep));
     }
 
     createWorkingStep(newWorkingStep) {
