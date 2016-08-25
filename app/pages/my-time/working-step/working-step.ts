@@ -15,7 +15,7 @@ import {TaskSelectionService} from '../../../components/task-selection/task-sele
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
 import {DurationPipe} from '../../../pipes/duration-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
-import {NewBookingService} from './working-step.service';
+import {WorkingStepService} from './working-step.service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
@@ -23,7 +23,7 @@ enum DurationType{
 
 @Component({
     templateUrl: 'build/pages/my-time/working-step/working-step.html',
-    providers: [MyTimeService, BookingDeadlineService, NewBookingService, TaskSelectionService],
+    providers: [MyTimeService, BookingDeadlineService, WorkingStepService, TaskSelectionService],
     pipes: [DurationTypePipe, DurationPipe]
 })
 export class WorkingStep implements OnInit {
@@ -42,7 +42,7 @@ export class WorkingStep implements OnInit {
     // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
     workingStep;
 
-    constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService, private taskSelecttionService: TaskSelectionService) {
+    constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private workingStepService: WorkingStepService, private taskSelectionService: TaskSelectionService) {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         const ws = params.get('workingStep');
@@ -93,6 +93,12 @@ export class WorkingStep implements OnInit {
             loader.onDidDismiss(data=> {
                 this.viewCtrl.dismiss(data);
             });
+
+            //TODO pass taskCategory and taskAssigment like object not like value
+            /*let found = this.taskCategories.find((cat)=> {
+                return cat.value = value;
+            });*/
+
             this.myTimeService.createWorkingStep(this.workingStep).subscribe(data=> {
                 loader.dismiss(data);
             }, error=> {
@@ -108,7 +114,7 @@ export class WorkingStep implements OnInit {
             if (data !== null) {
                 this.workingStep.task = data;
                 this.areTaskCategoriesAndAssigmentsLoading = true;
-                this.newBookingService.getTaskCategoriesAndAssigments(data, this.workingStep.bookingDate).subscribe(
+                this.workingStepService.getTaskCategoriesAndAssigments(data, this.workingStep.bookingDate).subscribe(
                     data=> {
                         this.taskCategories = data[0];
                         this.taskAssigments = data[1];
@@ -202,9 +208,9 @@ export class WorkingStep implements OnInit {
     ngOnInit() {
         const ws = this.params.get('workingStep');
         if (this.params.get('workingStep')) {
-            //TODO taskId was renamd to task because of json-server
+            //TODO taskId was renamed to task because of json-server
             this.isTaskSelectionLoading = true;
-            this.taskSelecttionService.findTaskById(ws.task).subscribe(
+            this.taskSelectionService.findTaskById(ws.task).subscribe(
                 data => {
                     //TODO handle situation when task is not found
                     this.workingStep.task = data;
@@ -212,6 +218,20 @@ export class WorkingStep implements OnInit {
                 }, error=> {
                     console.log(error);
                 });
+            this.areTaskCategoriesAndAssigmentsLoading = true;
+            this.workingStepService.getTaskCategoriesAndAssigments(ws.task, ws.date).subscribe(
+                data => {
+                    this.taskCategories = data[0];
+                    this.workingStep.taskCategory = ws.category;
+                    this.taskAssigments = data[1];
+                    this.hideAssigment = this.taskAssigments.length === 0;
+                    if (!this.hideAssigment) {
+                        this.workingStep.taskAssigment = this.taskAssigments.length !== 0 ? this.taskAssigments[0].value : null;
+                    }
+                    this.areTaskCategoriesAndAssigmentsLoading = false;
+                }, error=> {
+                    console.log(error);
+                })
         }
         this.bookingDeadlineService.getBookingDeadline().subscribe(
             data => {

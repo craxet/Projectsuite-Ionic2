@@ -7,7 +7,7 @@ import {Moment} from  'moment';
 import * as moment from 'moment';
 
 @Injectable()
-export class NewBookingService {
+export class WorkingStepService {
     constructor(private http: Http) {
     }
 
