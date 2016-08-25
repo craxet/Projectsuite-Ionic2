@@ -42,18 +42,21 @@ export class WorkingStep implements OnInit {
     //TODO create modal
     // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
     workingStep;
+    labelButtonMode;
 
     constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private workingStepService: WorkingStepService, private taskSelectionService: TaskSelectionService) {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         const ws = params.get('workingStep');
         if (ws) {
+            this.labelButtonMode = 'Edit';
             this.workingStep = {};
             //edit working step - set attributes that do not need loading time
             this.workingStep.id = ws.id;
             this.workingStep.duration = ws.duration;
             this.workingStep.activity = ws.activity;
         } else {
+            this.labelButtonMode = 'Create';
             //create new working step
             this.workingStep = {
                 bookingDate: this.maxBookingDate,
