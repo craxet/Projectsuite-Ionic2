@@ -5,30 +5,32 @@ import {
     PickerController,
     ActionSheetController,
     AlertController,
-    LoadingController,
+    LoadingController, NavParams
 } from 'ionic-angular';
 import * as moment from 'moment';
 
 import {MyTimeService} from '../my-time.service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
+import {TaskSelectionService} from '../../../components/task-selection/task-selection.service';
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
 import {DurationPipe} from '../../../pipes/duration-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
-import {NewBookingService} from './new-booking.service';
+import {NewBookingService} from './working-step.service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
 }
 
 @Component({
-    templateUrl: 'build/pages/my-time/new-booking/new-booking.html',
-    providers: [MyTimeService, BookingDeadlineService, NewBookingService],
+    templateUrl: 'build/pages/my-time/working-step/working-step.html',
+    providers: [MyTimeService, BookingDeadlineService, NewBookingService, TaskSelectionService],
     pipes: [DurationTypePipe, DurationPipe]
 })
-export class NewBooking implements OnInit {
+export class WorkingStep implements OnInit {
 
     minBookingDate: string;
     isMinBookingDateLoading: boolean = true;
+    isTaskSelectionLoading: boolean = false;
     areTaskCategoriesAndAssigmentsLoading: boolean = false;
     maxBookingDate: string
     durationType: DurationType = DurationType.HOURS;
@@ -36,19 +38,32 @@ export class NewBooking implements OnInit {
     taskCategories: Array<any> = [];
     taskAssigments: Array<any> = [];
     hideAssigment: boolean = true;
-    workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
+    //TODO create modal
+    // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
+    workingStep;
 
-    constructor(private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService) {
+    constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private newBookingService: NewBookingService, private taskSelecttionService: TaskSelectionService) {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
-        this.workingStep = {
-            bookingDate: this.maxBookingDate,
-            duration: 0.25,
-            task: null,
-            taskCategory: null,
-            taskAssigment: null,
-            activity: ''
-        };
+        const ws = params.get('workingStep');
+        console.log(ws);
+        if (ws) {
+            this.workingStep = {};
+            //edit working step - set attributes that do not need loading time
+            this.workingStep.duration = ws.duration;
+            this.workingStep.activity = ws.activity;
+        } else {
+            //create new working step
+            this.workingStep = {
+                bookingDate: this.maxBookingDate,
+                duration: 0.25,
+                task: null,
+                taskCategory: null,
+                taskAssigment: null,
+                activity: ''
+            };
+        }
+
     }
 
     cancel() {
@@ -182,11 +197,30 @@ export class NewBooking implements OnInit {
         return array;
     }
 
+    // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
+
     ngOnInit() {
+        const ws = this.params.get('workingStep');
+        if (this.params.get('workingStep')) {
+            //TODO taskId was renamd to task because of json-server
+            this.isTaskSelectionLoading = true;
+            this.taskSelecttionService.findTaskById(ws.task).subscribe(
+                data => {
+                    //TODO handle situation when task is not found
+                    this.workingStep.task = data;
+                    this.isTaskSelectionLoading = false;
+                }, error=> {
+                    console.log(error);
+                });
+        }
         this.bookingDeadlineService.getBookingDeadline().subscribe(
             data => {
                 this.isMinBookingDateLoading = false;
                 this.minBookingDate = data.date.toISOString();
+                if (this.params.get('workingStep')) {
+                    this.workingStep.bookingDate = moment(ws.date).toISOString();
+                }
+
             }, error=> {
                 console.log(error);
             });

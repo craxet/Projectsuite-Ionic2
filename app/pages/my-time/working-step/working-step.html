@@ -14,7 +14,8 @@
         <ion-list-header>Booking Date</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
-            <ion-datetime disabled="{{isMinBookingDateLoading}}" displayFormat="D. MMMM YYYY" [(ngModel)]="workingStep.bookingDate"
+            <ion-datetime disabled="{{isMinBookingDateLoading}}" displayFormat="D. MMMM YYYY"
+                          [(ngModel)]="workingStep.bookingDate"
                           min="{{minBookingDate}}" max="{{maxBookingDate}}"></ion-datetime>
             <div item-right [hidden]="!isMinBookingDateLoading">
                 <ion-spinner></ion-spinner>
@@ -23,13 +24,24 @@
     </ion-list>
     <ion-list>
         <ion-list-header>Task</ion-list-header>
-        <button ion-item detail-push (click)="selectTask()" class="ion-item-value" text-wrap>
-            <ion-label [class.label-placeholder]="workingStep.task == null">{{workingStep.task == null?"Task name":workingStep.task.name}}</ion-label>
+        <button [hidden]="isTaskSelectionLoading" ion-item detail-push (click)="selectTask()" class="ion-item-value"
+                text-wrap>
+            <ion-label [class.label-placeholder]="workingStep.task == null">{{workingStep.task ==
+                null?"Taskname":workingStep.task.name}}
+            </ion-label>
         </button>
+        <ion-item [hidden]="!isTaskSelectionLoading">
+            <ion-label class="label-placeholder">Task Name</ion-label>
+            <div item-right>
+                <ion-spinner></ion-spinner>
+            </div>
+        </ion-item>
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}" [(ngModel)]="workingStep.taskCategory">
-                <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}</ion-option>
+            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}"
+                        [(ngModel)]="workingStep.taskCategory">
+                <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}
+                </ion-option>
             </ion-select>
             <div item-right [hidden]="!areTaskCategoriesAndAssigmentsLoading">
                 <ion-spinner></ion-spinner>
@@ -38,7 +50,8 @@
         <ion-item [hidden]="hideAssigment">
             <ion-label>Assigment</ion-label>
             <ion-select [(ngModel)]="workingStep.taskAssigment">
-                <ion-option *ngFor="let assigment of taskAssigments" value="{{assigment.value}}">{{assigment.name}}</ion-option>
+                <ion-option *ngFor="let assigment of taskAssigments" value="{{assigment.value}}">{{assigment.name}}
+                </ion-option>
             </ion-select>
         </ion-item>
     </ion-list>
@@ -82,7 +95,8 @@
     <ion-list>
         <ion-list-header>Activity</ion-list-header>
         <ion-item>
-            <ion-textarea maxlength="60" placeholder="Describe your Activity" [(ngModel)]="workingStep.activity"></ion-textarea>
+            <ion-textarea maxlength="60" placeholder="Describe your Activity"
+                          [(ngModel)]="workingStep.activity"></ion-textarea>
         </ion-item>
     </ion-list>
 </ion-content>

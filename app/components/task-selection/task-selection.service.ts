@@ -10,7 +10,8 @@ import {TaskGroup} from '../../enums/enums';
 
 @Injectable()
 export class TaskSelectionService {
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
 
     getTasksByGroup(date: Moment, taskGroup: TaskGroup) {
         return this.http.get('http://localhost:3000/tasks').map(res => {
@@ -28,6 +29,15 @@ export class TaskSelectionService {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
-        })
+        });
+    }
+
+    findTaskById(id: string) {
+        return this.http.get('http://localhost:3000/tasks/' + id).map(res => {
+            return res.json();
+        }).catch(error => {
+            console.log('service', error);
+            return Observable.throw(error);
+        });
     }
 }

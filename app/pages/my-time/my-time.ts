@@ -16,7 +16,7 @@ import {MyTimeService} from './my-time.service';
 import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
 import {CalViewType} from '../../enums/enums';
 import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
-import {NewBooking} from './new-booking/new-booking';
+import {WorkingStep} from './working-step/working-step';
 import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
 
 enum Direction{
@@ -166,7 +166,7 @@ export class MyTimePage implements OnInit {
     }
 
     createBooking() {
-        let modal = this.modalCtrl.create(NewBooking);
+        let modal = this.modalCtrl.create(WorkingStep);
         modal.onDidDismiss((data)=> {
             if (data) {
                 //TODO create function that add created working step to array on right position;
@@ -253,7 +253,7 @@ export class MyTimePage implements OnInit {
     }
 
     editWorkingStep(step){
-        let modal = this.modalCtrl.create(NewBooking);
+        let modal = this.modalCtrl.create(WorkingStep,{workingStep: step});
         modal.onDidDismiss((data)=> {
             if (data) {
                 //TODO create function that add edit working step to array on right position;
@@ -275,10 +275,6 @@ export class MyTimePage implements OnInit {
                 }
             }
         });
-    }
-
-    editWorkingStep() {
-
     }
 
     ngOnInit() {
