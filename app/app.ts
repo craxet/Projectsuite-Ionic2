@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './tabs/tabs'
-import {LoginPage} from './pages/login/login';
 import { HTTP_PROVIDERS } from '@angular/http';
 
 @Component({
