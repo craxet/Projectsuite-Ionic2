@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalController, PopoverController, IONIC_DIRECTIVES, Events} from 'ionic-angular';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {ModalController, PopoverController, IONIC_DIRECTIVES} from 'ionic-angular';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 
@@ -14,6 +14,9 @@ import {DateViewModePopover} from '../date-view-mode-popover/date-view-mode-popo
 })
 export class CalendarView implements OnInit {
 
+    @Output()
+    onListUpdate = new EventEmitter<Object>();
+
     hidePrevButton: boolean;
     hideNextButton: boolean;
     dateIndex: number = 0;
@@ -27,7 +30,7 @@ export class CalendarView implements OnInit {
     private weekLevel: number;
     private dayLevel: number;
 
-    constructor(public events: Events, private modalCtrl: ModalController, private popoverCtrl: PopoverController) {
+    constructor(private modalCtrl: ModalController, private popoverCtrl: PopoverController) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -128,7 +131,7 @@ export class CalendarView implements OnInit {
                 break;
         }
         //TODO cancel request if prev or next button will be quickly selected
-        this.events.publish('workingSteps:refreshed', this.selectedDate);
+        this.onListUpdate.emit(this.selectedDate);
     }
 
     showDateViewModePopover(ev) {

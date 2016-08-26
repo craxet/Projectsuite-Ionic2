@@ -12,7 +12,7 @@
             </button>
         </ion-buttons>
     </ion-toolbar>
-    <calendar-view></calendar-view>
+    <calendar-view (onListUpdate)="callGetWorkingSteps($event)" ></calendar-view>
 </ion-header>
 <ion-content class="working-step">
     <ion-refresher (ionRefresh)="getWorkingSteps($event)">

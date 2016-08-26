@@ -1,7 +1,7 @@
 import {
-    LoadingController, ModalController, AlertController, Refresher, NavController, Events
+    LoadingController, ModalController, AlertController, Refresher, NavController
 } from 'ionic-angular';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Moment} from 'moment';
 
 import {DateFormatPipe} from 'angular2-moment';
@@ -33,7 +33,7 @@ import {CalendarView} from '../../components/calendar-view/calendar-view';
     directives: [CalendarView]
 })
 
-export class MyTimePage implements OnInit {
+export class MyTimePage {
 
     selectedDate: {from: Moment, to: Moment};
     workingSteps: Array<any> = [];
@@ -45,7 +45,7 @@ export class MyTimePage implements OnInit {
     selectedDateClass: boolean = false;
     areWorkingStepsLoading: boolean = false;
 
-    constructor(public events: Events, private nav: NavController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
+    constructor(private nav: NavController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
     }
 
     gotToWorkingStepDetail(step) {
@@ -80,6 +80,10 @@ export class MyTimePage implements OnInit {
         });
     }
 
+    callGetWorkingSteps(selectedDate){
+        this.selectedDate = selectedDate;
+        this.getWorkingSteps();
+    }
 
     getWorkingSteps(refresher: Refresher = null) {
         this.areWorkingStepsLoading = refresher === null ? true : false;
@@ -151,13 +155,6 @@ export class MyTimePage implements OnInit {
                     array.splice(index, 1);
                 }
             }
-        });
-    }
-
-    ngOnInit() {
-        this.events.subscribe('workingSteps:refreshed', params => {
-            this.selectedDate = params[0];
-            this.getWorkingSteps();
         });
     }
 }
