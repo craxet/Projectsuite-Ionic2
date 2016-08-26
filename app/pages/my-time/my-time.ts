@@ -1,6 +1,6 @@
 import {
     LoadingController, PopoverController, ModalController, AlertController, Refresher,
-    ToastController
+    ToastController,NavController
 } from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
@@ -18,6 +18,7 @@ import {CalViewType} from '../../enums/enums';
 import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
 import {WorkingStep} from './working-step/working-step';
 import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
+import {WorkingStepDetail} from './working-step-detail/working-step-detail';
 
 enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
@@ -61,7 +62,7 @@ export class MyTimePage implements OnInit {
     private weekLevel: number;
     private dayLevel: number;
 
-    constructor(private toastCtrl: ToastController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
+    constructor(private nav: NavController,private toastCtrl: ToastController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
         this.monthLevel = 2;
         this.weekLevel = 3;
         //number od days until today
@@ -165,6 +166,10 @@ export class MyTimePage implements OnInit {
         this.getWorkingSteps();
     }
 
+    gotToWorkingStepDetail(step){
+        this.nav.push(WorkingStepDetail,step);
+    }
+
     createBooking() {
         let modal = this.modalCtrl.create(WorkingStep);
         modal.onDidDismiss((data)=> {
@@ -264,7 +269,7 @@ export class MyTimePage implements OnInit {
         modal.present();
     }
 
-    deleteWorkingStepLocally(workingStep) {
+   private deleteWorkingStepLocally(workingStep) {
         this.workingSteps.forEach((item, index, array)=> {
             if (item.date === workingStep.date) {
                 item.values.splice(item.values.findIndex((el)=> {

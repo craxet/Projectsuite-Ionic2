@@ -219,6 +219,23 @@
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234
+    },
+    {
+      "id": "2016-08-26T07:24:39.707Z",
+      "date": 1472196232191,
+      "taskName": "CR 177190 P6 - Optimierung Benutzerfreundlichkeit Teil 1",
+      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "tenant": "A",
+      "duration": 1,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "created",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
     }
   ],
   "tasks": [

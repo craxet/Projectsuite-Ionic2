@@ -56,7 +56,7 @@
                 </ion-grid>
             </ion-item-divider>
             <ion-item-sliding *ngFor="let step of headerDate.values" [attr.booked]="step.booked">
-                <ion-item>
+                <button ion-item (click)="gotToWorkingStepDetail(step)">
                     <ion-grid no-padding no-margin>
                         <ion-row wrap center>
                             <ion-col width-90>
@@ -73,7 +73,7 @@
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                </ion-item>
+                </button>
                 <ion-item-options>
                     <button danger (click)="deleteWorkingStep(step)">
                         <ion-icon name="close"></ion-icon>
