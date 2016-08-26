@@ -27,35 +27,22 @@
     <ion-list [hidden]="areWorkingStepsLoading ||  workingSteps.length === 0">
         <ion-item-group *ngFor="let headerDate of workingSteps | orderBy: ['-date']">
             <ion-item-divider>
-                <ion-grid no-padding>
-                    <ion-row style="padding-right:8px">
-                        <ion-col width-90>
-                            {{headerDate.date | amDateFormat:"DD.MM.YYYY"}}
-                        </ion-col>
-                        <ion-col width-10>
-                            <strong>{{headerDate.sumOfDuration | duration}}</strong>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+                {{headerDate.date | amDateFormat:"DD.MM.YYYY"}}
+                <div item-right style="padding-right:8px;">
+                    <strong>{{headerDate.sumOfDuration | duration}}</strong>
+                </div>
             </ion-item-divider>
             <ion-item-sliding *ngFor="let step of headerDate.values" [attr.booked]="step.booked">
-                <button ion-item (click)="gotToWorkingStepDetail(step)">
-                    <ion-grid no-padding no-margin>
-                        <ion-row wrap center>
-                            <ion-col width-90>
-                                <p><strong>Task</strong></p>
-                                <p>{{step.taskName}}</p>
-                                <p><strong>Project</strong></p>
-                                <p>{{step.projectName}}</p>
-                                <p><strong>Activity</strong></p>
-                                <p>{{step.activity}}</p>
-                                <!--<p><strong>Category </strong>{{step.category.name}}</p>-->
-                            </ion-col>
-                            <ion-col width-10>
-                                <h4>{{step.duration | duration}}</h4>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
+                <button ion-item detail-none (click)="gotToWorkingStepDetail(step)">
+                    <p><strong>Task</strong></p>
+                    <p>{{step.taskName}}</p>
+                    <p><strong>Project</strong></p>
+                    <p>{{step.projectName}}</p>
+                    <p><strong>Activity</strong></p>
+                    <p>{{step.activity}}</p>
+                    <div item-right>
+                        <h4>{{step.duration | duration}}</h4>
+                    </div>
                 </button>
                 <ion-item-options>
                     <button danger (click)="deleteWorkingStep(step)">
