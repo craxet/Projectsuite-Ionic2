@@ -1,0 +1,18 @@
+<ion-toolbar no-border-top>
+    <ion-buttons [hidden]="hidePrevButton" start>
+        <button (click)="setNewDateRange('PREV')">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>
+        <button dark clear (click)="showDateViewModePopover($event)">
+            <span>{{selectedDate.name}}</span>
+            <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
+        </button>
+    </ion-title>
+    <ion-buttons [hidden]="hideNextButton" end>
+        <button (click)="setNewDateRange('NEXT')">
+            <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+    </ion-buttons>
+</ion-toolbar>

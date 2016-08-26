@@ -43,8 +43,7 @@
         <ion-item>
             <ion-label>{{workingStep.booked ? 'Booked': 'Not Booked'}}</ion-label>
             <div item-right>
-                <div [class.booked]="workingStep.booked"></div>
-                <div [class.not-booked]="!workingStep.booked"></div>
+                <div [class.booked]="workingStep.booked" [class.not-booked]="!workingStep.booked"></div>
             </div>
         </ion-item>
     </ion-list>

@@ -1,28 +1,20 @@
 import {
-    LoadingController, PopoverController, ModalController, AlertController, Refresher,
-    ToastController,NavController
+    LoadingController, ModalController, AlertController, Refresher, NavController, Events
 } from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
-import {DatePipe} from '@angular/common';
 import {Moment} from 'moment';
 
-import * as _ from 'lodash';
-import * as moment from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
 import {DurationPipe} from '../../pipes/duration-pipe';
 import {OrderByPipe} from '../../pipes/order-by-pipe';
 
 import {MyTimeService} from './my-time.service';
-import {DateViewModePopover} from '../../components/date-view-mode-popover/date-view-mode-popover';
-import {CalViewType} from '../../enums/enums';
-import {CustomDatesModal} from '../../components/custom-dates-modal/custom-dates-modal';
 import {WorkingStep} from './working-step/working-step';
 import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
 import {WorkingStepDetail} from './working-step-detail/working-step-detail';
 
-enum Direction{
-    PREV = <any>'PREV', NEXT = <any>'NEXT'
-}
+import {CalendarView} from '../../components/calendar-view/calendar-view';
+
 
 @Component({
     templateUrl: 'build/pages/my-time/my-time.html',
@@ -37,17 +29,13 @@ enum Direction{
         `
     ],
     providers: [MyTimeService],
-    pipes: [DateFormatPipe, DurationPipe, OrderByPipe]
+    pipes: [DateFormatPipe, DurationPipe, OrderByPipe],
+    directives: [CalendarView]
 })
 
 export class MyTimePage implements OnInit {
 
-    hidePrevButton: boolean;
-    hideNextButton: boolean;
-    dateIndex: number = 0;
-    selectedDate: {name: string, from: Moment, to: Moment};
-    calView: CalViewType = CalViewType.MONTH;
-    lastCalView: CalViewType = CalViewType.MONTH;
+    selectedDate: {from: Moment, to: Moment};
     workingSteps: Array<any> = [];
     totalSumOfWorkingSteps: number;
     firstLastDateOfWorkingSteps: {first: Moment, last: Moment};
@@ -57,117 +45,11 @@ export class MyTimePage implements OnInit {
     selectedDateClass: boolean = false;
     areWorkingStepsLoading: boolean = false;
 
-    private newDate: Moment;
-    private monthLevel: number;
-    private weekLevel: number;
-    private dayLevel: number;
-
-    constructor(private nav: NavController,private toastCtrl: ToastController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private popoverCtrl: PopoverController, private myTimeService: MyTimeService) {
-        this.monthLevel = 2;
-        this.weekLevel = 3;
-        //number od days until today
-        this.dayLevel = moment().date() - 1;
+    constructor(public events: Events, private nav: NavController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
     }
 
-    setNewDateRange(direction?) {
-        this.selectedDateClass = false;
-        switch (this.calView) {
-            case CalViewType.DAY:
-                if (Direction.PREV === direction) {
-                    this.dateIndex++;
-                    this.newDate = this.selectedDate.from.add(-1, 'day');
-                } else if (Direction.NEXT === direction) {
-                    this.dateIndex--;
-                    this.newDate = this.selectedDate.from.add(1, 'day');
-                } else {
-                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                }
-                this.selectedDate = {
-                    name: this.newDate.format('ddd, DD.MM.YYYY'),
-                    from: this.newDate.clone().startOf('day'), to: this.newDate.clone().endOf('day')
-                };
-                this.hideNextButton = this.selectedDate.from.isSame(moment({
-                    hour: 0,
-                    minute: 0,
-                    seconds: 0,
-                    milliseconds: 0
-                }));
-                this.hidePrevButton = this.dateIndex === this.dayLevel && !this.hideNextButton;
-                break;
-            case CalViewType.MONTH:
-                if (Direction.PREV === direction) {
-                    this.dateIndex++;
-                    this.newDate = this.selectedDate.from.add(-1, 'month');
-                } else if (Direction.NEXT === direction) {
-                    this.dateIndex--;
-                    this.newDate = this.selectedDate.from.add(1, 'month');
-                } else {
-                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                }
-                this.selectedDate = {
-                    name: this.newDate.format('MMMM'),
-                    from: this.newDate.clone().startOf('month'), to: this.newDate.clone().endOf('month')
-                };
-                this.hideNextButton = this.selectedDate.from.month() === moment().month();
-                this.hidePrevButton = this.dateIndex === this.monthLevel && !this.hideNextButton;
-                break;
-            case CalViewType.WEEK:
-                this.selectedDateClass = true;
-                if (Direction.PREV === direction) {
-                    this.dateIndex++;
-                    this.newDate = this.selectedDate.from.add(-1, 'week');
-                } else if (Direction.NEXT === direction) {
-                    this.dateIndex--;
-                    this.newDate = this.selectedDate.from.add(1, 'week');
-                } else {
-                    this.newDate = moment({hour: 0, minute: 0, seconds: 0, milliseconds: 0});
-                }
-                const startOfWeek = this.newDate.clone().startOf('isoWeek');
-                const endOfWeek = this.newDate.clone().endOf('isoWeek');
-                const name = startOfWeek.format('DD.MM.YYYY') + ' - ' + endOfWeek.format('DD.MM.YYYY') + ' ' + this.newDate.format('(W.)');
-                this.selectedDate = {
-                    name: name,
-                    from: startOfWeek, to: endOfWeek
-                };
-                this.hideNextButton = this.selectedDate.from.week() === moment().week();
-                this.hidePrevButton = this.dateIndex === this.weekLevel && !this.hideNextButton;
-                break;
-            case CalViewType.CUSTOM:
-                if (this.lastCalView === CalViewType.WEEK) {
-                    this.selectedDateClass = true;
-                } else {
-                    this.selectedDateClass = false;
-                }
-                let modal = this.modalCtrl.create(CustomDatesModal, {}, {enableBackdropDismiss: false});
-                modal.present();
-                modal.onDidDismiss(data => {
-                    if (data !== null) {
-                        this.selectedDateClass = true;
-                        this.hidePrevButton = true;
-                        this.hideNextButton = true;
-                        this.selectedDate = {
-                            name: data.from.format('DD.MM.YYYY') + ' - ' + data.to.format('DD.MM.YYYY'),
-                            from: data.from,
-                            to: data.to
-                        };
-                    } else {
-                        this.calView = this.lastCalView;
-                        if (this.calView === CalViewType.WEEK) {
-                            this.selectedDateClass = true;
-                        } else {
-                            this.selectedDateClass = false;
-                        }
-
-                    }
-                });
-                break;
-        }
-        //TODO cancel request if prev or next button will be quickly selected
-        this.getWorkingSteps();
-    }
-
-    gotToWorkingStepDetail(step){
-        this.nav.push(WorkingStepDetail,step);
+    gotToWorkingStepDetail(step) {
+        this.nav.push(WorkingStepDetail, step);
     }
 
     createBooking() {
@@ -198,16 +80,6 @@ export class MyTimePage implements OnInit {
         });
     }
 
-    showDateViewModePopover(ev) {
-        this.lastCalView = this.calView;
-        let popover = this.popoverCtrl.create(DateViewModePopover, {calView: this.calView});
-        popover.onDidDismiss(data=> {
-            this.dateIndex = 0;
-            this.calView = data;
-            this.setNewDateRange();
-        });
-        popover.present({ev: ev});
-    }
 
     getWorkingSteps(refresher: Refresher = null) {
         this.areWorkingStepsLoading = refresher === null ? true : false;
@@ -257,8 +129,8 @@ export class MyTimePage implements OnInit {
         prompt.present();
     }
 
-    editWorkingStep(step){
-        let modal = this.modalCtrl.create(WorkingStep,{workingStep: step});
+    editWorkingStep(step) {
+        let modal = this.modalCtrl.create(WorkingStep, {workingStep: step});
         modal.onDidDismiss((data)=> {
             if (data) {
                 //TODO create function that add edit working step to array on right position;
@@ -269,7 +141,7 @@ export class MyTimePage implements OnInit {
         modal.present();
     }
 
-   private deleteWorkingStepLocally(workingStep) {
+    private deleteWorkingStepLocally(workingStep) {
         this.workingSteps.forEach((item, index, array)=> {
             if (item.date === workingStep.date) {
                 item.values.splice(item.values.findIndex((el)=> {
@@ -283,6 +155,9 @@ export class MyTimePage implements OnInit {
     }
 
     ngOnInit() {
-        this.setNewDateRange();
+        this.events.subscribe('workingSteps:refreshed', params => {
+            this.selectedDate = params[0];
+            this.getWorkingSteps();
+        });
     }
 }

@@ -12,24 +12,7 @@
             </button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar no-border-top>
-        <ion-buttons [hidden]="hidePrevButton" start>
-            <button (click)="setNewDateRange('PREV')">
-                <ion-icon name="arrow-dropleft"></ion-icon>
-            </button>
-        </ion-buttons>
-        <ion-title>
-            <button dark clear (click)="showDateViewModePopover($event)">
-                <span [class.selected-date]="selectedDateClass">{{selectedDate.name}}</span>
-                <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
-            </button>
-        </ion-title>
-        <ion-buttons [hidden]="hideNextButton" end>
-            <button (click)="setNewDateRange('NEXT')">
-                <ion-icon name="arrow-dropright"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-toolbar>
+    <calendar-view></calendar-view>
 </ion-header>
 <ion-content class="working-step">
     <ion-refresher (ionRefresh)="getWorkingSteps($event)">
@@ -41,7 +24,7 @@
     <div text-center class="center-vertically-in-list" [hidden]="areWorkingStepsLoading || workingSteps.length !== 0">
         <span class="no-items-found">No Working Step found</span>
     </div>
-    <ion-list [hidden]="areWorkingStepsLoading || workingSteps.length === 0">
+    <ion-list [hidden]="areWorkingStepsLoading ||  workingSteps.length === 0">
         <ion-item-group *ngFor="let headerDate of workingSteps | orderBy: ['-date']">
             <ion-item-divider>
                 <ion-grid no-padding>
@@ -86,13 +69,4 @@
             </ion-item-sliding>
         </ion-item-group>
     </ion-list>
-    <!--<ion-list [virtualScroll]="workingSteps" [bufferRatio]="20" [headerFn]="headerDateFn">
-        <ion-item-group *virtualItem="let item">
-        <ion-item-divider><div style="text-align: left;font-weight: bold">{{ item.date
-            }}</div></ion-item-divider>
-        <ion-item *ngFor="let subItem of item.values">
-                {{subItem.taskName}}
-        </ion-item>
-        </ion-item-group>
-    </ion-list>-->
 </ion-content>`

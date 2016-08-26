@@ -5,3 +5,7 @@ export enum CalViewType{
 export enum TaskGroup{
     MY_TASKS = <any>'myTasks', LAST_BOOKED_TASKS = <any>'lastBookedTasks', GLOBAL_TASKS = <any>'globalTasks', TEAM_TASKS = <any>'teamTasks'
 }
+
+export enum Direction{
+    PREV = <any>'PREV', NEXT = <any>'NEXT'
+}

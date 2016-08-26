@@ -7,7 +7,7 @@ import {CalViewType} from '../../enums/enums';
     templateUrl: 'build/components/date-view-mode-popover/date-view-mode-popover.html'
 })
 export class DateViewModePopover {
-    calView:CalViewType;
+    calView: CalViewType;
 
     constructor(private params:NavParams,private viewCtrl:ViewController) {
         this.calView = params.get('calView');
