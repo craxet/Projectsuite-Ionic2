@@ -3,18 +3,50 @@
         <ion-title>Working Step Detail</ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
-    <h5>Date</h5>
-    <p>{{workingStep.date}}</p>
-    <h5>Task</h5>
-    <p>{{workingStep.taskName}}</p>
-    <h5>Project</h5>
-    <p>{{workingStep.projectName}}</p>
-    <h5>{{workingStep.activity}}</h5>
-    <h5>Category</h5>
-    <p>{{workingStep.category.name}}</p>
-    <h5>Duration</h5>
-    <p>{{workingStep.duration}}</p>
-    <h5>Booked</h5>
-    <p>{{workingStep.booked}}</p>
+<ion-content>
+    <ion-list>
+        <ion-list-header>Booking Date & Duration</ion-list-header>
+        <ion-item>
+            <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
+            {{workingStep.date | amDateFormat:"DD.MM.YYYY"}}
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
+            {{workingStep.duration | duration}} h
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Task</ion-list-header>
+        <ion-item text-wrap>
+            {{workingStep.taskName}}
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Project</ion-list-header>
+        <ion-item text-wrap>
+            {{workingStep.projectName}}
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Activity</ion-list-header>
+        <ion-item text-wrap>
+            {{workingStep.activity}}
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Category</ion-list-header>
+        <ion-item text-wrap>
+            {{workingStep.category.name}}
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>{{workingStep.booked ? 'Booked': 'Not Booked'}}</ion-label>
+            <div item-right>
+                <div [class.booked]="workingStep.booked"></div>
+                <div [class.not-booked]="!workingStep.booked"></div>
+            </div>
+        </ion-item>
+    </ion-list>
+
 </ion-content>
