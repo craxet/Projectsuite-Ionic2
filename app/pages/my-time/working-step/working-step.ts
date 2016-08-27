@@ -43,6 +43,8 @@ export class WorkingStep implements OnInit {
     // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
     workingStep;
     labelButtonMode;
+    private durationValuesHours: Array<any> = [];
+    private durationValuesMinutes: Array<any> = [];
 
     constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private workingStepService: WorkingStepService, private taskSelectionService: TaskSelectionService) {
         this.maxBookingDate = moment().toISOString();
@@ -67,7 +69,6 @@ export class WorkingStep implements OnInit {
                 activity: ''
             };
         }
-
     }
 
     cancel() {
@@ -165,7 +166,7 @@ export class WorkingStep implements OnInit {
         });
         picker.addColumn({
             name: 'duration',
-            options: this.generateDurationValues(this.durationType)
+            options: this.durationType == DurationType.HOURS ? this.durationValuesHours : this.durationValuesMinutes
         });
         picker.present();
     }
@@ -199,10 +200,6 @@ export class WorkingStep implements OnInit {
         actionSheet.present();
     }
 
-    formatDuration(duration) {
-        return this.durationType === DurationType.HOURS ? parseFloat(duration).toFixed(2) : duration;
-    }
-
     selectedDurationSegment(value) {
         this.workingStep.duration = this.durationType == DurationType.MINUTES ? value * 60 : value;
     }
@@ -212,7 +209,7 @@ export class WorkingStep implements OnInit {
     private generateDurationValues(durationType: DurationType) {
         let array = [];
         let count = durationType == DurationType.HOURS ? 0.25 : 1;
-        const max = durationType == DurationType.HOURS ? 24 : 1415.4;
+        const max = durationType == DurationType.HOURS ? 24 : 360;
         let i = count;
         for (i; i < max; i += count) {
             array.push({text: durationType == DurationType.HOURS ? i.toFixed(2) : i, value: i.toFixed(2)});
@@ -220,9 +217,11 @@ export class WorkingStep implements OnInit {
         return array;
     }
 
-    // workingStep: {bookingDate: string,duration: number,task: Object,taskCategory: Object,taskAssigment: Object,activity: string};
-
     ngOnInit() {
+        //generation of values for duration picker
+        this.durationValuesMinutes = this.generateDurationValues(DurationType.MINUTES);
+        this.durationValuesHours = this.generateDurationValues(DurationType.HOURS);
+
         const ws = this.params.get('workingStep');
         if (this.params.get('workingStep')) {
             //TODO taskId was renamed to task because of json-server
