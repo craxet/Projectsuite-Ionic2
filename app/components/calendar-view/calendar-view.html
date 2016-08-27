@@ -4,9 +4,9 @@
             <ion-icon name="arrow-dropleft"></ion-icon>
         </button>
     </ion-buttons>
-    <ion-title>
-        <button dark clear (click)="showDateViewModePopover($event)">
-            <span>{{selectedDate.name}}</span>
+    <ion-title no-padding no-margin>
+        <button text-center dark clear (click)="showDateViewModePopover($event)">
+            <span class="selected-date" [attr.cal-view]="calView" >{{selectedDate.name}}</span>
             <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         </button>
     </ion-title>

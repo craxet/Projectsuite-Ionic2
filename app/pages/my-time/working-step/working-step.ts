@@ -205,7 +205,6 @@ export class WorkingStep implements OnInit {
     }
 
     //value is always in hours but text is either in hours or minutes
-    //TODO generate values just once at at the opening modal
     private generateDurationValues(durationType: DurationType) {
         let array = [];
         let count = durationType == DurationType.HOURS ? 0.25 : 1;

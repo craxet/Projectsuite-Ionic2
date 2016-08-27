@@ -18,16 +18,6 @@ import {CalendarView} from '../../components/calendar-view/calendar-view';
 
 @Component({
     templateUrl: 'build/pages/my-time/my-time.html',
-    styles: [
-        `.month-or-week span{
-            color: #8c8c8c;
-        }
-        .active{
-            color: #387ef5;
-        }
-
-        `
-    ],
     providers: [MyTimeService],
     pipes: [DateFormatPipe, DurationPipe, OrderByPipe],
     directives: [CalendarView]

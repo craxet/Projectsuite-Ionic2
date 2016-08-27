@@ -40,6 +40,8 @@
 
 @import "../pages/my-time/booking-detail/booking-detail";
 
+@import "../components/calendar-view/calendar-view";
+
 //background of ion-content
 ion-content{
   background-color: $content-ios-outer-background;
@@ -105,9 +107,4 @@ ion-page.custom-dates-modal.show-page ~ .nav-decor {
   left: 0 !important;
   width: 100% !important;
   border-radius: 0 !important;
-}
-
-
-.selected-date{
-  font-size: 1.2rem;
 }
