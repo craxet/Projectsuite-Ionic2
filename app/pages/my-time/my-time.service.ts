@@ -36,13 +36,14 @@ export class MyTimeService {
                 totalSum += sumOfDuration;
                 list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
+            const firstLast = list.length === 0? null: {
+                first: moment(parseInt(_.minBy(list, 'date').date)),
+                last: moment(parseInt(_.maxBy(list, 'date').date))
+            }
             return {
                 list: list,
                 totalSum: totalSum,
-                firstLast: {
-                    first: moment(parseInt(_.minBy(list, 'date').date)),
-                    last: moment(parseInt(_.maxBy(list, 'date').date))
-                }
+                firstLast: firstLast
             };
         }).catch(error => {
             console.log('service', error);

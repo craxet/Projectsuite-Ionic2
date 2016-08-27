@@ -9,9 +9,10 @@ import {Moment} from 'moment';
 
 @Injectable()
 export class SummaryService {
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
 
-    getSummaryEntries(from: Moment, to:Moment, inclBooked:boolean) {
+    getSummaryEntries(from: Moment, to: Moment, inclBooked: boolean) {
         return this.http.get('http://localhost:3000/summaryEntries').map(res => {
             let query = _.chain(res.json()).filter(function (item) {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
@@ -28,14 +29,14 @@ export class SummaryService {
                 totalSum += sumOfDuration;
                 list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
-            console.log(list);
+            const firstLast = list.length === 0 ? null : {
+                first: moment(parseInt(_.minBy(list, 'date').date)),
+                last: moment(parseInt(_.maxBy(list, 'date').date))
+            };
             return {
                 list: list,
                 totalSum: totalSum,
-                firstLast: {
-                    first: moment(parseInt(_.minBy(list, 'date').date)),
-                    last: moment(parseInt(_.maxBy(list, 'date').date))
-                }
+                firstLast: firstLast
             };
 
         }).catch(error => {

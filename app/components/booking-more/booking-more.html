@@ -14,7 +14,7 @@
             <ion-toggle [(ngModel)]="inclBooked"></ion-toggle>
         </ion-item>
     </ion-list>
-    <ion-list>
+    <ion-list *ngIf="firstLastDateOfBookings !== null">
         <ion-list-header>Total Sum of {{bookingsLabel}}</ion-list-header>
         <ion-item>
             <ion-label class="label-text">{{firstLastDateOfBookings.first | amDateFormat: 'DD.MM.YYYY'}} -

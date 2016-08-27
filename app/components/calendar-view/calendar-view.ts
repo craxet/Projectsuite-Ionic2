@@ -31,7 +31,7 @@ export class CalendarView implements OnInit {
     private dayLevel: number;
 
     constructor(private modalCtrl: ModalController, private popoverCtrl: PopoverController) {
-        this.monthLevel = 2;
+        this.monthLevel = 5;
         this.weekLevel = 3;
         //number od days until today
         this.dayLevel = moment().date() - 1;

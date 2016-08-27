@@ -64,7 +64,6 @@ export class SummaryPage {
         this.summaryService.getSummaryEntries(this.selectedDate.from, this.selectedDate.to, this.inclBooked).subscribe(
             data=> {
                 this.summaryEntries = data.list;
-                console.log(this.summaryEntries);
                 this.totalSumOfSummaryEntries = data.totalSum;
                 this.firstLastDateOfSummaryEntries = data.firstLast;
                 this.areSummaryEntriesLoading = false;
