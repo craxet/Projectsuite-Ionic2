@@ -10,8 +10,8 @@ import {OrderByPipe} from '../../pipes/order-by-pipe';
 
 import {MyTimeService} from './my-time.service';
 import {WorkingStep} from './working-step/working-step';
-import {WorkingStepMoreModal} from '../../components/working-step-more/working-step-more-modal';
-import {WorkingStepDetail} from './working-step-detail/working-step-detail';
+import {BookingMore} from '../../components/booking-more/booking-more';
+import {BookingDetail} from './booking-detail/booking-detail';
 
 import {CalendarView} from '../../components/calendar-view/calendar-view';
 
@@ -49,7 +49,7 @@ export class MyTimePage {
     }
 
     gotToWorkingStepDetail(step) {
-        this.nav.push(WorkingStepDetail, step);
+        this.nav.push(BookingDetail, step);
     }
 
     createBooking() {
@@ -65,11 +65,12 @@ export class MyTimePage {
     }
 
     openMoreModal() {
-        let modal = this.modalCtrl.create(WorkingStepMoreModal, {
+        let modal = this.modalCtrl.create(BookingMore, {
             inclBooked: this.inclBooked,
             selectedDate: this.selectedDate,
-            totalSumOfWorkingSteps: this.totalSumOfWorkingSteps,
-            firstLastDateOfWorkingSteps: this.firstLastDateOfWorkingSteps
+            totalSumOfBookings: this.totalSumOfWorkingSteps,
+            firstLastDateOfBookings: this.firstLastDateOfWorkingSteps,
+            bookingsLabel: 'Working Steps'
         });
         modal.present();
         modal.onDidDismiss(data => {

@@ -4,15 +4,39 @@ import {Observable}     from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 
 @Injectable()
-export class TaskSelectionService {
+export class SummaryService {
     constructor(private http: Http) {}
 
-    getSummaryEntries(from: Moment, to:Moment) {
+    getSummaryEntries(from: Moment, to:Moment, inclBooked:boolean) {
         return this.http.get('http://localhost:3000/summaryEntries').map(res => {
-            let body = res.json();
+            let query = _.chain(res.json()).filter(function (item) {
+                let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
+                if (!inclBooked) {
+                    return dateQuery && item.booked === false;
+                } else {
+                    return dateQuery;
+                }
+            }).groupBy('date').value();
+            let list = [];
+            let totalSum = 0;
+            _.forIn(query, function (value, key) {
+                let sumOfDuration = _.sumBy(value, 'duration');
+                totalSum += sumOfDuration;
+                list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
+            });
+            console.log(list);
+            return {
+                list: list,
+                totalSum: totalSum,
+                firstLast: {
+                    first: moment(parseInt(_.minBy(list, 'date').date)),
+                    last: moment(parseInt(_.maxBy(list, 'date').date))
+                }
+            };
 
         }).catch(error => {
             console.log('service', error);

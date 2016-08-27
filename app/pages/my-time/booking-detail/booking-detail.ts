@@ -5,14 +5,14 @@ import {DateFormatPipe} from 'angular2-moment';
 import {DurationPipe} from '../../../pipes/duration-pipe';
 
 @Component({
-    templateUrl: 'build/pages/my-time/working-step-detail/working-step-detail.html',
+    templateUrl: 'build/pages/my-time/booking-detail/booking-detail.html',
     pipes:[DateFormatPipe,DurationPipe]
 })
-export class WorkingStepDetail {
+export class BookingDetail {
 
-    workingStep;
+    booking;
 
     constructor(private navParams: NavParams) {
-        this.workingStep = navParams.data;
+        this.booking = navParams.data;
     }
 }

@@ -8,20 +8,20 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-list-header>Incl. Booked Working Steps</ion-list-header>
+        <ion-list-header>Incl. Booked {{bookingsLabel}}</ion-list-header>
         <ion-item>
             <ion-label class="label-text">{{inclBooked ? 'Incl. Booked' : 'Not Booked'}}</ion-label>
             <ion-toggle [(ngModel)]="inclBooked"></ion-toggle>
         </ion-item>
     </ion-list>
     <ion-list>
-        <ion-list-header>Total Sum of Working Steps</ion-list-header>
+        <ion-list-header>Total Sum of {{bookingsLabel}}</ion-list-header>
         <ion-item>
-            <ion-label class="label-text">{{firstLastDateOfWorkingSteps.first | amDateFormat: 'DD.MM.YYYY'}} -
-                {{firstLastDateOfWorkingSteps.last | amDateFormat: 'DD.MM.YYYY'}}
+            <ion-label class="label-text">{{firstLastDateOfBookings.first | amDateFormat: 'DD.MM.YYYY'}} -
+                {{firstLastDateOfBookings.last | amDateFormat: 'DD.MM.YYYY'}}
             </ion-label>
             <div item-content>
-                <h2 style="padding-right: 8px">{{totalSumOfWorkingSteps | duration}} h</h2>
+                <h2 style="padding-right: 8px">{{totalSumOfBookings | duration}} h</h2>
             </div>
         </ion-item>
     </ion-list>

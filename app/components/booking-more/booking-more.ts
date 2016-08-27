@@ -6,19 +6,21 @@ import {DateFormatPipe} from 'angular2-moment';
 import {DurationPipe} from '../../pipes/duration-pipe.ts';
 
 @Component({
-    templateUrl: 'build/components/working-step-more/working-step-more-modal.html',
+    templateUrl: 'build/components/booking-more/booking-more.html',
     pipes: [DurationPipe, DateFormatPipe]
 })
-export class WorkingStepMoreModal {
+export class BookingMore {
 
     inclBooked: boolean = false;
-    firstLastDateOfWorkingSteps: {first: Moment, last: Moment};
-    totalSumOfWorkingSteps: number;
+    firstLastDateOfBookings: {first: Moment, last: Moment};
+    totalSumOfBookings: number;
+    bookingsLabel: string;
 
     constructor(private params: NavParams, private viewCtrl: ViewController) {
         this.inclBooked = params.get('inclBooked');
-        this.firstLastDateOfWorkingSteps = params.get('firstLastDateOfWorkingSteps');
-        this.totalSumOfWorkingSteps = params.get('totalSumOfWorkingSteps');
+        this.firstLastDateOfBookings = params.get('firstLastDateOfBookings');
+        this.totalSumOfBookings = params.get('totalSumOfBookings');
+        this.bookingsLabel = params.get('bookingsLabel');
     }
 
     cancel() {

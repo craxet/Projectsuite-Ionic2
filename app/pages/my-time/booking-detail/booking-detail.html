@@ -8,45 +8,45 @@
         <ion-list-header>Booking Date</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
-            {{workingStep.date | amDateFormat:"DD.MM.YYYY"}}
+            {{booking.date | amDateFormat:"DD.MM.YYYY"}}
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-list-header>Duration</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
-            {{workingStep.duration | duration}} h
+            {{booking.duration | duration}} h
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-list-header>Task</ion-list-header>
         <ion-item text-wrap>
-            {{workingStep.taskName}}
+            {{booking.taskName}}
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-list-header>Category</ion-list-header>
         <ion-item text-wrap>
-            {{workingStep.category.name}}
+            {{booking.category.name}}
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-list-header>Project</ion-list-header>
         <ion-item text-wrap>
-            {{workingStep.projectName}}
+            {{booking.projectName}}
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-list-header>Activity</ion-list-header>
         <ion-item text-wrap>
-            {{workingStep.activity}}
+            {{booking.activity}}
         </ion-item>
     </ion-list>
     <ion-list>
         <ion-item>
-            <ion-label>{{workingStep.booked ? 'Booked': 'Not Booked'}}</ion-label>
+            <ion-label>{{booking.booked ? 'Booked': 'Not Booked'}}</ion-label>
             <div item-right>
-                <div [class.booked]="workingStep.booked" [class.not-booked]="!workingStep.booked"></div>
+                <div [class.booked]="booking.booked" [class.not-booked]="!booking.booked"></div>
             </div>
         </ion-item>
     </ion-list>
