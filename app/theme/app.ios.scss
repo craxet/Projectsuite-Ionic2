@@ -47,6 +47,10 @@ ion-content{
   background-color: $content-ios-outer-background;
 }
 
+.toolbar-title,.bar-button {
+  font-size: 1.5rem;
+}
+
 ion-page.custom-dates-modal.show-page ~ .nav-decor {
   background: white;
 }

@@ -1,12 +1,12 @@
-<ion-toolbar no-border-top>
+<ion-toolbar no-border primary>
     <ion-buttons [hidden]="hidePrevButton" start>
         <button (click)="setNewDateRange('PREV')">
             <ion-icon name="arrow-dropleft"></ion-icon>
         </button>
     </ion-buttons>
     <ion-title no-padding no-margin>
-        <button text-center dark clear (click)="showDateViewModePopover($event)">
-            <span class="selected-date" [attr.cal-view]="calView" >{{selectedDate.name}}</span>
+        <button class="selected-date" text-center dark clear (click)="showDateViewModePopover($event)">
+            <span [attr.cal-view]="calView" >{{selectedDate.name}}</span>
             <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown"></ion-icon>
         </button>
     </ion-title>
