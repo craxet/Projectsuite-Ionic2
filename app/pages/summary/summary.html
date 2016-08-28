@@ -23,7 +23,7 @@
     </div>
     <ion-list [hidden]="areSummaryEntriesLoading ||  summaryEntries.length === 0">
         <ion-item-group *ngFor="let headerDate of summaryEntries | orderBy: ['-date']">
-            <ion-item-divider>
+            <ion-item-divider light>
                 {{headerDate.date | amDateFormat:"DD.MM.YYYY"}}
                 <div item-right style="padding-right:8px;">
                     <strong>{{headerDate.sumOfDuration | duration}}</strong>

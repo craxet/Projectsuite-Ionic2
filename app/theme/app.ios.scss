@@ -34,11 +34,10 @@
 
 @import "../components/task-selection/task-selection";
 
-@import "../pages/my-time/my-time";
-
 @import "../components/booking-more/booking-more";
 
 @import "../pages/my-time/booking-detail/booking-detail";
+
 
 
 //background of ion-content
@@ -101,9 +100,9 @@ ion-content{
 }*/
 
 //TODO just for IOS
-.custom-dates-modal ion-toolbar {
+/*.custom-dates-modal ion-toolbar {
   border-radius: $alert-ios-border-radius $alert-ios-border-radius 0 0;
-}
+}*/
 
 .popover-content {
   min-height: initial;

@@ -3,12 +3,10 @@
   padding: 4px 0;
 }
 
-//ios
 .not-bookable-task {
   border-right: 3px solid $not-bookable-item;
 }
 
-//ios
 .center-vertically-in-list {
   margin-top: 170px;
 }
@@ -20,4 +18,9 @@
 
 .input-value-font-color {
   color: inherit;
+}
+
+//ios
+.task-group-padding{
+  padding: 16px;
 }

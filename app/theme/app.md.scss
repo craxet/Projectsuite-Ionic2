@@ -1,42 +1,50 @@
 // http://ionicframework.com/docs/v2/theming/
-
-
 // App Shared Variables
 // --------------------------------------------------
 // Shared Sass variables go in the app.variables.scss file
 @import "app.variables";
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
-
 // Ionic Material Design Sass
 // --------------------------------------------------
 // Custom App variables must be declared before importing Ionic.
 // Ionic will use its default values when a custom variable isn't provided.
 @import "ionic.md";
-
-
 // App Shared Sass
 // --------------------------------------------------
 // All Sass files that make up this app goes into the app.core.scss file.
 // For simpler CSS overrides, custom app CSS must come after Ionic's CSS.
 @import "app.core";
 
-
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
 
+// needed for tabs in task selection
+.toolbar {
+  padding-bottom: 0;
+}
 
-ion-item-divider{
+.not-bookable-task {
+  border-right: 3px solid $not-bookable-item;
+}
+
+.center-vertically-in-list {
+  margin-top: 170px;
+}
+
+ion-item-divider {
   border-bottom: none;
 }
 
-.fab-fixed{
+.fab-fixed {
   bottom: 64px;
   right: 0;
+}
+
+//next cal view button - fix for jumping on right
+.icon-placeholder {
+  min-width: 28px;
 }
 

@@ -8,8 +8,9 @@
             <button (click)="selectTask()">Select</button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar no-border-top>
-        <ion-segment [(ngModel)]="taskGroup" (ionChange)="changedTaskGroup()" primary padding>
+    <ion-toolbar no-border-top primary>
+        <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()" showWhen="android"></ion-searchbar>
+        <ion-segment class="task-group-padding" [(ngModel)]="taskGroup" (ionChange)="changedTaskGroup()" white>
             <ion-segment-button value="myTasks">
                 My
             </ion-segment-button>
@@ -29,7 +30,7 @@
     <ion-refresher (ionRefresh)="getTasks($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()" showWhen="ios"></ion-searchbar>
     <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
         <ion-spinner></ion-spinner>
     </div>
@@ -37,7 +38,7 @@
         <span class="no-items-found">No Tasks found</span>
     </div>
     <ion-list [hidden]="isLoading || tasks.length === 0" radio-group [(ngModel)]="selectedTaskTemp">
-        <ion-item [class.not-bookable-task]="!task.bookable" text-wrap  *ngFor="let task of tasks">
+        <ion-item [class.not-bookable-task]="!task.bookable" text-wrap *ngFor="let task of tasks">
             <ion-label>
                 <h4>{{task.name}}</h4>
                 <div class="task-item-project">
