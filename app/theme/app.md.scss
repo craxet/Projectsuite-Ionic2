@@ -48,3 +48,25 @@ ion-item-divider {
   min-width: 28px;
 }
 
+//for android all items in list  wll be styled
+ion-card{
+  margin-left: 0;
+  margin-right: 0;
+  width: auto;
+}
+
+//for android header card
+ion-card ion-card-header{
+  //color: #858585;
+  color: $primary;
+}
+
+//last item in list without border
+ion-list > .item:last-child{
+  border-bottom: none;
+}
+
+
+ion-card ion-list ion-icon{
+  color: $primary;
+}
