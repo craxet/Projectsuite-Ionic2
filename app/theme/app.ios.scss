@@ -40,7 +40,6 @@
 
 @import "../pages/my-time/booking-detail/booking-detail";
 
-@import "../components/calendar-view/calendar-view";
 
 //background of ion-content
 ion-content{
@@ -51,9 +50,9 @@ ion-content{
   font-size: 1.5rem;
 }
 
-ion-page.custom-dates-modal.show-page ~ .nav-decor {
+/*ion-page.custom-dates-modal.show-page ~ .nav-decor {
   background: white;
-}
+}*/
 
 /*@media (min-width: 300px) and (min-height: 500px) {
   ion-modal ion-backdrop {
@@ -68,7 +67,7 @@ ion-page.custom-dates-modal.show-page ~ .nav-decor {
 }*/
 
 // In you modal css
-.custom-dates-modal {
+/*.custom-dates-modal {
   position: absolute;
   top: calc(50% - 45vh); // half of vh
   left: calc(50% + 10vw); // half of 100-vw
@@ -99,7 +98,7 @@ ion-page.custom-dates-modal.show-page ~ .nav-decor {
 .custom-dates-modal ion-col .button.ok {
   border-radius: 0 0 $alert-ios-border-radius 0;
   font-weight: bold;
-}
+}*/
 
 //TODO just for IOS
 .custom-dates-modal ion-toolbar {

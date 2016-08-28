@@ -29,3 +29,14 @@
 // App Material Design Only Sass
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
+
+
+ion-item-divider{
+  border-bottom: none;
+}
+
+.fab-fixed{
+  bottom: 64px;
+  right: 0;
+}
+
