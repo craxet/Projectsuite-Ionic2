@@ -98,7 +98,7 @@
     }
   ],
   "bookingDeadline": {
-    "date": 1470079140924
+    "date": 1462060800000
   },
   "workingSteps": [
     {
@@ -293,36 +293,19 @@
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234
-    },
-    {
-      "id": "2016-08-26T07:24:39.707Z",
-      "date": 1472196232191,
-      "taskName": "CR 177190 P6 - Optimierung Benutzerfreundlichkeit Teil 1",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
-      "tenant": "A",
-      "duration": 1,
-      "durationType": 1,
-      "category": {
-        "name": "Quick Test",
-        "value": "C"
-      },
-      "activity": "created",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
     }
   ],
   "tasks": [
     {
       "id": "2016-03-21 14:01:28.463",
-      "name": "CR 177190 P6 - Optimierung Benutzerfreundlichkeit Teil 1",
+      "name": "Complex Task Feature",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2016-03-17 17:13:37.437",
-        "name": "P6 - Performance & Usability enhancements - V16.5",
+        "name": "Complex Analysis Project",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -360,14 +343,14 @@
     },
     {
       "id": "2016-04-29 07:30:55.516",
-      "name": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
+      "name": "Usability Improvements",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2016-03-17 17:13:37.437",
-        "name": "P6 - Performance & Usability enhancements - V16.5",
+        "name": "Improvements 2016",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -405,14 +388,14 @@
     },
     {
       "id": "2016-04-29 07:32:28.559",
-      "name": "CR 179172 P6 - Automatische Taskanalge Teil 1",
+      "name": "Global Extensions & Features ",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2016-03-17 17:16:12.808",
-        "name": "P6 - Ticketing - HP Demand interface - V16.5",
+        "name": "Big Project 2 2016",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -450,14 +433,14 @@
     },
     {
       "id": "2016-05-01 14:48:56.086",
-      "name": "CR 179172 P6 - Automatische Taskanlage Teil 1",
+      "name": "Frontend Bugfixing",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2016-03-17 17:13:37.437",
-        "name": "P6 - Performance & Usability enhancements - V16.5",
+        "name": "Development Project",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -495,14 +478,14 @@
     },
     {
       "id": "2016-05-01 14:49:40.546",
-      "name": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
+      "name": "Backend Validations of modern Applications",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2016-03-17 17:13:37.437",
-        "name": "P6 - Performance & Usability enhancements - V16.5",
+        "name": "2016 Development Projects",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -540,14 +523,14 @@
     },
     {
       "id": "2016-06-01 11:08:57.821",
-      "name": "CR 181470 Coresearch Implementierung",
+      "name": "DTG Application Analysis",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-11-25 12:56:42.878",
-        "name": "AMOS Austria Internal",
+        "name": "Internal Stuff",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -585,14 +568,14 @@
     },
     {
       "id": "2016-06-07 09:36:15.601",
-      "name": "FSC Reporting",
+      "name": "Reporting Features",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-09-24 14:16:56.0974",
-        "name": "Y6 - GUI and Business Logic V16.5",
+        "name": "GUI Enhancements of 2015",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -630,14 +613,14 @@
     },
     {
       "id": "2016-06-14 15:38:35.733",
-      "name": "Load Test FCS",
+      "name": "Load Tests",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-09-24 14:16:56.0974",
-        "name": "Y6 - GUI and Business Logic V16.5",
+        "name": "Web & Mobile Apllications",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -675,14 +658,14 @@
     },
     {
       "id": "2016-06-27 13:23:19.369",
-      "name": "CR 182631 Logging - Bereitstellung des Elastic stacks und anzapfen von Datenquellen",
+      "name": "Database Queries on Complex Basis with Backend Improvements",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-09-24 12:22:41.7558",
-        "name": "W6 - Technical framework for web applications - v16.5",
+        "name": "Technical Framework 2014",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -720,14 +703,14 @@
     },
     {
       "id": "2016-07-28 12:34:08.268",
-      "name": "FCS Reporting 2",
+      "name": "ABC Reporting",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-09-24 14:16:56.0974",
-        "name": "Y6 - GUI and Business Logic V16.5",
+        "name": "GUI and Business Logic ",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -765,14 +748,14 @@
     },
     {
       "id": "2016-07-31 16:26:02.822",
-      "name": "CR 184808 Logging - Stabilisierung des elastic stacks und anzapfen von Datenquellen",
+      "name": "Production Test 3",
       "state": {
         "name": "New",
         "value": "N"
       },
       "project": {
         "id": "2015-09-24 12:24:21.7558",
-        "name": "W6 - Transformation web application - v16.5",
+        "name": " Transformation Mobile Application 7856",
         "state": {
           "name": "In Arbeit",
           "value": "I"

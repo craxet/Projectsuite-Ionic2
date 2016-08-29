@@ -4,7 +4,7 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
         <ion-card-header>Booking Date</ion-card-header>
         <ion-list>
             <ion-item no-border-bottom>
@@ -13,15 +13,15 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Booking Date</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
-            {{booking.date | amDateFormat:"DD.MM.YYYY"}}
+            <div>{{booking.date | amDateFormat:"DD.MM.YYYY"}}</div>
         </ion-item>
     </ion-list>
 
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
         <ion-card-header>Duration</ion-card-header>
         <ion-list>
             <ion-item>
@@ -30,7 +30,7 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Duration</ion-list-header>
         <ion-item>
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
@@ -38,7 +38,7 @@
         </ion-item>
     </ion-list>
 
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
         <ion-card-header>Task</ion-card-header>
         <ion-list>
             <ion-item text-wrap>
@@ -46,14 +46,14 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Task</ion-list-header>
         <ion-item text-wrap>
             {{booking.taskName}}
         </ion-item>
     </ion-list>
 
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
         <ion-card-header>Category</ion-card-header>
         <ion-list>
             <ion-item text-wrap>
@@ -61,14 +61,14 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Category</ion-list-header>
         <ion-item text-wrap>
             {{booking.category.name}}
         </ion-item>
     </ion-list>
 
-    <ion-card>
+    <ion-card showWhen="">
         <ion-card-header>Project</ion-card-header>
         <ion-list>
             <ion-item text-wrap>
@@ -76,14 +76,14 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Project</ion-list-header>
         <ion-item text-wrap>
             {{booking.projectName}}
         </ion-item>
     </ion-list>
 
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
         <ion-card-header>Activity</ion-card-header>
         <ion-list>
             <ion-item text-wrap>
@@ -91,14 +91,14 @@
             </ion-item>
         </ion-list>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-list-header>Activity</ion-list-header>
         <ion-item text-wrap>
             {{booking.activity}}
         </ion-item>
     </ion-list>
 
-    <ion-card showWhen="android">
+    <ion-card showWhen="">
             <ion-item>
                 <ion-label>{{booking.booked ? 'Booked': 'Not Booked'}}</ion-label>
                 <div item-right>
@@ -106,7 +106,7 @@
                 </div>
             </ion-item>
     </ion-card>
-    <ion-list showWhen="ios">
+    <ion-list showWhen="ios,android">
         <ion-item>
             <ion-label>{{booking.booked ? 'Booked': 'Not Booked'}}</ion-label>
             <div item-right>

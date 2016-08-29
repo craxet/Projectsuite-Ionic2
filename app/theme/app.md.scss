@@ -21,6 +21,21 @@
 // --------------------------------------------------
 // CSS that should only apply to the Material Design app
 
+.booked{
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  background-color: $booked-working-step;
+}
+
+.not-booked{
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #7f7f7f;
+}
+
+
 // needed for tabs in task selection
 .toolbar {
   padding-bottom: 0;
@@ -62,11 +77,22 @@ ion-card ion-card-header{
 }
 
 //last item in list without border
-ion-list > .item:last-child{
+/*ion-list > .item:last-child{
   border-bottom: none;
-}
+}*/
 
 
 ion-card ion-list ion-icon{
   color: $primary;
+}
+
+//background of ion-content
+ion-content{
+  //background-color: $content-ios-outer-background;
+  background-color: #f5f5f5;
+}
+
+.label-placeholder {
+  font-size: 1.6rem !important;
+  color: #7f7f7f;
 }

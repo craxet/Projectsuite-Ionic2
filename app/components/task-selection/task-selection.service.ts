@@ -24,7 +24,7 @@ export class TaskSelectionService {
                 case TaskGroup.GLOBAL_TASKS:
                     return [];
                 case TaskGroup.TEAM_TASKS:
-                    return [];
+                    return _.takeRight(body, 6);
             }
         }).catch(error => {
             console.log('service', error);
