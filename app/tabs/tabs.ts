@@ -3,7 +3,7 @@ import {NavParams} from 'ionic-angular';
 
 import {MyTimePage} from '../pages/my-time/my-time';
 import {SummaryPage} from '../pages/summary/summary';
-
+import {SettingsPage} from '../pages/settings/settings';
 @Component({
     templateUrl: 'build/tabs/tabs.html'
 })
@@ -11,6 +11,7 @@ import {SummaryPage} from '../pages/summary/summary';
 export class TabsPage {
     myTimeRoot: any = MyTimePage;
     summaryRoot: any = SummaryPage;
+    settingsRoot: any = SettingsPage;
     mySelectedIndex: number = 0;
 
     constructor(navParams: NavParams) {

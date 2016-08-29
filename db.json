@@ -1,76 +1,89 @@
 {
   "summaryEntries": [
     {
-      "id": "2016-08-23 18:18:41.452",
-      "date": 1471903200000,
-      "taskName": "CR 123461 This is an API test",
-      "projectName": "Allgemeine Tätigkeiten",
+      "id": "2016-08-29T16:13:40.501Z",
+      "date": 1472421600000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
       "tenant": "A",
       "duration": 0.25,
       "durationType": 1,
       "category": {
-        "name": "Doppelwartung",
-        "value": "O"
+        "name": "Analysis Design",
+        "value": "B"
       },
-      "activity": "dsfsdfsdf",
+      "activity": "Testing improvements",
       "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 15:16:00.235",
-      "number": 31353
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
     },
     {
-      "id": "2016-08-23 17:35:25.755",
-      "date": 1471903200000,
-      "taskName": "CR 123461 This is an API test",
-      "projectName": "Allgemeine Tätigkeiten",
+      "id": "2016-08-29T16:14:04.859Z",
+      "date": 1472421600000,
+      "taskName": "Load Tests",
+      "projectName": "Web & Mobile Apllications",
       "tenant": "A",
-      "duration": 0.25,
+      "duration": 1.5,
       "durationType": 1,
       "category": {
-        "name": "Consulting",
-        "value": "I"
+        "name": "Quick Test",
+        "value": "C"
       },
-      "activity": "sadasdad",
+      "activity": "best feature",
       "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 15:16:00.235",
-      "number": 31353
+      "task": "2016-06-14 15:38:35.733",
+      "number": 1234
     },
     {
-      "id": "2016-08-23 17:34:59.02",
-      "date": 1471903200000,
-      "taskName": "CR 123457 Test123",
-      "projectName": "Allgemeine Tätigkeiten",
+      "id": "2016-08-29T16:14:32.089Z",
+      "date": 1472335200000,
+      "taskName": "Frontend Bugfixing",
+      "projectName": "Development Project",
       "tenant": "A",
-      "duration": 0.25,
+      "duration": 3,
       "durationType": 1,
       "category": {
-        "name": "Feiertag",
-        "value": "F"
+        "name": "Complex Analyse",
+        "value": "A"
       },
-      "activity": "dsfsdfsdfsdf",
+      "activity": "Bug fixing ",
       "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 14:48:23.528",
-      "number": 31351
+      "task": "2016-05-01 14:48:56.086",
+      "number": 1234
     },
     {
-      "id": "2016-08-16 16:57:08.295",
-      "date": 1471298400000,
-      "taskName": "CR 123456 Test123",
-      "projectName": "Allgemeine Tätigkeiten",
+      "id": "2016-08-29T16:15:08.130Z",
+      "date": 1472162400000,
+      "taskName": "Backend Validations of modern Applications",
+      "projectName": "2016 Development Projects",
       "tenant": "A",
-      "duration": 0.25,
+      "duration": 1.5,
       "durationType": 1,
       "category": {
-        "name": "Doppelwartung",
-        "value": "O"
+        "name": "Analysis Design",
+        "value": "B"
       },
-      "activity": "sdfsdfdsf",
+      "activity": "Backend validations ",
       "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 14:46:23.096",
-      "number": 31350
+      "task": "2016-05-01 14:49:40.546",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:15:39.247Z",
+      "date": 1472162400000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 2,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "very complex issues",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
     }
   ],
   "taskAssigments": [
@@ -250,6 +263,91 @@
         "value": "C"
       },
       "activity": "modern applications",
+      "booked": false,
+      "task": "2016-05-01 14:49:40.546",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:27:07.160Z",
+      "date": 1468965600000,
+      "taskName": "ABC Reporting",
+      "projectName": "GUI and Business Logic ",
+      "tenant": "A",
+      "duration": 7.75,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "abc issues, done",
+      "booked": false,
+      "task": "2016-07-28 12:34:08.268",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:31:16.148Z",
+      "date": 1471903200000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
+      "tenant": "A",
+      "duration": 6,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "usability components",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:32:16.950Z",
+      "date": 1468879200000,
+      "taskName": "Database Queries on Complex Basis with Backend Improvements",
+      "projectName": "Technical Framework 2014",
+      "tenant": "A",
+      "duration": 3,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "complex queries",
+      "booked": false,
+      "task": "2016-06-27 13:23:19.369",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:33:24.603Z",
+      "date": 1471557600000,
+      "taskName": "Load Tests",
+      "projectName": "Web & Mobile Apllications",
+      "tenant": "A",
+      "duration": 5.75,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "load tests prepared",
+      "booked": false,
+      "task": "2016-06-14 15:38:35.733",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:35:18.246Z",
+      "date": 1471384800000,
+      "taskName": "Backend Validations of modern Applications",
+      "projectName": "2016 Development Projects",
+      "tenant": "A",
+      "duration": 9.25,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "validations of complex applications",
       "booked": false,
       "task": "2016-05-01 14:49:40.546",
       "number": 1234
