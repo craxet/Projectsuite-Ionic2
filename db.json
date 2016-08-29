@@ -102,186 +102,10 @@
   },
   "workingSteps": [
     {
-      "id": "2016-07-19 15:53:51.641",
-      "date": 1471298400000,
-      "taskName": "My Test Task 2",
-      "projectName": "Allgemeine Tätigkeiten",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Rüstzeiten",
-        "value": "Z"
-      },
-      "activity": "big projects",
-      "booked": true,
-      "editableExpired": false,
-      "task": "2016-06-15 14:46:23.096",
-      "number": 31350
-    },
-    {
-      "id": "2016-07-19 15:54:20.068",
-      "date": 1468015200000,
-      "taskName": "CR 123461 This is an API test",
-      "projectName": "Allgemeine Tätigkeiten",
-      "tenant": "A",
-      "duration": 0.5,
-      "durationType": 1,
-      "category": {
-        "name": "Koord./Planung",
-        "value": "P"
-      },
-      "activity": "test dates 123",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 15:16:00.235",
-      "number": 31353
-    },
-    {
-      "id": "2016-07-19 15:54:08.453",
-      "date": 1467756000000,
-      "taskName": "CR 123457 Test123",
-      "projectName": "Allgemeine Tätigkeiten",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Fehlerbehebung",
-        "value": "B"
-      },
-      "activity": "test data",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 14:48:23.528",
-      "number": 31351
-    },
-    {
-      "id": "2016-06-22 15:26:05.301",
-      "date": 1466546400000,
-      "taskName": "CR 123456 Test123",
-      "projectName": "Allgemeine Tätigkeiten",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Doppelwartung",
-        "value": "O"
-      },
-      "activity": "xszsaczxczxc",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2016-06-15 14:46:23.096",
-      "number": 31350
-    },
-    {
-      "id": "2016-06-13 12:53:55.465",
-      "date": 1465768800000,
-      "taskName": "Support AZCH",
-      "projectName": "Consulting AZCH",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Doppelwartung",
-        "value": "O"
-      },
-      "activity": "dfgdfgdfdfg",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2012-10-04 10:01:17.8453",
-      "number": 18089
-    },
-    {
-      "id": "2016-06-13 12:52:43.935",
-      "date": 1465768800000,
-      "taskName": "P6 - ProjectSuite - Stabilisierung",
-      "projectName": "T6 - Column oriented database and In-memory technology-V16.0",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Rüstzeiten",
-        "value": "Z"
-      },
-      "activity": "sdfsdfsdf",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2015-12-17 15:49:45.717",
-      "number": 30983
-    },
-    {
-      "id": "2016-06-13 12:52:26.563",
-      "date": 1465768800000,
-      "taskName": "P6 - ProjectSuite - Stabilisierung",
-      "projectName": "T6 - Column oriented database and In-memory technology-V16.0",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Doppelwartung",
-        "value": "O"
-      },
-      "activity": "fdgdfg",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2015-12-17 15:49:45.717",
-      "number": 30983
-    },
-    {
-      "id": "2016-06-10 13:06:36.913",
-      "date": 1465509600000,
-      "taskName": "P6 - ProjectSuite - Stabilisierung",
-      "projectName": "T6 - Column oriented database and In-memory technology-V16.0",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Fehlerbehebung",
-        "value": "B"
-      },
-      "activity": "",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2015-12-17 15:49:45.717",
-      "number": 30983
-    },
-    {
-      "id": "2016-06-07 16:01:43.529",
-      "date": 1465250400000,
-      "taskName": "Stand up meetings C/S",
-      "projectName": "Cross-Cutting project management",
-      "tenant": "A",
-      "duration": 20,
-      "durationType": 1,
-      "category": {
-        "name": "Doppelwartung",
-        "value": "O"
-      },
-      "activity": "teste",
-      "booked": false,
-      "editableExpired": false,
-      "task": "2015-10-13 14:59:17.2478",
-      "number": 30159
-    },
-    {
-      "date": 1472037313628,
-      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": "B",
-      "activity": "bghjyghjgfhjghj",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234,
-      "id": "e6639189-0c6d-4285-a248-81c49127fcaf"
-    },
-    {
-      "id": "2016-08-25T15:40:03.216Z",
-      "date": 1472037676552,
-      "taskName": "CR 179163 P6 - Optimierung Benutzerfreundlichkeit Teil 2",
-      "projectName": "P6 - Performance & Usability enhancements - V16.5",
+      "id": "2016-08-29T16:13:40.501Z",
+      "date": 1472421600000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
       "tenant": "A",
       "duration": 0.25,
       "durationType": 1,
@@ -289,9 +113,145 @@
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": "sdfsdfsdfsdf UPDATED ",
+      "activity": "Testing improvements",
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:14:04.859Z",
+      "date": 1472421600000,
+      "taskName": "Load Tests",
+      "projectName": "Web & Mobile Apllications",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "best feature",
+      "booked": false,
+      "task": "2016-06-14 15:38:35.733",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:14:32.089Z",
+      "date": 1472335200000,
+      "taskName": "Frontend Bugfixing",
+      "projectName": "Development Project",
+      "tenant": "A",
+      "duration": 3,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "Bug fixing ",
+      "booked": false,
+      "task": "2016-05-01 14:48:56.086",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:15:08.130Z",
+      "date": 1472162400000,
+      "taskName": "Backend Validations of modern Applications",
+      "projectName": "2016 Development Projects",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "Backend validations ",
+      "booked": false,
+      "task": "2016-05-01 14:49:40.546",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:15:39.247Z",
+      "date": 1472162400000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 2,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "very complex issues",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:16:14.559Z",
+      "date": 1472162400000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
+      "tenant": "A",
+      "duration": 7,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "frontend improvements",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:16:52.251Z",
+      "date": 1472076000000,
+      "taskName": "ABC Reporting",
+      "projectName": "GUI and Business Logic ",
+      "tenant": "A",
+      "duration": "0.50",
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "reporting changes",
+      "booked": false,
+      "task": "2016-07-28 12:34:08.268",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:19:04.499Z",
+      "date": 1469570400000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "global extensions",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-08-29T16:20:56.646Z",
+      "date": 1469570400000,
+      "taskName": "Backend Validations of modern Applications",
+      "projectName": "2016 Development Projects",
+      "tenant": "A",
+      "duration": 1,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "modern applications",
+      "booked": false,
+      "task": "2016-05-01 14:49:40.546",
       "number": 1234
     }
   ],

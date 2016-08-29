@@ -66,9 +66,11 @@ export class MyTimeService {
 
     createWorkingStep(newWorkingStep) {
         //TODO taskId property was renamed to task because of json-server
+        let temp = moment(newWorkingStep.bookingDate);
+        let date = moment({day: temp.date(), month: temp.month(), year: temp.year()});
         let req = {
             id: moment().toISOString(),
-            date: moment(newWorkingStep.bookingDate).toDate().getTime(),
+            date: date.toDate().getTime(),
             taskName: newWorkingStep.task.name,
             projectName: newWorkingStep.task.project.name,
             tenant: 'A',
