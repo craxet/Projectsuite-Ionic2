@@ -115,7 +115,7 @@ export class WorkingStep implements OnInit {
                 loader.onDidDismiss(data=> {
                     this.viewCtrl.dismiss(data);
                 });
-                this.myTimeService.createWorkingStep(this.workingStep).subscribe(data=> {
+                this.myTimeService.createWorkingStep(this.workingStep).subscribe(data => {
                     loader.dismiss(data);
                 }, error=> {
                     console.log(error);

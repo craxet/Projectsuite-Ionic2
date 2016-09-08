@@ -17,11 +17,12 @@ export class MyTimeService {
     constructor(private http: Http) {
     }
 
+
     getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
         //TODO temporary without observable
         return this.http.get('http://localhost:3000/workingSteps').map(res => {
-            let query = _.chain(res.json()).filter(function (item) {
+            let query = _.chain(res.json()).filter((item)=> {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {
                     return dateQuery && item.booked === false;
@@ -31,12 +32,12 @@ export class MyTimeService {
             }).groupBy('date').value();
             let list = [];
             let totalSum = 0;
-            _.forIn(query, function (value, key) {
+            _.forIn(query, (value, key)=> {
                 let sumOfDuration = _.sumBy(value, 'duration');
                 totalSum += sumOfDuration;
                 list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
-            const firstLast = list.length === 0? null: {
+            const firstLast = list.length === 0 ? null : {
                 first: moment(parseInt(_.minBy(list, 'date').date)),
                 last: moment(parseInt(_.maxBy(list, 'date').date))
             }
@@ -74,14 +75,14 @@ export class MyTimeService {
             taskName: newWorkingStep.task.name,
             projectName: newWorkingStep.task.project.name,
             tenant: 'A',
-            duration: newWorkingStep.duration,
+            duration: parseFloat(newWorkingStep.duration),
             durationType: 1,
             category: newWorkingStep.taskCategory,
             activity: newWorkingStep.activity,
             booked: false,
             task: newWorkingStep.task.id,
-            number: '1234'
-        }
+            number: 1234
+        };
         return this.http.post('http://localhost:3000/workingSteps/', req).map(()=> {
             return req;
         }).catch(error => {

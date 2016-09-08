@@ -15,6 +15,8 @@ import {BookingDetail} from './booking-detail/booking-detail';
 
 import {CalendarView} from '../../components/calendar-view/calendar-view';
 
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
     templateUrl: 'build/pages/my-time/my-time.html',
@@ -32,10 +34,9 @@ export class MyTimePage {
     inclBooked: boolean = false;
     tenant: string = null;
     memberId: string = null;
-    selectedDateClass: boolean = false;
     areWorkingStepsLoading: boolean = false;
 
-    constructor(private nav: NavController,private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
+    constructor(private nav: NavController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
     }
 
     gotToWorkingStepDetail(step) {
@@ -49,9 +50,41 @@ export class MyTimePage {
                 //TODO create function that add created working step to array on right position;
                 // this.workingSteps.push(data);
                 this.getWorkingSteps();
+                console.log(data);
+                console.log('modified',this.recomputeWorkingSteps(data, this.workingSteps));
             }
         });
         modal.present();
+    }
+
+    recomputeWorkingSteps(workingStep, workingSteps) {
+        console.log('all',workingSteps);
+        let all = [];
+        //ungroup all working steps
+        workingSteps.forEach((ws)=>{
+            all.push(ws.values);
+        });
+        //add new working into list
+        all.push(workingStep);
+        //group working steps by date
+       /* let grouped = _.groupBy('date');
+
+        let list = [];
+        let totalSum = 0;
+        _.forIn(grouped, (value, key)=> {
+            let sumOfDuration = _.sumBy(value, 'duration');
+            totalSum += sumOfDuration;
+            list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
+        });
+        const firstLast = list.length === 0 ? null : {
+            first: moment(parseInt(_.minBy(list, 'date').date)),
+            last: moment(parseInt(_.maxBy(list, 'date').date))
+        }
+        return {
+            list: list,
+            totalSum: totalSum,
+            firstLast: firstLast
+        };*/
     }
 
     openMoreModal() {
@@ -71,7 +104,7 @@ export class MyTimePage {
         });
     }
 
-    callGetWorkingSteps(selectedDate){
+    callGetWorkingSteps(selectedDate) {
         this.selectedDate = selectedDate;
         this.getWorkingSteps();
     }
