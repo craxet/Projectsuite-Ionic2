@@ -402,23 +402,6 @@
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234
-    },
-    {
-      "id": "2016-09-09T08:33:58.273Z",
-      "date": 1473112800000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 3,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": 1345648887987,
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
     }
   ],
   "tasks": [

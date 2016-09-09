@@ -12,12 +12,12 @@ export class WorkingStepService {
     }
 
     getTaskCategoriesAndAssigments(task: Object, date: string) {
-        return  Observable.forkJoin(this.http.get('http://localhost:3000/taskCategories').map(res => {
+        return  Observable.forkJoin(this.http.get('/api/taskCategories').map(res => {
             return res.json();
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
-        }), this.http.get('http://localhost:3000/taskAssigments').map(res => {
+        }), this.http.get('/api/taskAssigments').map(res => {
             return res.json();
         }).catch(error => {
             console.log('service', error);

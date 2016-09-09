@@ -14,7 +14,7 @@ export class TaskSelectionService {
     }
 
     getTasksByGroup(date: Moment, taskGroup: TaskGroup) {
-        return this.http.get('http://localhost:3000/tasks').map(res => {
+        return this.http.get('/api/tasks').map(res => {
             let body = res.json();
             switch (taskGroup) {
                 case TaskGroup.MY_TASKS:
@@ -33,7 +33,7 @@ export class TaskSelectionService {
     }
 
     findTaskById(id: string) {
-        return this.http.get('http://localhost:3000/tasks/' + id).map(res => {
+        return this.http.get('/api/tasks/' + id).map(res => {
             return res.json();
         }).catch(error => {
             console.log('service', error);

@@ -37,10 +37,10 @@ export class MyTimeService {
         });
         //add new working into list
         all.push(workingStep);
-      return this.packWorkingStepsToFormat(all);
+        return this.packWorkingStepsToFormat(all);
     }
 
-    packWorkingStepsToFormat(workingSteps){
+    packWorkingStepsToFormat(workingSteps) {
         let list = [];
         let totalSum = 0;
         //group working steps by date
@@ -64,8 +64,8 @@ export class MyTimeService {
     getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
         //TODO temporary without observable
-        return this.http.get('http://localhost:3000/workingSteps').map(res => {
-            let query = _.filter(res.json(),(item)=> {
+        return this.http.get('/api/workingSteps').map(res => {
+            let query = _.filter(res.json(),(item: any) => {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {
                     return dateQuery && item.booked === false;
@@ -81,7 +81,7 @@ export class MyTimeService {
     }
 
     deleteWorkingStep(workingStep) {
-        return this.http.delete('http://localhost:3000/workingSteps/' + workingStep.id).map(() => {
+        return this.http.delete('/api/workingSteps/' + workingStep.id).map(() => {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
@@ -111,7 +111,7 @@ export class MyTimeService {
             task: newWorkingStep.task.id,
             number: 1234
         };
-        return this.http.post('http://localhost:3000/workingSteps/', req).map(()=> {
+        return this.http.post('/api/workingSteps/', req).map(()=> {
             return req;
         }).catch(error => {
             console.log('service', error);
