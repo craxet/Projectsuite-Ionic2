@@ -15,10 +15,24 @@ export class MyTimeService {
     constructor(private http: Http) {
     }
 
-    recomputeWorkingSteps(workingStep, workingSteps) {
+    deleteWorkingStepFromList(workingStep, workingSteps) {
+        workingSteps.forEach((item, index, array)=> {
+            if (item.date === workingStep.date) {
+                item.values.splice(item.values.findIndex((el)=> {
+                    return el.id === workingStep.id;
+                }), 1);
+                if (item.values.length === 0) {
+                    array.splice(index, 1);
+                }
+            }
+        });
+    }
+
+
+    addWorkingStepToList(workingStep, workingSteps) {
         let all = [];
         //ungroup all working steps
-        _.forEach(workingSteps, (ws)=> {
+        workingSteps.forEach(workingSteps, (ws)=> {
             all = all.concat(ws.values);
         });
         //add new working into list

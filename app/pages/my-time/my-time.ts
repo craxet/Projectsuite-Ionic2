@@ -47,7 +47,7 @@ export class MyTimePage {
         let modal = this.modalCtrl.create(WorkingStep);
         modal.onDidDismiss((data)=> {
             if (data) {
-                const recomputed = this.myTimeService.recomputeWorkingSteps(data, this.workingSteps);
+                const recomputed = this.myTimeService.addWorkingStepToList(data, this.workingSteps);
                 this.workingSteps = recomputed.list;
                 this.totalSumOfWorkingSteps = recomputed.totalSum;
                 this.firstLastDateOfWorkingSteps = recomputed.firstLast;
@@ -113,7 +113,7 @@ export class MyTimePage {
                     handler: ()=> {
                         loader.present();
                         this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
-                            this.deleteWorkingStepLocally(workingStep);
+                            this.myTimeService.deleteWorkingStepFromList(workingStep,this.workingSteps);
                             loader.dismiss();
                         }, error=> {
                             loader.dismiss();
@@ -136,18 +136,5 @@ export class MyTimePage {
             }
         });
         modal.present();
-    }
-
-    private deleteWorkingStepLocally(workingStep) {
-        this.workingSteps.forEach((item, index, array)=> {
-            if (item.date === workingStep.date) {
-                item.values.splice(item.values.findIndex((el)=> {
-                    return el.id === workingStep.id;
-                }), 1);
-                if (item.values.length === 0) {
-                    array.splice(index, 1);
-                }
-            }
-        });
     }
 }
