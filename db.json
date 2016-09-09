@@ -353,10 +353,44 @@
       "number": 1234
     },
     {
-      "id": "2016-09-08T15:53:42.270Z",
-      "date": 1473285600000,
+      "id": "2016-09-09T07:49:58.303Z",
+      "date": 1473372000000,
       "taskName": "Complex Task Feature",
       "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "fsdfsdf",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-09T08:02:33.039Z",
+      "date": 1473199200000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-09T08:24:07.669Z",
+      "date": 1473372000000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
       "tenant": "A",
       "duration": 0.25,
       "durationType": 1,
@@ -364,24 +398,24 @@
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": 1234564654,
+      "activity": "sadasdasd",
       "booked": false,
-      "task": "2016-03-21 14:01:28.463",
+      "task": "2016-04-29 07:30:55.516",
       "number": 1234
     },
     {
-      "id": "2016-09-08T15:56:17.962Z",
-      "date": 1473285600000,
+      "id": "2016-09-09T08:33:58.273Z",
+      "date": 1473112800000,
       "taskName": "Complex Task Feature",
       "projectName": "Complex Analysis Project",
       "tenant": "A",
       "duration": 3,
       "durationType": 1,
       "category": {
-        "name": "Quick Test",
-        "value": "C"
+        "name": "Analysis Design",
+        "value": "B"
       },
-      "activity": "dsgfsdfsdf",
+      "activity": 1345648887987,
       "booked": false,
       "task": "2016-03-21 14:01:28.463",
       "number": 1234

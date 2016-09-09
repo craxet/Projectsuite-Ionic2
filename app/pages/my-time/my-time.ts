@@ -47,44 +47,13 @@ export class MyTimePage {
         let modal = this.modalCtrl.create(WorkingStep);
         modal.onDidDismiss((data)=> {
             if (data) {
-                //TODO create function that add created working step to array on right position;
-                // this.workingSteps.push(data);
-                this.getWorkingSteps();
-                console.log(data);
-                console.log('modified',this.recomputeWorkingSteps(data, this.workingSteps));
+                const recomputed = this.myTimeService.recomputeWorkingSteps(data, this.workingSteps);
+                this.workingSteps = recomputed.list;
+                this.totalSumOfWorkingSteps = recomputed.totalSum;
+                this.firstLastDateOfWorkingSteps = recomputed.firstLast;
             }
         });
         modal.present();
-    }
-
-    recomputeWorkingSteps(workingStep, workingSteps) {
-        console.log('all',workingSteps);
-        let all = [];
-        //ungroup all working steps
-        workingSteps.forEach((ws)=>{
-            all.push(ws.values);
-        });
-        //add new working into list
-        all.push(workingStep);
-        //group working steps by date
-       /* let grouped = _.groupBy('date');
-
-        let list = [];
-        let totalSum = 0;
-        _.forIn(grouped, (value, key)=> {
-            let sumOfDuration = _.sumBy(value, 'duration');
-            totalSum += sumOfDuration;
-            list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
-        });
-        const firstLast = list.length === 0 ? null : {
-            first: moment(parseInt(_.minBy(list, 'date').date)),
-            last: moment(parseInt(_.maxBy(list, 'date').date))
-        }
-        return {
-            list: list,
-            totalSum: totalSum,
-            firstLast: firstLast
-        };*/
     }
 
     openMoreModal() {

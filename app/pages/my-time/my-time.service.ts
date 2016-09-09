@@ -12,40 +12,54 @@ import {WorkingStepsData} from './working-steps-test-data';
 @Injectable()
 export class MyTimeService {
 
-    workingSteps = WorkingStepsData;
-
     constructor(private http: Http) {
     }
 
+    recomputeWorkingSteps(workingStep, workingSteps) {
+        let all = [];
+        //ungroup all working steps
+        _.forEach(workingSteps, (ws)=> {
+            all = all.concat(ws.values);
+        });
+        //add new working into list
+        all.push(workingStep);
+      return this.packWorkingStepsToFormat(all);
+    }
+
+    packWorkingStepsToFormat(workingSteps){
+        let list = [];
+        let totalSum = 0;
+        //group working steps by date
+        const grouped = _.groupBy(workingSteps, 'date');
+        _.forIn(grouped, (value, key)=> {
+            let sumOfDuration = _.sumBy(value, 'duration');
+            totalSum += sumOfDuration;
+            list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
+        });
+        const firstLast = list.length === 0 ? null : {
+            first: moment(parseInt(_.minBy(list, 'date').date)),
+            last: moment(parseInt(_.maxBy(list, 'date').date))
+        }
+        return {
+            list: list,
+            totalSum: totalSum,
+            firstLast: firstLast
+        }
+    }
 
     getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
         //TODO temporary without observable
         return this.http.get('http://localhost:3000/workingSteps').map(res => {
-            let query = _.chain(res.json()).filter((item)=> {
+            let query = _.filter(res.json(),(item)=> {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {
                     return dateQuery && item.booked === false;
                 } else {
                     return dateQuery;
                 }
-            }).groupBy('date').value();
-            let list = [];
-            let totalSum = 0;
-            _.forIn(query, (value, key)=> {
-                let sumOfDuration = _.sumBy(value, 'duration');
-                totalSum += sumOfDuration;
-                list.push({date: parseInt(key), sumOfDuration: sumOfDuration, values: value});
             });
-            const firstLast = list.length === 0 ? null : {
-                first: moment(parseInt(_.minBy(list, 'date').date)),
-                last: moment(parseInt(_.maxBy(list, 'date').date))
-            }
-            return {
-                list: list,
-                totalSum: totalSum,
-                firstLast: firstLast
-            };
+            return this.packWorkingStepsToFormat(query);
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
