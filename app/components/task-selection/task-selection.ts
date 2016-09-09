@@ -1,4 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {
+    Component, OnInit, trigger,
+    state,
+    style,
+    animate,
+    transition
+} from '@angular/core';
 import {ViewController, AlertController, NavParams, LoadingController, Refresher} from 'ionic-angular';
 import {DateFormatPipe} from 'angular2-moment';
 import * as moment from 'moment';
@@ -9,7 +15,19 @@ import {TaskGroup} from '../../enums/enums';
 @Component({
     templateUrl: 'build/components/task-selection/task-selection.html',
     providers: [TaskSelectionService],
-    pipes: [DateFormatPipe]
+    pipes: [DateFormatPipe],
+    animations: [
+        trigger('flyInOut', [
+            state('in', style({transform: 'translateX(1%)'})),
+            transition('void => *', [
+                style({transform: 'translateX(-100%)'}),
+                animate(100)
+            ]),
+            transition('* => void', [
+                animate(100, style({transform: 'translateX(100%)'}))
+            ])
+        ])
+    ]
 })
 export class TaskSelection implements OnInit {
 

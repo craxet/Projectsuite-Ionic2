@@ -387,7 +387,7 @@
       "number": 1234
     },
     {
-      "id": "2016-09-09T08:24:07.669Z",
+      "id": "2016-09-09T12:53:13.286Z",
       "date": 1473372000000,
       "taskName": "Usability Improvements",
       "projectName": "Improvements 2016",
@@ -398,7 +398,24 @@
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": "sadasdasd",
+      "activity": "",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-09T12:55:48.950Z",
+      "date": 1473372000000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "",
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234

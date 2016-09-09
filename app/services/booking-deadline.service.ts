@@ -12,7 +12,7 @@ export class BookingDeadlineService {
     }
 
     getBookingDeadline() {
-        return this.http.get('http://localhost:3000/bookingDeadline').map(res => {
+        return this.http.get('/api/bookingDeadline').map(res => {
             return {date: moment(res.json().date).add(1, 'day')};
         }).catch(error => {
             console.log('service', error);

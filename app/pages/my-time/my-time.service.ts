@@ -32,7 +32,7 @@ export class MyTimeService {
     addWorkingStepToList(workingStep, workingSteps) {
         let all = [];
         //ungroup all working steps
-        workingSteps.forEach(workingSteps, (ws)=> {
+        workingSteps.forEach(ws=> {
             all = all.concat(ws.values);
         });
         //add new working into list
@@ -65,7 +65,7 @@ export class MyTimeService {
         // allTenants: false
         //TODO temporary without observable
         return this.http.get('/api/workingSteps').map(res => {
-            let query = _.filter(res.json(),(item: any) => {
+            let query = _.filter(res.json(), (item: any) => {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {
                     return dateQuery && item.booked === false;

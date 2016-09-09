@@ -1,7 +1,14 @@
 import {
-    LoadingController, ModalController, AlertController, Refresher, NavController
+    LoadingController, ModalController, AlertController, Refresher, NavController, Content
 } from 'ionic-angular';
-import {Component} from '@angular/core';
+import {
+    ViewChild,
+    Component, trigger,
+    state,
+    style,
+    animate,
+    transition
+} from '@angular/core';
 import {Moment} from 'moment';
 
 import {DateFormatPipe} from 'angular2-moment';
@@ -22,10 +29,25 @@ import * as moment from 'moment';
     templateUrl: 'build/pages/my-time/my-time.html',
     providers: [MyTimeService],
     pipes: [DateFormatPipe, DurationPipe, OrderByPipe],
-    directives: [CalendarView]
+    directives: [CalendarView],
+    animations: [
+        trigger('flyInOut', [
+            state('in', style({transform: 'translateX(0)'})),
+            state('none', style({})),
+            transition('void => in', [
+                style({transform: 'translateX(-100%)'}),
+                animate("400ms ease-in-out")
+            ]),
+            transition('in => void', [
+                animate("400ms ease-in-out", style({transform: 'translateX(100%)'}))
+            ])
+        ])
+    ]
 })
 
 export class MyTimePage {
+
+    @ViewChild(Content) content: Content;
 
     selectedDate: {from: Moment, to: Moment};
     workingSteps: Array<any> = [];
@@ -35,8 +57,11 @@ export class MyTimePage {
     tenant: string = null;
     memberId: string = null;
     areWorkingStepsLoading: boolean = false;
+    newWorkingStepId = null;
 
     constructor(private nav: NavController, private loadingController: LoadingController, private alertController: AlertController, private modalCtrl: ModalController, private myTimeService: MyTimeService) {
+        //TODO https://forum.ionicframework.com/t/ionic-2-get-scroll-position/56711/11
+        //console.log(this.content.getScrollTop());
     }
 
     gotToWorkingStepDetail(step) {
@@ -47,6 +72,7 @@ export class MyTimePage {
         let modal = this.modalCtrl.create(WorkingStep);
         modal.onDidDismiss((data)=> {
             if (data) {
+                this.newWorkingStepId = data.id;
                 const recomputed = this.myTimeService.addWorkingStepToList(data, this.workingSteps);
                 this.workingSteps = recomputed.list;
                 this.totalSumOfWorkingSteps = recomputed.totalSum;
@@ -113,7 +139,7 @@ export class MyTimePage {
                     handler: ()=> {
                         loader.present();
                         this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
-                            this.myTimeService.deleteWorkingStepFromList(workingStep,this.workingSteps);
+                            this.myTimeService.deleteWorkingStepFromList(workingStep, this.workingSteps);
                             loader.dismiss();
                         }, error=> {
                             loader.dismiss();
