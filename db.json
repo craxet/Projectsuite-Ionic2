@@ -115,91 +115,6 @@
   },
   "workingSteps": [
     {
-      "id": "2016-08-29T16:13:40.501Z",
-      "date": 1472421600000,
-      "taskName": "Usability Improvements",
-      "projectName": "Improvements 2016",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "Testing improvements",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-29T16:14:04.859Z",
-      "date": 1472421600000,
-      "taskName": "Load Tests",
-      "projectName": "Web & Mobile Apllications",
-      "tenant": "A",
-      "duration": 1.5,
-      "durationType": 1,
-      "category": {
-        "name": "Quick Test",
-        "value": "C"
-      },
-      "activity": "best feature",
-      "booked": false,
-      "task": "2016-06-14 15:38:35.733",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-29T16:14:32.089Z",
-      "date": 1472335200000,
-      "taskName": "Frontend Bugfixing",
-      "projectName": "Development Project",
-      "tenant": "A",
-      "duration": 3,
-      "durationType": 1,
-      "category": {
-        "name": "Complex Analyse",
-        "value": "A"
-      },
-      "activity": "Bug fixing ",
-      "booked": false,
-      "task": "2016-05-01 14:48:56.086",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-29T16:15:08.130Z",
-      "date": 1472162400000,
-      "taskName": "Backend Validations of modern Applications",
-      "projectName": "2016 Development Projects",
-      "tenant": "A",
-      "duration": 1.5,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "Backend validations ",
-      "booked": false,
-      "task": "2016-05-01 14:49:40.546",
-      "number": 1234
-    },
-    {
-      "id": "2016-08-29T16:15:39.247Z",
-      "date": 1472162400000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 2,
-      "durationType": 1,
-      "category": {
-        "name": "Complex Analyse",
-        "value": "A"
-      },
-      "activity": "very complex issues",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
       "id": "2016-08-29T16:16:14.559Z",
       "date": 1472162400000,
       "taskName": "Usability Improvements",
@@ -353,10 +268,27 @@
       "number": 1234
     },
     {
-      "id": "2016-09-09T07:49:58.303Z",
+      "id": "2016-09-09T16:11:21.765Z",
       "date": 1473372000000,
       "taskName": "Complex Task Feature",
       "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "sdasadasd",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-09T16:12:35.174Z",
+      "date": 1473372000000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
       "tenant": "A",
       "duration": 1.5,
       "durationType": 1,
@@ -364,58 +296,24 @@
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": "fsdfsdf",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
-      "id": "2016-09-09T08:02:33.039Z",
-      "date": 1473199200000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Quick Test",
-        "value": "C"
-      },
-      "activity": "",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
-      "id": "2016-09-09T12:53:13.286Z",
-      "date": 1473372000000,
-      "taskName": "Usability Improvements",
-      "projectName": "Improvements 2016",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "",
+      "activity": "sadsadasdsad",
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234
     },
     {
-      "id": "2016-09-09T12:55:48.950Z",
+      "id": "2016-09-09T16:13:43.452Z",
       "date": 1473372000000,
       "taskName": "Usability Improvements",
       "projectName": "Improvements 2016",
       "tenant": "A",
-      "duration": 1.5,
+      "duration": 0.75,
       "durationType": 1,
       "category": {
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": "",
+      "activity": "xzczxcxzc",
       "booked": false,
       "task": "2016-04-29 07:30:55.516",
       "number": 1234

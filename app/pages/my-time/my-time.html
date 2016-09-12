@@ -32,8 +32,7 @@
                     <strong>{{headerDate.sumOfDuration | duration}}</strong>
                 </div>
             </ion-item-divider>
-            <ion-item-sliding *ngFor="let step of headerDate.values" [attr.booked]="step.booked"
-                              @flyInOut="newWorkingStepId == step.id? 'in':'none'">
+            <ion-item-sliding *ngFor="let step of headerDate.values" [attr.booked]="step.booked">
                 <button ion-item detail-none (click)="gotToWorkingStepDetail(step)">
                     <p><strong>Task</strong></p>
                     <p>{{step.taskName}}</p>
