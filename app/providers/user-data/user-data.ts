@@ -1,11 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import {Storage, LocalStorage, Events} from 'ionic-angular';
 
 @Injectable()
 export class UserData {
 
-  constructor(private http: Http) {}
+  HAS_LOGGED_IN = 'hasLoggedIn';
+  storage = new Storage(LocalStorage);
 
+  constructor(private events: Events) {}
+
+  login(username){
+    this.events.publish('user:login');
+  }
+
+  logout(){
+    this.events.publish('user:logout');
+  }
+
+  hasLoggedIn(){
+    return false;
+  }
 }
 

@@ -1,18 +1,28 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './tabs/tabs'
-import {LoginPage} from 'pages/login/login';
 import { HTTP_PROVIDERS } from '@angular/http';
 
+import {LoginPage} from './pages/login/login';
+import {UserData} from './providers/user-data/user-data';
+
 @Component({
-    templateUrl: 'build/app.html'
+    templateUrl: 'build/app.html',
+    providers:[UserData]
+
 })
 class MyApp {
+
+    @ViewChild(Nav) nav: Nav;
+
     rootPage:any = TabsPage;
 
-    constructor(private platform:Platform) {
+    constructor(private platform:Platform, private userData: UserData) {
         this.initializeApp();
+
+        //this.userData.hasLoggedIn()
+        this.nav.setRoot(LoginPage);
     }
 
     initializeApp() {
@@ -22,6 +32,8 @@ class MyApp {
             StatusBar.styleDefault();
         });
     }
+
+
 
 }
 
