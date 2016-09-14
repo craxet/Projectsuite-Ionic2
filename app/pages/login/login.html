@@ -17,16 +17,9 @@
                                    type="password"
                                    spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
                     </ion-item>
+                    <button class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
                 </form>
             </ion-list>
         </ion-col>
     </ion-row>
-    <ion-row>
-        <ion-col>
-            <ion-list inset>
-                <button class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
-            </ion-list>
-        </ion-col>
-    </ion-row>
-
 </ion-content>
