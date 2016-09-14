@@ -1,3 +1,24 @@
 .login {
+  background-color: $white;
+}
 
+.login .logo h1{
+  font-size: 4rem;
+}
+
+.login form ion-item {
+  border-radius: 30px;
+  border: 0.01rem solid $primary !important;
+  margin-bottom: 10px;
+  background-color: transparent;
+  color: $primary;
+}
+
+.login form ion-item input::-webkit-input-placeholder {
+  color: $primary !important;
+}
+
+.login .login-button{
+  border-radius: 30px;
+  opacity: 1;
 }

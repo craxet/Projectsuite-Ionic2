@@ -1,12 +1,32 @@
-<ion-header>
+<ion-content class="login">
+    <ion-row>
+        <ion-col class="logo" text-center>
+            <h1>Projectsuite</h1>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-list no-lines inset>
+                <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
+                    <ion-item>
+                        <ion-input [(ngModel)]="credentials.username" name="username" #username="ngModel" type="text"
+                                   spellcheck="false" autocapitalize="off" placeholder="Username" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input [(ngModel)]="credentials.password" name="password" #password="ngModel"
+                                   type="password"
+                                   spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
+                    </ion-item>
+                </form>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-list inset>
+                <button class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
+            </ion-list>
+        </ion-col>
+    </ion-row>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-    <div><h1>Projectsuite</h1></div>
 </ion-content>

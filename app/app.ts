@@ -1,28 +1,26 @@
-import {Component,ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './tabs/tabs'
-import { HTTP_PROVIDERS } from '@angular/http';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 import {LoginPage} from './pages/login/login';
 import {UserData} from './providers/user-data/user-data';
 
 @Component({
     templateUrl: 'build/app.html',
-    providers:[UserData]
+    providers: [UserData]
 
 })
 class MyApp {
 
     @ViewChild(Nav) nav: Nav;
 
-    rootPage:any = TabsPage;
+    rootPage: any = TabsPage;
 
-    constructor(private platform:Platform, private userData: UserData) {
+    constructor(private platform: Platform, private userData: UserData) {
         this.initializeApp();
 
-        //this.userData.hasLoggedIn()
-        this.nav.setRoot(LoginPage);
     }
 
     initializeApp() {
@@ -33,8 +31,11 @@ class MyApp {
         });
     }
 
-
+    ngAfterViewInit() {
+        //this.userData.hasLoggedIn()
+        this.nav.setRoot(LoginPage);
+    }
 
 }
 
-ionicBootstrap(MyApp, [HTTP_PROVIDERS]);
+ionicBootstrap(MyApp,[HTTP_PROVIDERS]);
