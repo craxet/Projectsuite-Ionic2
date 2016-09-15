@@ -3,7 +3,9 @@
 }
 
 .login .logo h1{
-  font-size: 4rem;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  //font-size: 4rem;
 }
 
 .login form ion-item {
@@ -12,11 +14,19 @@
   margin-bottom: 10px;
   background-color: transparent;
   color: $primary;
+  //transform: scale(1,0.8);
+}
+
+.login form ion-item input:focus{
+  //text-indent: 70px;
 }
 
 .login form ion-item input::-webkit-input-placeholder {
   color: $primary !important;
+  //text-indent: 70px;
+  //transform: scale(1,1.2);
 }
+
 
 .login .login-button{
   border-radius: 30px;

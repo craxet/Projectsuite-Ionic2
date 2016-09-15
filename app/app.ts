@@ -16,7 +16,7 @@ class MyApp {
 
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = TabsPage;
+    rootPage: any;
 
     constructor(private platform: Platform, private userData: UserData) {
         this.initializeApp();

@@ -1,4 +1,8 @@
 {
+  "login": {
+    "username": "a1234",
+    "password": "1234"
+  },
   "summaryEntries": [
     {
       "id": "2016-08-29T16:13:40.501Z",

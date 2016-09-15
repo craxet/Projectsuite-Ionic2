@@ -1,13 +1,14 @@
-<ion-content class="login">
+<ion-content class="login" padding>
     <ion-row>
         <ion-col class="logo" text-center>
-            <h1>Projectsuite</h1>
+            <h1 @flyInBottomSlow="'in'">Projectsuite</h1>
         </ion-col>
     </ion-row>
     <ion-row>
         <ion-col>
-            <ion-list no-lines inset>
-                <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
+            <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
+                <ion-list no-lines inset @bounceInBottom="'in'">
+                    <p text-center grey *ngIf="badCredentials">Your Username or Password is incorrect.</p>
                     <ion-item>
                         <ion-input [(ngModel)]="credentials.username" name="username" #username="ngModel" type="text"
                                    spellcheck="false" autocapitalize="off" placeholder="Username" required></ion-input>
@@ -18,8 +19,8 @@
                                    spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
                     </ion-item>
                     <button class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
-                </form>
-            </ion-list>
+                </ion-list>
+            </form>
         </ion-col>
     </ion-row>
 </ion-content>
