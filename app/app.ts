@@ -34,7 +34,6 @@ class MyApp {
     ngAfterViewInit() {
         this.userData.hasLoggedIn().then(state => {
             if (state) {
-                console.log('is it Here');
                 this.nav.setRoot(TabsPage);
             } else {
                 this.nav.setRoot(LoginPage);

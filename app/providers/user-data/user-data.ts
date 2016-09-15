@@ -8,10 +8,10 @@ import 'rxjs/Rx';
 export class UserData {
 
     HAS_LOGGED_IN = 'hasLoggedIn';
-    storage = new Storage(SqlStorage);
+    storage: Storage;
 
     constructor(private http: Http, private events: Events) {
-        this.storage.set(this.HAS_LOGGED_IN, false);
+        this.storage = new Storage(SqlStorage);
     }
 
     login(credentials) {
@@ -28,7 +28,7 @@ export class UserData {
     }
 
     logout() {
-        return this.storage.set(this.HAS_LOGGED_IN,false);
+        return this.storage.set(this.HAS_LOGGED_IN, false);
         // this.events.publish('user:logout');
     }
 

@@ -21,17 +21,6 @@ import {UserData} from '../../providers/user-data/user-data';
             ])
         ]),
 
-        //For the background detail
-        trigger('flyInBottomFast', [
-            state('in', style({
-                transform: 'translate3d(0,0,0)'
-            })),
-            transition('void => *', [
-                style({transform: 'translate3d(0,2000px,0)'}),
-                animate('1000ms ease-in-out')
-            ])
-        ]),
-
         //For the login form
         trigger('bounceInBottom', [
             state('in', style({
@@ -62,6 +51,7 @@ export class LoginPage {
 
     credentials: Credentials = new Credentials();
     badCredentials = false;
+    inputTypePassword = "password";
 
     constructor(private navCtrl: NavController, private userData: UserData,private loadingController:LoadingController) {
     }
@@ -78,6 +68,14 @@ export class LoginPage {
             }, error => {
                 console.log(error);
             });
+    }
+
+    changeInputPassType(){
+        if(this.inputTypePassword == 'password'){
+            this.inputTypePassword = 'text';
+        }else{
+            this.inputTypePassword = 'password';
+        }
     }
 
 

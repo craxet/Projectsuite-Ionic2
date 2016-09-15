@@ -1,4 +1,3 @@
-
 <ion-content class="login" padding>
     <ion-row>
         <ion-col class="logo" text-center>
@@ -7,7 +6,7 @@
     </ion-row>
     <ion-row>
         <ion-col>
-            <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
+            <form #loginForm="ngForm" novalidate>
                 <ion-list no-lines inset @bounceInBottom="'in'">
                     <p text-center grey *ngIf="badCredentials">Your Username or Password is incorrect.</p>
                     <ion-item>
@@ -16,10 +15,14 @@
                     </ion-item>
                     <ion-item>
                         <ion-input [(ngModel)]="credentials.password" name="password" #password="ngModel"
-                                   type="password"
+                                   type="{{inputTypePassword}}"
                                    spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
+                        <button clear item-right (click)="changeInputPassType()">
+                            <ion-icon *ngIf="inputTypePassword == 'password'" name="eye"></ion-icon>
+                            <ion-icon *ngIf="inputTypePassword == 'text'" name="eye-off"></ion-icon>
+                        </button>
                     </ion-item>
-                    <button class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
+                    <button  (click)="onLogin(loginForm)" class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
                 </ion-list>
             </form>
         </ion-col>
