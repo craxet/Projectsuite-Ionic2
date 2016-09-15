@@ -1,13 +1,11 @@
-<ion-content class="login" padding>
-    <ion-row>
-        <ion-col class="logo" text-center>
-            <h1 @flyInBottomSlow="'in'">Projectsuite</h1>
-        </ion-col>
-    </ion-row>
+<ion-header>
+    <ion-toolbar white no-border><ion-title><span primary>Projectsuite</span></ion-title></ion-toolbar>
+</ion-header>
+<ion-content class="login">
     <ion-row>
         <ion-col>
             <form #loginForm="ngForm" novalidate>
-                <ion-list no-lines inset @bounceInBottom="'in'">
+                <ion-list inset>
                     <p text-center grey *ngIf="badCredentials">Your Username or Password is incorrect.</p>
                     <ion-item>
                         <ion-input [(ngModel)]="credentials.username" name="username" #username="ngModel" type="text"
@@ -17,12 +15,10 @@
                         <ion-input [(ngModel)]="credentials.password" name="password" #password="ngModel"
                                    type="{{inputTypePassword}}"
                                    spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
-                        <button clear item-right (click)="changeInputPassType()">
-                            <ion-icon *ngIf="inputTypePassword == 'password'" name="eye"></ion-icon>
-                            <ion-icon *ngIf="inputTypePassword == 'text'" name="eye-off"></ion-icon>
-                        </button>
                     </ion-item>
-                    <button  (click)="onLogin(loginForm)" class="login-button" type="submit" [disabled]="!loginForm.form.valid" full>Login</button>
+                    <button (click)="onLogin(loginForm)" class="login-button"
+                            [disabled]="!loginForm.form.valid" block>Login
+                    </button>
                 </ion-list>
             </form>
         </ion-col>

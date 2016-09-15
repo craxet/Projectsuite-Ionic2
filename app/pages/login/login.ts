@@ -16,8 +16,10 @@ import {UserData} from '../../providers/user-data/user-data';
                 transform: 'translate3d(0,0,0)'
             })),
             transition('void => *', [
-                style({transform: 'translate3d(0,2000px,0'}),
-                animate('2000ms ease-in-out')
+                animate('2000ms ease-in-out', keyframes([
+                    style({transform: 'translate3d(0,2000px,0)', offset: 0}),
+                    style({transform: 'translate3d(0,0,0)', offset: 1})
+                ]))
             ])
         ]),
 

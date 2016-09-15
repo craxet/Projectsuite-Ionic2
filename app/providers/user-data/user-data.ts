@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {Storage, SqlStorage, Events} from 'ionic-angular';
 import 'rxjs/Rx';
 
+import {API_ENDPOINT} from '../../constants/app-settings.ts';
+
 @Injectable()
 export class UserData {
 
@@ -15,7 +17,7 @@ export class UserData {
     }
 
     login(credentials) {
-        return this.http.get('/api/login').map(res => {
+        return this.http.get(API_ENDPOINT +'/login').map(res => {
             const storedCred = res.json();
             const hasLoggedIn = storedCred.username == credentials.username && storedCred.password == credentials.password;
             this.storage.set(this.HAS_LOGGED_IN, hasLoggedIn);
@@ -34,6 +36,9 @@ export class UserData {
 
     hasLoggedIn() {
         return this.storage.get(this.HAS_LOGGED_IN).then(value => {
+            if (typeof value === 'undefined') {
+                value = 'false';
+            }
             //You have to parse value of storage anyway you get string value not boolean value
             return JSON.parse(value);
         });

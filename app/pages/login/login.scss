@@ -2,23 +2,15 @@
   background-color: $white;
 }
 
-.login .logo h1{
-  margin-top: 70px;
-  margin-bottom: 70px;
-  //font-size: 4rem;
-}
-
-.login form ion-item {
+/*.login form ion-item {
   border-radius: 30px;
-  border: 0.01rem solid $primary !important;
+  border: 1px solid $primary !important;
   margin-bottom: 10px;
   background-color: transparent;
   color: $primary;
-  //transform: scale(1,0.8);
-}
+}*/
 
 .login form ion-item input:focus{
-  //text-indent: 70px;
 }
 
 .login form ion-item input::-webkit-input-placeholder {
@@ -29,6 +21,5 @@
 
 
 .login .login-button{
-  border-radius: 30px;
   margin-top: 30px;
 }

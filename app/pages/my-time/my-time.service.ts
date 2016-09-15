@@ -6,8 +6,7 @@ import 'rxjs/Rx';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-
-import {WorkingStepsData} from './working-steps-test-data';
+import {API_ENDPOINT} from '../../constants/app-settings.ts';
 
 @Injectable()
 export class MyTimeService {
@@ -63,8 +62,7 @@ export class MyTimeService {
 
     getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
         // allTenants: false
-        //TODO temporary without observable
-        return this.http.get('/api/workingSteps').map(res => {
+        return this.http.get(API_ENDPOINT + '/workingSteps').map(res => {
             let query = _.filter(res.json(), (item: any) => {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {
@@ -81,7 +79,7 @@ export class MyTimeService {
     }
 
     deleteWorkingStep(workingStep) {
-        return this.http.delete('/api/workingSteps/' + workingStep.id).map(() => {
+        return this.http.delete(API_ENDPOINT + '/workingSteps/' + workingStep.id).map(() => {
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);
@@ -111,7 +109,7 @@ export class MyTimeService {
             task: newWorkingStep.task.id,
             number: 1234
         };
-        return this.http.post('/api/workingSteps/', req).map(()=> {
+        return this.http.post(API_ENDPOINT + '/workingSteps/', req).map(()=> {
             return req;
         }).catch(error => {
             console.log('service', error);

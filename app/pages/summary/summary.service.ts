@@ -6,6 +6,7 @@ import 'rxjs/Rx';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {Moment} from 'moment';
+import {API_ENDPOINT} from '../../constants/app-settings.ts';
 
 @Injectable()
 export class SummaryService {
@@ -13,7 +14,7 @@ export class SummaryService {
     }
 
     getSummaryEntries(from: Moment, to: Moment, inclBooked: boolean) {
-        return this.http.get('/api/summaryEntries').map(res => {
+        return this.http.get(API_ENDPOINT + '/summaryEntries').map(res => {
             let query = _.chain(res.json()).filter(function (item) {
                 let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
                 if (!inclBooked) {

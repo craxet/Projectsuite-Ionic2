@@ -272,40 +272,6 @@
       "number": 1234
     },
     {
-      "id": "2016-09-09T16:11:21.765Z",
-      "date": 1473372000000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Complex Analyse",
-        "value": "A"
-      },
-      "activity": "sdasadasd",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
-      "id": "2016-09-09T16:12:35.174Z",
-      "date": 1473372000000,
-      "taskName": "Usability Improvements",
-      "projectName": "Improvements 2016",
-      "tenant": "A",
-      "duration": 1.5,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "sadsadasdsad",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
-    },
-    {
       "id": "2016-09-09T16:13:43.452Z",
       "date": 1473372000000,
       "taskName": "Usability Improvements",
