@@ -31,6 +31,13 @@
     </ion-list>
 
     <ion-list>
-        <button ion-team primary>Logout</button>
+        <ion-item>
+            <!--<ion-icon ios="ios-people" md="md-people" item-left primary></ion-icon>-->
+            <ion-label>About</ion-label>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <button primary (click)="onLogout()" full>Logout</button>
     </ion-list>
 </ion-content>

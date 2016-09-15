@@ -1,5 +1,5 @@
 import {Component, trigger, state, style, transition, animate, keyframes} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController,LoadingController} from 'ionic-angular';
 
 import {Credentials} from '../../models/credentials';
 import {TabsPage} from '../../tabs/tabs';
@@ -63,24 +63,21 @@ export class LoginPage {
     credentials: Credentials = new Credentials();
     badCredentials = false;
 
-    constructor(private navCtrl: NavController, private userData: UserData) {
+    constructor(private navCtrl: NavController, private userData: UserData,private loadingController:LoadingController) {
     }
 
     onLogin(form) {
-        console.log('formValid', form.valid);
-        if (form.valid) {
-            this.userData.login(this.credentials).subscribe(
-                data => {
-                    if (data) {
-                        this.badCredentials = false;
-                        this.navCtrl.push(TabsPage);
-                    } else {
-                        this.badCredentials = true;
-                    }
-                }, error => {
-                    console.log(error);
-                });
-        }
+        this.userData.login(this.credentials).subscribe(
+            data => {
+                if (data) {
+                    this.badCredentials = false;
+                    this.navCtrl.push(TabsPage);
+                } else {
+                    this.badCredentials = true;
+                }
+            }, error => {
+                console.log(error);
+            });
     }
 
 

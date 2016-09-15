@@ -34,7 +34,8 @@ export class UserData {
 
     hasLoggedIn() {
         return this.storage.get(this.HAS_LOGGED_IN).then(value => {
-            return value;
+            //You have to parse value of storage anyway you get string value not boolean value
+            return JSON.parse(value);
         });
     }
 }
