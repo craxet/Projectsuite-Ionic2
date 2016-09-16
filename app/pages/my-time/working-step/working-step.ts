@@ -22,6 +22,8 @@ enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
 }
 
+declare var CustomKeyboard:any;
+
 @Component({
     templateUrl: 'build/pages/my-time/working-step/working-step.html',
     providers: [MyTimeService, BookingDeadlineService, WorkingStepService, TaskSelectionService],

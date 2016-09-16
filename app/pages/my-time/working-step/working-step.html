@@ -29,13 +29,10 @@
                 <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
             </button>
         </ion-list-header>
-        <ion-item>
-            <ion-input type="number" min="0.1"></ion-input>
-        </ion-item>
-        <!--<button ion-item (click)="openDurationPicker()">
+        <button ion-item (click)="openDurationPicker()">
             <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
             {{workingStep.duration | duration}}
-        </button>-->
+        </button>
         <ion-item>
             <ion-segment [(ngModel)]="durationTemp" primary>
                 <ion-segment-button value="0.25" (ionSelect)="selectedDurationSegment('0.25')">

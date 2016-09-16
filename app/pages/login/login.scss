@@ -2,13 +2,18 @@
   background-color: $white;
 }
 
-/*.login form ion-item {
-  border-radius: 30px;
-  border: 1px solid $primary !important;
-  margin-bottom: 10px;
-  background-color: transparent;
-  color: $primary;
-}*/
+.login h5{
+  margin-top:0;
+  font-weight: 300;
+}
+
+.login form ion-list{
+  margin-top: 5px;
+}
+
+.login-header::after{
+  background: none;
+}
 
 .login form ion-item input:focus{
 }
