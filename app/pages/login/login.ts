@@ -1,5 +1,5 @@
 import {Component, trigger, state, style, transition, animate, keyframes} from '@angular/core';
-import {NavController,LoadingController} from 'ionic-angular';
+import {NavController, LoadingController, AlertController} from 'ionic-angular';
 
 import {Credentials} from '../../models/credentials';
 import {TabsPage} from '../../tabs/tabs';
@@ -55,12 +55,26 @@ export class LoginPage {
     badCredentials = false;
     inputTypePassword = "password";
 
-    constructor(private navCtrl: NavController, private userData: UserData,private loadingController:LoadingController) {
+    constructor(private navCtrl: NavController, private userData: UserData, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
     }
 
     onLogin(form) {
+        if (!form.valid) {
+            let alert = this.alertCtrl.create({
+                title: 'Required',
+                subTitle: 'Username and Password are required',
+                buttons: ['OK']
+            });
+            alert.present();
+            return;
+        }
+        let loader = this.loadingCtrl.create({
+            content: 'Logging In...'
+        });
+        loader.present();
         this.userData.login(this.credentials).subscribe(
             data => {
+                loader.dismiss();
                 if (data) {
                     this.badCredentials = false;
                     this.navCtrl.push(TabsPage);
@@ -68,14 +82,15 @@ export class LoginPage {
                     this.badCredentials = true;
                 }
             }, error => {
+                loader.dismiss();
                 console.log(error);
             });
     }
 
-    changeInputPassType(){
-        if(this.inputTypePassword == 'password'){
+    changeInputPassType() {
+        if (this.inputTypePassword == 'password') {
             this.inputTypePassword = 'text';
-        }else{
+        } else {
             this.inputTypePassword = 'password';
         }
     }

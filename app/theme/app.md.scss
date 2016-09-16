@@ -96,3 +96,9 @@ ion-content{
   font-size: 1.6rem !important;
   color: #7f7f7f;
 }
+
+//change color of border bottom to default color if field is invalid
+.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner {
+ border-bottom-color: $list-md-border-color;
+ box-shadow: none;
+}
