@@ -3,6 +3,7 @@ import {LoadingController, Nav} from 'ionic-angular';
 
 import {UserData} from '../../providers/user-data/user-data';
 import {LoginPage} from '../login/login';
+import {AboutPage} from '../about/about';
 
 @Component({
     templateUrl: 'build/pages/settings/settings.html',
@@ -20,4 +21,7 @@ export class SettingsPage {
         });
     }
 
+    goToAbout(){
+        this.nav.push(AboutPage);
+    }
 }
