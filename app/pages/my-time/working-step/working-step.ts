@@ -107,7 +107,6 @@ export class WorkingStep implements OnInit {
                 });
                 loader.present();
                 loader.onDidDismiss(data=> {
-                    console.log(data);
                     this.viewCtrl.dismiss(data);
                 });
                 this.myTimeService.editWorkingStep(this.workingStep).subscribe(

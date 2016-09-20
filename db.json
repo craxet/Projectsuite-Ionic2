@@ -423,6 +423,40 @@
       "booked": false,
       "task": "2016-06-14 15:38:35.733",
       "number": 1234
+    },
+    {
+      "id": "2016-09-20T19:30:05.804Z",
+      "date": 1473717600000,
+      "taskName": "DTG Application Analysis",
+      "projectName": "Internal Stuff",
+      "tenant": "A",
+      "duration": 1.75,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "backend logic",
+      "booked": false,
+      "task": "2016-06-01 11:08:57.821",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T19:35:20.822Z",
+      "date": 1473458400000,
+      "taskName": "Reporting Features",
+      "projectName": "GUI Enhancements of 2015",
+      "tenant": "A",
+      "duration": 0.8,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "time feature is completed and ready in production ",
+      "booked": false,
+      "task": "2016-06-07 09:36:15.601",
+      "number": 1234
     }
   ],
   "tasks": [
