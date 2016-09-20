@@ -96,17 +96,24 @@ export class WorkingStep implements OnInit {
         } else {
             //TODO pass taskCategory like object not like value because of json-server
             this.workingStep.taskCategory = _.find(this.taskCategories, ['value', this.workingStep.taskCategory]);
+            //if duration type is minutes convert minutes to hours
+            //TODO put it into directive
+            if(this.durationType === DurationType.MINUTES){
+                this.workingStep.duration /= 60;
+            }
             if (this.params.get('workingStep')) {
                 let loader = this.loadingCtrl.create({
                     content: 'Editing...'
                 });
                 loader.present();
                 loader.onDidDismiss(data=> {
+                    console.log(data);
                     this.viewCtrl.dismiss(data);
                 });
                 this.myTimeService.editWorkingStep(this.workingStep).subscribe(
                     data=> {
-                        loader.dismiss(data);
+                        //just response from second observable - create working step
+                        loader.dismiss(data[1]);
                     }, error=> {
                         console.log(error);
                     });

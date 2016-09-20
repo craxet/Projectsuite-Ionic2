@@ -272,23 +272,6 @@
       "number": 1234
     },
     {
-      "id": "2016-09-09T16:13:43.452Z",
-      "date": 1473372000000,
-      "taskName": "Usability Improvements",
-      "projectName": "Improvements 2016",
-      "tenant": "A",
-      "duration": 0.75,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "xzczxcxzc",
-      "booked": false,
-      "task": "2016-04-29 07:30:55.516",
-      "number": 1234
-    },
-    {
       "id": "2016-09-20T15:01:16.560Z",
       "date": 1474322400000,
       "taskName": "Complex Task Feature",
@@ -306,20 +289,139 @@
       "number": 1234
     },
     {
-      "id": "2016-09-20T15:39:14.349Z",
-      "date": 1473631200000,
+      "id": "2016-09-20T15:53:12.610Z",
+      "date": 1474322400000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 3,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "complex frontend",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T15:54:27.770Z",
+      "date": 1474322400000,
+      "taskName": "Usability Improvements",
+      "projectName": "Improvements 2016",
+      "tenant": "A",
+      "duration": 1,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "time component changed",
+      "booked": false,
+      "task": "2016-04-29 07:30:55.516",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T15:55:05.574Z",
+      "date": 1474236000000,
       "taskName": "Frontend Bugfixing",
       "projectName": "Development Project",
       "tenant": "A",
-      "duration": 2,
+      "duration": 0.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "label 'Name' fixed",
+      "booked": false,
+      "task": "2016-05-01 14:48:56.086",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T16:04:08.980Z",
+      "date": 1474322400000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 0.25,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "sdfsdfsdsdf",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T16:13:22.562Z",
+      "date": 1474149600000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 0.4,
       "durationType": 1,
       "category": {
         "name": "Quick Test",
         "value": "C"
       },
-      "activity": "dsfasfdsafasdf",
+      "activity": "create,edit task ",
       "booked": false,
-      "task": "2016-05-01 14:48:56.086",
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T16:17:20.955Z",
+      "date": 1474149600000,
+      "taskName": "Database Queries on Complex Basis with Backend Improvements",
+      "projectName": "Technical Framework 2014",
+      "tenant": "A",
+      "duration": 1.2166666666666666,
+      "durationType": 1,
+      "category": {
+        "name": "Complex Analyse",
+        "value": "A"
+      },
+      "activity": "sql inserts changed",
+      "booked": false,
+      "task": "2016-06-27 13:23:19.369",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T16:19:44.049Z",
+      "date": 1473890400000,
+      "taskName": "ABC Reporting",
+      "projectName": "GUI and Business Logic ",
+      "tenant": "A",
+      "duration": 3.75,
+      "durationType": 1,
+      "category": {
+        "name": "Quick Test",
+        "value": "C"
+      },
+      "activity": "report results",
+      "booked": false,
+      "task": "2016-07-28 12:34:08.268",
+      "number": 1234
+    },
+    {
+      "id": "2016-09-20T16:29:34.878Z",
+      "date": 1473804000000,
+      "taskName": "Load Tests",
+      "projectName": "Web & Mobile Apllications",
+      "tenant": "A",
+      "duration": 0.65,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "frontend tests",
+      "booked": false,
+      "task": "2016-06-14 15:38:35.733",
       "number": 1234
     }
   ],

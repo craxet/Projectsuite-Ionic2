@@ -78,7 +78,6 @@ export class MyTimePage {
                 this.totalSumOfWorkingSteps = recomputed.totalSum;
                 this.firstLastDateOfWorkingSteps = recomputed.firstLast;
                 this.newWorkingStepId = null;
-                console.log(this.content.getContentDimensions());
             }
         });
         modal.present();
