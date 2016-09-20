@@ -69,7 +69,7 @@ export class MyTimePage {
     }
 
     createBooking() {
-        let modal = this.modalCtrl.create(WorkingStep);
+        let modal = this.modalCtrl.create(WorkingStep,{selectedDate: this.selectedDate});
         modal.onDidDismiss((data)=> {
             if (data) {
                 this.newWorkingStepId = data.id;

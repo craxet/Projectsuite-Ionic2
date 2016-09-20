@@ -52,6 +52,7 @@ export class WorkingStep implements OnInit {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         const ws = params.get('workingStep');
+        const selectedDate = params.get('selectedDate');
         if (ws) {
             this.labelButtonMode = 'Edit';
             this.workingStep = {};
@@ -63,7 +64,7 @@ export class WorkingStep implements OnInit {
             this.labelButtonMode = 'Create';
             //create new working step
             this.workingStep = {
-                bookingDate: this.maxBookingDate,
+                bookingDate: selectedDate.from.isSame(selectedDate.to,'day') ? selectedDate.to.toISOString(): this.maxBookingDate,
                 duration: 0.25,
                 task: null,
                 taskCategory: null,
