@@ -3,10 +3,6 @@
   padding: 4px 0;
 }
 
-.not-bookable-task {
-  border-right: 3px solid $not-bookable-item;
-}
-
 .center-vertically-in-list {
   margin-top: 170px;
 }
@@ -21,6 +17,13 @@
 }
 
 //ios
-.task-group-padding{
+.task-group-padding {
   padding: 16px;
+}
+
+.task-selection {
+  ion-item[bookable=false] ion-label {
+    border-left: 2px solid $not-bookable-item;;
+    padding-left: 10px;
+  }
 }
