@@ -75,7 +75,7 @@
         </ion-item>
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{task === null}}"
+            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{workingStep.task === null}}"
                         [(ngModel)]="workingStep.taskCategory">
                 <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}
                 </ion-option>
