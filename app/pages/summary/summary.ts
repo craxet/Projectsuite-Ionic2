@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {Refresher, NavController, ModalController} from 'ionic-angular';
 import {Moment} from 'moment';
 
@@ -18,7 +18,7 @@ import {DateFormatPipe} from 'angular2-moment';
     pipes:[OrderByPipe,DateFormatPipe,DurationPipe]
 })
 
-export class SummaryPage {
+export class SummaryPage{
 
     selectedDate: {from: Moment, to: Moment};
     summaryEntries: Array<any> = [];
@@ -73,5 +73,9 @@ export class SummaryPage {
                 this.areSummaryEntriesLoading = false;
                 refresher && refresher.complete();
             });
+    }
+
+    ionViewWillEnter(){
+        this.getSummaryEntries();
     }
 }
