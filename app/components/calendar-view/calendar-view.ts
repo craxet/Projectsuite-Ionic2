@@ -138,9 +138,14 @@ export class CalendarView implements OnInit {
         this.lastCalView = this.calView;
         let popover = this.popoverCtrl.create(DateViewModePopover, {calView: this.calView});
         popover.onDidDismiss(data=> {
-            this.dateIndex = 0;
-            this.calView = data;
-            this.setNewDateRange();
+            if(data == null){
+                this.calView = this.lastCalView;
+            }
+            if (this.lastCalView != data && data != null) {
+                this.dateIndex = 0;
+                this.calView = data;
+                this.setNewDateRange();
+            }
         });
         popover.present({ev: ev});
     }
