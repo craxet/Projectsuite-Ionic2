@@ -323,23 +323,6 @@
       "number": 1234
     },
     {
-      "id": "2016-08-29T16:35:18.246Z",
-      "date": 1471384800000,
-      "taskName": "Backend Validations of modern Applications",
-      "projectName": "2016 Development Projects",
-      "tenant": "A",
-      "duration": 9.25,
-      "durationType": 1,
-      "category": {
-        "name": "Complex Analyse",
-        "value": "A"
-      },
-      "activity": "validations of complex applications",
-      "booked": false,
-      "task": "2016-05-01 14:49:40.546",
-      "number": 1234
-    },
-    {
       "id": "2016-09-20T15:53:12.610Z",
       "date": 1474322400000,
       "taskName": "Complex Task Feature",
