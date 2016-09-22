@@ -34,8 +34,6 @@ var copyFonts = require('ionic-gulp-fonts-copy');
 var copyScripts = require('ionic-gulp-scripts-copy');
 var tslint = require('ionic-gulp-tslint');
 var exec = require('child_process').exec;
-var pipe = require('gulp-pipe');
-var run = require('gulp-run');
 
 var isRelease = argv.indexOf('--release') > -1;
 
