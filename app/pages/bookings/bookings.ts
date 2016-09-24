@@ -25,6 +25,8 @@ export class BookingsPage {
     selectedDate: {from: Moment, to: Moment};
     bookings: Array<Booking> = [];
     bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}}
+    isLoading:boolean = false;
+    bookingsLabel:string = 'Working Steps'
 
     constructor(private navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private modalCtrl: ModalController) {
 
@@ -39,14 +41,14 @@ export class BookingsPage {
             inclBooked: this.bookingsMore.inclBooked,
             selectedDate: this.selectedDate,
             totalSumOfBookings: this.bookingsMore.totalSumOfBookings,
-            datesOfBookingsView: this.firstLastDateOfWorkingSteps,
-            bookingsLabel: 'Working Steps'
+            datesOfBookingsView: this.bookingsMore.datesOfBookingsView,
+            bookingsLabel: this.bookingsLabel
         });
         modal.present();
         modal.onDidDismiss(data => {
-            if (data && this.inclBooked !== data.inclBooked) {
-                this.inclBooked = data.inclBooked;
-                this.getWorkingSteps();
+            if (this.bookingsMore.inclBooked !== data.inclBooked) {
+                this.bookingsMore.inclBooked = data.inclBooked;
+                this.getBookings();
             }
         });
     }
@@ -57,7 +59,7 @@ export class BookingsPage {
     }
 
     getBookings(refresher: Refresher = null) {
-        this.areWorkingStepsLoading = refresher === null ? true : false;
+        this.isLoading = refresher === null ? true : false;
         this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {
                 this.bookings = data.list;

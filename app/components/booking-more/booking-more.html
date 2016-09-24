@@ -9,18 +9,18 @@
     <ion-list>
         <ion-list-header>Incl. Booked {{bookingsLabel}}</ion-list-header>
         <ion-item>
-            <ion-label class="label-text">{{inclBooked ? 'Incl. Booked' : 'Not Booked'}}</ion-label>
-            <ion-toggle [(ngModel)]="inclBooked"></ion-toggle>
+            <ion-label class="label-text">{{bookingsMore.inclBooked ? 'Incl. Booked' : 'Not Booked'}}</ion-label>
+            <ion-toggle [(ngModel)]="bookingsMore.inclBooked"></ion-toggle>
         </ion-item>
     </ion-list>
-    <ion-list *ngIf="firstLastDateOfBookings !== null">
-        <ion-list-header>Total Sum of {{bookingsLabel}}</ion-list-header>
+    <ion-list *ngIf="bookingsMore.datesOfBookingsView !== null">
+        <ion-list-header>Total sum of {{bookingsLabel}}</ion-list-header>
         <ion-item>
-            <ion-label class="label-text">{{firstLastDateOfBookings.first | amDateFormat: 'DD.MM.YYYY'}} -
-                {{firstLastDateOfBookings.last | amDateFormat: 'DD.MM.YYYY'}}
+            <ion-label class="label-text">{{bookingsMore.datesOfBookingsView.first | amDateFormat: 'DD.MM.YYYY'}} -
+                {{bookingsMore.datesOfBookingsView.last | amDateFormat: 'DD.MM.YYYY'}}
             </ion-label>
             <div item-content>
-                <h2 style="padding-right: 8px">{{totalSumOfBookings | duration}} h</h2>
+                <h2 style="padding-right: 8px">{{bookingsMore.totalSumOfBookings | duration}} h</h2>
             </div>
         </ion-item>
     </ion-list>

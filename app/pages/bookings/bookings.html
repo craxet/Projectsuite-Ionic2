@@ -1,11 +1,64 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Booking</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar no-border primary>
+    <ion-buttons start>
+      <button (click)="openMoreModal()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>My Time</ion-title>
+    <ion-buttons end hideWhen="android">
+      <button (click)="createBooking()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <calendar-view (onListUpdate)="callGetBookings($event)"></calendar-view>
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content class="bookings">
+  <ion-refresher (ionRefresh)="getWorkingSteps($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div text-center class="center-vertically-in-list" [hidden]="isLoading || bookings.length !== 0">
+    <span class="no-items-found">No {{bookingsLabel}} found</span>
+  </div>
+  <ion-list [hidden]="isLoading || bookings.length === 0">
+    <ion-item-group *ngFor="let headerDate of bookings | orderBy: ['-date']">
+      <ion-item-divider light>
+        {{headerDate.date | amDateFormat:"DD.MM.YYYY"}}
+        <div item-right style="padding-right:8px;">
+          <strong>{{headerDate.sumOfDuration | duration}}</strong>
+        </div>
+      </ion-item-divider>
+      <ion-item-sliding *ngFor="let step of headerDate.values" [attr.booked]="step.booked">
+        <button ion-item detail-none (click)="gotToWorkingStepDetail(step)">
+          <p><strong>Task</strong></p>
+          <p>{{step.taskName}}</p>
+          <p><strong>Project</strong></p>
+          <p>{{step.projectName}}</p>
+          <p><strong>Activity</strong></p>
+          <p>{{step.activity}}</p>
+          <div item-right>
+            <h4>{{step.duration | duration}}</h4>
+          </div>
+        </button>
+        <ion-item-options>
+          <button danger (click)="deleteWorkingStep(step)">
+            <ion-icon name="close"></ion-icon>
+            Delete
+          </button>
+          <button (click)="editWorkingStep(step)">
+            Edit
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+  <ion-fixed class="fab-fixed" hideWhen="ios">
+    <button fab fab-bottom fab-right (click)="createBooking()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fixed>
 </ion-content>
