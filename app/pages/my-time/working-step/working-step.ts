@@ -16,13 +16,11 @@ import {TaskSelectionService} from '../../../components/task-selection/task-sele
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
 import {DurationPipe} from '../../../pipes/duration-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
-import {WorkingStepService} from './working-step.service';
+import {WorkingStepService} from '../../../providers/working-step-service/working-step-service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
 }
-
-declare var CustomKeyboard:any;
 
 @Component({
     templateUrl: 'build/pages/my-time/working-step/working-step.html',
