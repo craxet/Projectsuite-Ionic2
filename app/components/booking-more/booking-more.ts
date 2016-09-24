@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Modal, NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavParams, ViewController} from 'ionic-angular';
 import {Moment} from 'moment';
 import {DateFormatPipe} from 'angular2-moment';
 
@@ -11,19 +11,17 @@ import {DurationPipe} from '../../pipes/duration-pipe.ts';
 })
 export class BookingMore {
 
-    inclBooked: boolean = false;
-    firstLastDateOfBookings: {first: Moment, last: Moment};
-    totalSumOfBookings: number;
+    bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}}
     bookingsLabel: string;
 
     constructor(private params: NavParams, private viewCtrl: ViewController) {
-        this.inclBooked = params.get('inclBooked');
-        this.firstLastDateOfBookings = params.get('firstLastDateOfBookings');
-        this.totalSumOfBookings = params.get('totalSumOfBookings');
+        this.bookingsMore.inclBooked = params.get('inclBooked');
+        this.bookingsMore.datesOfBookingsView = params.get('datesOfBookingsView');
+        this.bookingsMore.totalSumOfBookings = params.get('totalSumOfBookings');
         this.bookingsLabel = params.get('bookingsLabel');
     }
 
     cancel() {
-        this.viewCtrl.dismiss({inclBooked: this.inclBooked});
+        this.viewCtrl.dismiss({inclBooked: this.bookingsMore.inclBooked});
     }
 }

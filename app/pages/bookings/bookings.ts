@@ -24,6 +24,7 @@ export class BookingsPage {
 
     selectedDate: {from: Moment, to: Moment};
     bookings: Array<Booking> = [];
+    bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}}
 
     constructor(private navCtrl: NavController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private modalCtrl: ModalController) {
 
@@ -35,10 +36,10 @@ export class BookingsPage {
 
     openMoreModal() {
         let modal = this.modalCtrl.create(BookingMore, {
-            inclBooked: this.inclBooked,
+            inclBooked: this.bookingsMore.inclBooked,
             selectedDate: this.selectedDate,
-            totalSumOfBookings: this.totalSumOfWorkingSteps,
-            firstLastDateOfBookings: this.firstLastDateOfWorkingSteps,
+            totalSumOfBookings: this.bookingsMore.totalSumOfBookings,
+            datesOfBookingsView: this.firstLastDateOfWorkingSteps,
             bookingsLabel: 'Working Steps'
         });
         modal.present();
