@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 
-import {MyTimePage} from '../pages/my-time/my-time';
+import {BookingsPage} from '../pages/bookings/bookings';
 import {SummaryPage} from '../pages/summary/summary';
 import {SettingsPage} from '../pages/settings/settings';
 @Component({
@@ -9,7 +9,7 @@ import {SettingsPage} from '../pages/settings/settings';
 })
 
 export class TabsPage {
-    myTimeRoot: any = MyTimePage;
+    myTimeRoot: any = BookingsPage;
     summaryRoot: any = SummaryPage;
     settingsRoot: any = SettingsPage;
     mySelectedIndex: number = 0;

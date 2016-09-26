@@ -107,7 +107,7 @@ export class MyTimePage {
 
     getWorkingSteps(refresher: Refresher = null) {
         this.areWorkingStepsLoading = refresher === null ? true : false;
-        this.myTimeService.getWorkingSteps(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
+        this.myTimeService.getBookings(this.selectedDate.from, this.selectedDate.to, this.inclBooked, this.memberId, this.tenant).subscribe(
             data => {
                 this.workingSteps = data.list;
                 this.totalSumOfWorkingSteps = data.totalSum;

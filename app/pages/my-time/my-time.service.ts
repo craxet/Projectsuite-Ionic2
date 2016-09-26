@@ -36,10 +36,10 @@ export class MyTimeService {
         });
         //add new working into list
         all.push(workingStep);
-        return this.packWorkingStepsToFormat(all);
+        return this.packBookingsToFormat(all);
     }
 
-    packWorkingStepsToFormat(workingSteps) {
+    packBookingsToFormat(workingSteps) {
         let list = [];
         let totalSum = 0;
         //group working steps by date
@@ -60,7 +60,7 @@ export class MyTimeService {
         }
     }
 
-    getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
+    getBookings(from: Moment, to: Moment, inclBooked: boolean) {
         // allTenants: false
         return this.http.get(API_ENDPOINT + '/workingSteps').map(res => {
             let query = _.filter(res.json(), (item: any) => {
@@ -71,7 +71,7 @@ export class MyTimeService {
                     return dateQuery;
                 }
             });
-            return this.packWorkingStepsToFormat(query);
+            return this.packBookingsToFormat(query);
         }).catch(error => {
             console.log('service', error);
             return Observable.throw(error);

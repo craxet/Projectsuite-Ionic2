@@ -15,7 +15,7 @@
   <calendar-view (onListUpdate)="callGetBookings($event)"></calendar-view>
 </ion-header>
 <ion-content class="bookings">
-  <ion-refresher (ionRefresh)="getWorkingSteps($event)">
+  <ion-refresher (ionRefresh)="getBookings($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
