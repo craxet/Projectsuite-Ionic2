@@ -11,13 +11,15 @@ import {DurationPipe} from '../../pipes/duration-pipe.ts';
 })
 export class BookingMore {
 
-    bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}}
+    bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}};
     bookingsLabel: string;
 
     constructor(private params: NavParams, private viewCtrl: ViewController) {
-        this.bookingsMore.inclBooked = params.get('inclBooked');
-        this.bookingsMore.datesOfBookingsView = params.get('datesOfBookingsView');
-        this.bookingsMore.totalSumOfBookings = params.get('totalSumOfBookings');
+        this.bookingsMore = {
+            inclBooked: params.get('inclBooked'),
+            totalSumOfBookings: params.get('totalSumOfBookings'),
+            datesOfBookingsView: params.get('datesOfBookingsView')
+        };
         this.bookingsLabel = params.get('bookingsLabel');
     }
 

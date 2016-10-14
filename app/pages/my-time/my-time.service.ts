@@ -60,24 +60,6 @@ export class MyTimeService {
         }
     }
 
-    getWorkingSteps(from: Moment, to: Moment, inclBooked: boolean, memberId: String, tenant: string) {
-        // allTenants: false
-        return this.http.get(API_ENDPOINT + '/workingSteps').map(res => {
-            let query = _.filter(res.json(), (item: any) => {
-                let dateQuery = from.toDate().getTime() <= item.date && item.date <= to.toDate().getTime();
-                if (!inclBooked) {
-                    return dateQuery && item.booked === false;
-                } else {
-                    return dateQuery;
-                }
-            });
-            return this.packWorkingStepsToFormat(query);
-        }).catch(error => {
-            console.log('service', error);
-            return Observable.throw(error);
-        });
-    }
-
     deleteWorkingStep(workingStep) {
         return this.http.delete(API_ENDPOINT + '/workingSteps/' + workingStep.id).map(() => {
         }).catch(error => {

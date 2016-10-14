@@ -9,3 +9,7 @@ export enum TaskGroup{
 export enum Direction{
     PREV = <any>'PREV', NEXT = <any>'NEXT'
 }
+
+export enum BookingType{
+    MY_TIME = <any>'MY_TIME', SUMMARY = <any>'SUMMARY'
+}
