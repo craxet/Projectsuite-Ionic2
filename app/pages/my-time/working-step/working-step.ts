@@ -10,13 +10,12 @@ import {
 import * as moment from 'moment';
 import * as _ from  'lodash';
 
-import {MyTimeService} from '../my-time.service';
+import {WorkingStepService} from '../../../providers/working-step-service/working-step-service';
 import {TaskSelection} from '../../../components/task-selection/task-selection';
 import {TaskSelectionService} from '../../../components/task-selection/task-selection.service';
 import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
 import {DurationPipe} from '../../../pipes/duration-pipe';
 import {BookingDeadlineService} from '../../../services/booking-deadline.service';
-import {WorkingStepService} from '../../../providers/working-step-service/working-step-service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
@@ -24,7 +23,7 @@ enum DurationType{
 
 @Component({
     templateUrl: 'build/pages/my-time/working-step/working-step.html',
-    providers: [MyTimeService, BookingDeadlineService, WorkingStepService, TaskSelectionService],
+    providers: [BookingDeadlineService, WorkingStepService, TaskSelectionService],
     pipes: [DurationTypePipe, DurationPipe]
 })
 export class WorkingStep implements OnInit {
@@ -46,7 +45,7 @@ export class WorkingStep implements OnInit {
     private durationValuesHours: Array<any> = [];
     private durationValuesMinutes: Array<any> = [];
 
-    constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private myTimeService: MyTimeService, private bookingDeadlineService: BookingDeadlineService, private workingStepService: WorkingStepService, private taskSelectionService: TaskSelectionService) {
+    constructor(private params: NavParams, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController, private pickerCtrl: PickerController, private modalCtrl: ModalController, private viewCtrl: ViewController, private bookingDeadlineService: BookingDeadlineService, private workingStepService: WorkingStepService, private taskSelectionService: TaskSelectionService) {
         this.maxBookingDate = moment().toISOString();
         this.durationTemp = '0.25';
         const ws = params.get('workingStep');
@@ -62,7 +61,7 @@ export class WorkingStep implements OnInit {
             this.labelButtonMode = 'Create';
             //create new working step
             this.workingStep = {
-                bookingDate: selectedDate.from.isSame(selectedDate.to,'day') ? selectedDate.to.toISOString(): this.maxBookingDate,
+                bookingDate: selectedDate.from.isSame(selectedDate.to, 'day') ? selectedDate.to.toISOString() : this.maxBookingDate,
                 duration: 0.25,
                 task: null,
                 taskCategory: null,
@@ -96,7 +95,7 @@ export class WorkingStep implements OnInit {
             this.workingStep.taskCategory = _.find(this.taskCategories, ['value', this.workingStep.taskCategory]);
             //if duration type is minutes convert minutes to hours
             //TODO put it into directive
-            if(this.durationType === DurationType.MINUTES){
+            if (this.durationType === DurationType.MINUTES) {
                 this.workingStep.duration /= 60;
             }
             if (this.params.get('workingStep')) {
@@ -107,7 +106,7 @@ export class WorkingStep implements OnInit {
                 loader.onDidDismiss(data=> {
                     this.viewCtrl.dismiss(data);
                 });
-                this.myTimeService.editWorkingStep(this.workingStep).subscribe(
+                this.workingStepService.editWorkingStep(this.workingStep).subscribe(
                     data=> {
                         //just response from second observable - create working step
                         loader.dismiss(data[1]);
@@ -122,7 +121,7 @@ export class WorkingStep implements OnInit {
                 loader.onDidDismiss(data=> {
                     this.viewCtrl.dismiss(data);
                 });
-                this.myTimeService.createWorkingStep(this.workingStep).subscribe(data => {
+                this.workingStepService.createWorkingStep(this.workingStep).subscribe(data => {
                     loader.dismiss(data);
                 }, error=> {
                     console.log(error);

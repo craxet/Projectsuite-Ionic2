@@ -16,14 +16,14 @@ import {BookingDetail} from '../my-time/booking-detail/booking-detail';
 import {CalendarView} from '../../components/calendar-view/calendar-view';
 import {Booking} from  '../../models/booking';
 import {BookingType} from "../../enums/enums";
-import {MyTimeService} from "../my-time/my-time.service";
+import {WorkingStepService} from "../../providers/working-step-service/working-step-service.ts";
 
 
 @Component({
     templateUrl: 'build/pages/bookings/bookings.html',
     pipes: [DateFormatPipe, DurationPipe, OrderByPipe],
     directives: [CalendarView],
-    providers: [BookingsService, MyTimeService]
+    providers: [BookingsService, WorkingStepService]
 })
 export class BookingsPage {
 
@@ -37,7 +37,7 @@ export class BookingsPage {
     isMyTime;
     bookingTitle;
 
-    constructor(protected navCtrl: NavController, protected loadingCtrl: LoadingController, protected alertCtrl: AlertController, protected modalCtrl: ModalController, protected  bookingsService: BookingsService, protected myTimeService: MyTimeService) {
+    constructor(protected navCtrl: NavController, protected loadingCtrl: LoadingController, protected alertCtrl: AlertController, protected modalCtrl: ModalController, protected  bookingsService: BookingsService, protected workingStepService: WorkingStepService) {
         this.bookingsMore = {
             inclBooked: false,
             totalSumOfBookings: 0,
@@ -113,7 +113,7 @@ export class BookingsPage {
         modal.onDidDismiss((data)=> {
             if (data) {
                 this.newWorkingStepId = data.id;
-                const recomputed = this.myTimeService.addWorkingStepToList(data, this.bookings);
+                const recomputed = this.workingStepService.addWorkingStepToList(data, this.bookings);
                 this.bookings = recomputed.list;
                 this.bookingsMore.totalSumOfBookings = recomputed.totalSum;
                 this.bookingsMore.datesOfBookingsView = recomputed.firstLast;
@@ -139,8 +139,8 @@ export class BookingsPage {
                     text: 'Yes, I do',
                     handler: ()=> {
                         loader.present();
-                        this.myTimeService.deleteWorkingStep(workingStep).subscribe(() => {
-                            this.myTimeService.deleteWorkingStepFromList(workingStep, this.getBookings());
+                        this.workingStepService.deleteWorkingStep(workingStep).subscribe(() => {
+                            this.workingStepService.deleteWorkingStepFromList(workingStep, this.getBookings());
                             loader.dismiss();
                         }, error=> {
                             loader.dismiss();
