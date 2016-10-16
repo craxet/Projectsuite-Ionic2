@@ -30,13 +30,13 @@
 // --------------------------------------------------
 // CSS that should only apply to the iOS app
 
-@import "../pages/my-time/working-step/working-step";
+@import "../pages/working-step/working-step";
 
-@import "../components/task-selection/task-selection";
+@import "../pages/task-selection/task-selection";
 
-@import "../components/booking-more/booking-more";
+@import "../pages/booking-more/booking-more";
 
-@import "../pages/my-time/booking-detail/booking-detail";
+@import "../pages/booking-detail/booking-detail";
 
 
 //background of ion-content

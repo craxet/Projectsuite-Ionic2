@@ -110,7 +110,7 @@
         <ion-item>
             <ion-label>{{booking.booked ? 'Booked': 'Not Booked'}}</ion-label>
             <div item-right>
-                <div [class.booked]="booking.booked" [class.not-booked]="!booking.booked"></div>
+                <div class="booked-status" [attr.booked]="booking.booked" ></div>
             </div>
         </ion-item>
     </ion-list>

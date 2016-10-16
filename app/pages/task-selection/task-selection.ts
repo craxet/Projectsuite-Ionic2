@@ -9,7 +9,7 @@ import {ViewController, AlertController, NavParams, LoadingController, Refresher
 import {DateFormatPipe} from 'angular2-moment';
 import * as moment from 'moment';
 
-import {TaskSelectionService} from './task-selection.service';
+import {TaskSelectionService} from '../../providers/task-selection-service/task-selection-service';
 import {TaskGroup} from '../../enums/enums';
 
 @Component({
@@ -29,7 +29,7 @@ import {TaskGroup} from '../../enums/enums';
         ])
     ]
 })
-export class TaskSelection implements OnInit {
+export class TaskSelectionPage {
 
     taskGroup: TaskGroup = TaskGroup.MY_TASKS;
     tasks: Array<any> = [];
@@ -115,7 +115,7 @@ export class TaskSelection implements OnInit {
         this.isLoading = false;
     }
 
-    ngOnInit() {
+    ionViewWillEnter() {
         this.getTasks();
     }
 }

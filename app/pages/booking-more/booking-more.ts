@@ -9,7 +9,7 @@ import {DurationPipe} from '../../pipes/duration-pipe.ts';
     templateUrl: 'build/components/booking-more/booking-more.html',
     pipes: [DurationPipe, DateFormatPipe]
 })
-export class BookingMore {
+export class BookingMorePage {
 
     bookingsMore: {inclBooked: boolean,totalSumOfBookings: number,datesOfBookingsView: {first: Moment,last: Moment}};
     bookingsLabel: string;

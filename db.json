@@ -578,18 +578,18 @@
       "number": 1234
     },
     {
-      "id": "2016-10-14T21:40:05.790Z",
+      "id": "2016-10-16T09:29:22.974Z",
       "date": 1476396000000,
       "taskName": "Complex Task Feature",
       "projectName": "Complex Analysis Project",
       "tenant": "A",
-      "duration": 0.25,
+      "duration": 2,
       "durationType": 1,
       "category": {
         "name": "Analysis Design",
         "value": "B"
       },
-      "activity": "ghgfhgfhgfh",
+      "activity": "My Activity in Oktober",
       "booked": false,
       "task": "2016-03-21 14:01:28.463",
       "number": 1234

@@ -9,10 +9,10 @@ import {DateFormatPipe} from 'angular2-moment';
 import {DurationPipe} from '../../pipes/duration-pipe';
 import {OrderByPipe} from '../../pipes/order-by-pipe';
 
-import {WorkingStep} from '../my-time/working-step/working-step';
+import {WorkingStepPage} from '../working-step/working-step';
 import {BookingsService} from '../../providers/bookings-service/bookings-service.ts';
-import {BookingMore} from '../../components/booking-more/booking-more';
-import {BookingDetail} from '../my-time/booking-detail/booking-detail';
+import {BookingMorePage} from '../booking-more/booking-more';
+import {BookingDetailPage} from '../booking-detail/booking-detail';
 import {CalendarView} from '../../components/calendar-view/calendar-view';
 import {Booking} from  '../../models/booking';
 import {BookingType} from "../../enums/enums";
@@ -53,12 +53,12 @@ export class BookingsPage {
     }
 
     gotToBookingDetail(booking) {
-        this.navCtrl.push(BookingDetail, booking);
+        this.navCtrl.push(BookingDetailPage, booking);
     }
 
 
     openMoreModal() {
-        let modal = this.modalCtrl.create(BookingMore, {
+        let modal = this.modalCtrl.create(BookingMorePage, {
             inclBooked: this.bookingsMore.inclBooked,
             selectedDate: this.selectedDate,
             totalSumOfBookings: this.bookingsMore.totalSumOfBookings,
@@ -109,7 +109,7 @@ export class BookingsPage {
 
 
     createBooking() {
-        let modal = this.modalCtrl.create(WorkingStep, {selectedDate: this.selectedDate});
+        let modal = this.modalCtrl.create(WorkingStepPage, {selectedDate: this.selectedDate});
         modal.onDidDismiss((data)=> {
             if (data) {
                 this.newWorkingStepId = data.id;
@@ -154,7 +154,7 @@ export class BookingsPage {
     }
 
     editWorkingStep(step) {
-        let modal = this.modalCtrl.create(WorkingStep, {workingStep: step});
+        let modal = this.modalCtrl.create(WorkingStepPage, {workingStep: step});
         modal.onDidDismiss((data)=> {
             if (data) {
                 //TODO create function that add edit working step to array on right position;

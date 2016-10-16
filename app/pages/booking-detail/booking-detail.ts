@@ -2,13 +2,13 @@ import {Component} from '@angular/core';
 import {NavParams} from 'ionic-angular';
 import {DateFormatPipe} from 'angular2-moment';
 
-import {DurationPipe} from '../../../pipes/duration-pipe';
+import {DurationPipe} from '../../pipes/duration-pipe';
 
 @Component({
     templateUrl: 'build/pages/my-time/booking-detail/booking-detail.html',
     pipes:[DateFormatPipe,DurationPipe]
 })
-export class BookingDetail {
+export class BookingDetailPage {
 
     booking;
 

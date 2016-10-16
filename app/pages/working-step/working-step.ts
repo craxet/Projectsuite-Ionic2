@@ -10,12 +10,12 @@ import {
 import * as moment from 'moment';
 import * as _ from  'lodash';
 
-import {WorkingStepService} from '../../../providers/working-step-service/working-step-service';
-import {TaskSelection} from '../../../components/task-selection/task-selection';
-import {TaskSelectionService} from '../../../components/task-selection/task-selection.service';
-import {DurationTypePipe} from '../../../pipes/duration-type-pipe';
-import {DurationPipe} from '../../../pipes/duration-pipe';
-import {BookingDeadlineService} from '../../../services/booking-deadline.service';
+import {WorkingStepService} from '../../providers/working-step-service/working-step-service';
+import {TaskSelectionPage} from '../task-selection/task-selection';
+import {TaskSelectionService} from '../../providers/task-selection-service/task-selection-service';
+import {DurationTypePipe} from '../../pipes/duration-type-pipe';
+import {DurationPipe} from '../../pipes/duration-pipe';
+import {BookingDeadlineService} from '../../services/booking-deadline.service';
 
 enum DurationType{
     HOURS = <any>'hours', MINUTES = <any>'minutes', NONE = <any>'none'
@@ -26,7 +26,7 @@ enum DurationType{
     providers: [BookingDeadlineService, WorkingStepService, TaskSelectionService],
     pipes: [DurationTypePipe, DurationPipe]
 })
-export class WorkingStep implements OnInit {
+export class WorkingStepPage {
 
     minBookingDate: string;
     isMinBookingDateLoading: boolean = true;
@@ -132,7 +132,7 @@ export class WorkingStep implements OnInit {
 
 
     selectTask() {
-        let modal = this.modalCtrl.create(TaskSelection, {task: this.workingStep.task});
+        let modal = this.modalCtrl.create(TaskSelectionPage, {task: this.workingStep.task});
         modal.present();
         modal.onDidDismiss(data => {
             if (data !== null) {
@@ -222,7 +222,7 @@ export class WorkingStep implements OnInit {
         return array;
     }
 
-    ngOnInit() {
+    ionViewWillEnter() {
         //generation of values for duration picker
         this.durationValuesMinutes = this.generateDurationValues(DurationType.MINUTES);
         this.durationValuesHours = this.generateDurationValues(DurationType.HOURS);
