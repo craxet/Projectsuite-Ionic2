@@ -140,7 +140,7 @@ export class BookingsPage {
                     handler: ()=> {
                         loader.present();
                         this.workingStepService.deleteWorkingStep(workingStep).subscribe(() => {
-                            this.workingStepService.deleteWorkingStepFromList(workingStep, this.getBookings());
+                            this.workingStepService.deleteWorkingStepFromList(workingStep, this.bookings);
                             loader.dismiss();
                         }, error=> {
                             loader.dismiss();

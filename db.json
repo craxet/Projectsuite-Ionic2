@@ -255,23 +255,6 @@
       "number": 1234
     },
     {
-      "id": "2016-08-29T16:27:07.160Z",
-      "date": 1468965600000,
-      "taskName": "ABC Reporting",
-      "projectName": "GUI and Business Logic ",
-      "tenant": "A",
-      "duration": 7.75,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "abc issues, done",
-      "booked": false,
-      "task": "2016-07-28 12:34:08.268",
-      "number": 1234
-    },
-    {
       "id": "2016-08-29T16:31:16.148Z",
       "date": 1471903200000,
       "taskName": "Usability Improvements",
@@ -544,23 +527,6 @@
       "number": 1234
     },
     {
-      "id": "2016-09-20T20:04:28.188Z",
-      "date": 1474322400000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 0.25,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "controller refactoring",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
       "id": "2016-09-20T21:31:48.637Z",
       "date": 1474322400000,
       "taskName": "Complex Task Feature",
@@ -573,23 +539,6 @@
         "value": "A"
       },
       "activity": "services refactored",
-      "booked": false,
-      "task": "2016-03-21 14:01:28.463",
-      "number": 1234
-    },
-    {
-      "id": "2016-10-16T09:29:22.974Z",
-      "date": 1476396000000,
-      "taskName": "Complex Task Feature",
-      "projectName": "Complex Analysis Project",
-      "tenant": "A",
-      "duration": 2,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "My Activity in Oktober",
       "booked": false,
       "task": "2016-03-21 14:01:28.463",
       "number": 1234
