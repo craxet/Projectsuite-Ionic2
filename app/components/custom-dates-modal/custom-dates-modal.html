@@ -1,0 +1,26 @@
+<ion-toolbar no-border-bottom no-border-top>
+    <ion-title>Custom Dates</ion-title>
+</ion-toolbar>
+<ion-list no-lines>
+    <ion-item>
+        <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
+        <ion-label>From</ion-label>
+        <ion-datetime displayFormat="MM.DD.YYYY" [(ngModel)]="from"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
+        <ion-label>To</ion-label>
+        <ion-datetime displayFormat="MM.DD.YYYY" [(ngModel)]="to"></ion-datetime>
+    </ion-item>
+</ion-list>
+<ion-grid>
+    <ion-row>
+        <ion-col width-50>
+            <button class="cancel" light block (click)="cancel()">Cancel</button>
+        </ion-col>
+        <ion-col width-50>
+            <button class="ok" block light (click)="ok()">OK</button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+

@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar no-border primary>
+        <ion-buttons start>
+            <button (click)="cancel()">Cancel</button>
+        </ion-buttons>
+        <ion-title>Task Selection</ion-title>
+        <ion-buttons end>
+            <button (click)="selectTask()">Select</button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar no-border-top primary>
+        <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()" showWhen="android"></ion-searchbar>
+        <ion-segment class="task-group-padding" [(ngModel)]="taskGroup" (ionChange)="changedTaskGroup()" white>
+            <ion-segment-button value="myTasks">
+                My
+            </ion-segment-button>
+            <ion-segment-button value="lastBookedTasks">
+                Last
+            </ion-segment-button>
+            <ion-segment-button value="globalTasks">
+                Global
+            </ion-segment-button>
+            <ion-segment-button value="teamTasks">
+                Team
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="task-selection">
+    <ion-refresher (ionRefresh)="getTasks($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-searchbar [(ngModel)]="searchedValue" (ionInput)="searchTasksLocally()" showWhen="ios"></ion-searchbar>
+    <div text-center class="center-vertically-in-list" [hidden]="!isLoading">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div text-center class="center-vertically-in-list" [hidden]="isLoading || tasks.length !== 0">
+        <span class="no-items-found">No Tasks found</span>
+    </div>
+    <ion-list [hidden]="isLoading || tasks.length === 0" radio-group [(ngModel)]="selectedTaskTemp">
+        <ion-item [attr.bookable]="task.bookable" text-wrap *ngFor="let task of tasks">
+            <ion-label>
+                <h4>{{task.name}}</h4>
+                <div class="task-item-project">
+                    <p><strong>Project</strong></p>
+                    <p>{{task.project.name}}</p>
+                </div>
+                <p><strong>ID </strong>{{task.number}} , <strong>Start </strong>{{task.start |
+                    amDateFormat:"MM.DD.YYYY"}} ,
+                    <strong>End </strong>{{task.start | amDateFormat:"MM.DD.YYYY"}}</p>
+                <!--<ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>-->
+            </ion-label>
+            <ion-radio value="{{task.id}}" checked="{{task.checked}}"
+                       (ionSelect)="selectRadioTaskItem(task)"></ion-radio>
+        </ion-item>
+    </ion-list>
+</ion-content>

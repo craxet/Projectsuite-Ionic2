@@ -1,0 +1,4 @@
+{
+    "proxy" : "http://A5239:7cenarv7@proxy.aeat.allianz.at:8080/",
+    "rejectUnauthorized" : false
+}

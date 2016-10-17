@@ -1,0 +1,6 @@
+.bookings {
+  ion-item-sliding[booked=true] ion-label {
+    border-left: 2px solid $booked-working-step;
+    padding-left: 10px;
+  }
+}

@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar primary>
+        <ion-title>Settings</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding-top class="settings">
+    <div text-center>
+        <img src="img/avatar.jpg"/><br>
+        <div class="name">Max Mustermann</div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon ios="ios-contact" md="md-contact" item-left primary></ion-icon>
+            <ion-label>Username</ion-label>
+            <div item-right>A1234</div>
+        </ion-item>
+        <ion-item>
+            <ion-icon ios="ios-key" md="md-key" item-left primary></ion-icon>
+            <ion-label>Role</ion-label>
+            <div item-right>Guest</div>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-item>
+            <ion-icon ios="ios-people" md="md-people" item-left primary></ion-icon>
+            <ion-label>Tenant</ion-label>
+            <div item-right>ABC CCC</div>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <button ion-item (click)="goToAbout()">
+            <ion-icon ios="ios-information-circle" md="md-information-circle" item-left primary></ion-icon>
+            <ion-label>About</ion-label>
+        </button>
+    </ion-list>
+
+    <ion-list>
+        <button primary (click)="onLogout()" full>Logout</button>
+    </ion-list>
+</ion-content>

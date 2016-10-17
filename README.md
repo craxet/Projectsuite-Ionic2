@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Projectsuite Mobile
 
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/projectsuite_logo.png"  width="60">
@@ -16,3 +17,8 @@ Android
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen_android.png" width="30%" height="30%">
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen2_android.png" width="30%" height="30%">
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen3_android.png" width="30%" height="30%">
+=======
+# Projectsuite Mobile App
+
+- update npm package moment. typescript definition "isoWeek" in UnitOfTime is missing. I added it to package local!!!
+>>>>>>> dev

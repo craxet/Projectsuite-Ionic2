@@ -1,0 +1,112 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Variables
+// --------------------------------------------------
+// Shared Sass variables go in the app.variables.scss file
+@import "app.variables";
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+// Ionic iOS Sass
+// --------------------------------------------------
+// Custom App variables must be declared before importing Ionic.
+// Ionic will use its default values when a custom variable isn't provided.
+@import "ionic.ios";
+
+
+// App Shared Sass
+// --------------------------------------------------
+// All Sass files that make up this app goes into the app.core.scss file.
+// For simpler CSS overrides, custom app CSS must come after Ionic's CSS.
+@import "app.core";
+
+
+// App iOS Only Sass
+// --------------------------------------------------
+// CSS that should only apply to the iOS app
+
+@import "../pages/working-step/working-step";
+
+@import "../pages/task-selection/task-selection";
+
+@import "../pages/booking-more/booking-more";
+
+@import "../pages/booking-detail/booking-detail";
+
+
+//background of ion-content
+ion-content{
+  //background-color: $content-ios-outer-background;
+  background-color: #efeff4;
+}
+
+.toolbar-title {
+  font-size: 1.5rem;
+}
+
+/*ion-page.custom-dates-modal.show-page ~ .nav-decor {
+  background: white;
+}*/
+
+/*@media (min-width: 300px) and (min-height: 500px) {
+  ion-modal ion-backdrop {
+    visibility: visible;
+  }
+}
+
+.modal-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+}*/
+
+// In you modal css
+/*.custom-dates-modal {
+  position: absolute;
+  top: calc(50% - 45vh); // half of vh
+  left: calc(50% + 10vw); // half of 100-vw
+  width: 80vw;
+  height: auto;
+}
+
+.custom-dates-modal ion-list {
+  margin: -1px 0 0 0;
+}
+
+.custom-dates-modal ion-grid, ion-col {
+  padding: 0;
+}
+
+.custom-dates-modal ion-col .button {
+  margin: 0;
+  border-radius: 0;
+  border-top: 1px solid #dbdbdf;
+  //color: $alert-ios-button-text-color;
+}
+
+.custom-dates-modal ion-col .button.cancel {
+  border-radius: 0 0 0 $alert-ios-border-radius;
+  border-right: 1px solid #dbdbdf;
+}
+
+.custom-dates-modal ion-col .button.ok {
+  border-radius: 0 0 $alert-ios-border-radius 0;
+  font-weight: bold;
+}*/
+
+//TODO just for IOS
+/*.custom-dates-modal ion-toolbar {
+  border-radius: $alert-ios-border-radius $alert-ios-border-radius 0 0;
+}*/
+
+.popover-content {
+  min-height: initial;
+  left: 0 !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+}

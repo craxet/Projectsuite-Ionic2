@@ -1,0 +1,28 @@
+<ion-header class="login-header">
+    <ion-toolbar white no-border>
+        <ion-title text-center><img style="max-width:17px" src="img/projectsuite_logo.png"></ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="login">
+    <ion-row>
+        <ion-col>
+            <form #loginForm="ngForm" novalidate>
+                <ion-list inset>
+                    <h5>Login to Projectsuite</h5>
+                    <ion-item>
+                        <ion-input [(ngModel)]="credentials.username" name="username" #username="ngModel" type="text"
+                                   spellcheck="false" autocapitalize="off" placeholder="Username" required clearInput></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input [(ngModel)]="credentials.password" name="password" #password="ngModel"
+                                   type="{{inputTypePassword}}"
+                                   spellcheck="false" autocapitalize="off" placeholder="Password" required></ion-input>
+                    </ion-item>
+                    <p text-center grey *ngIf="badCredentials">Your Username or Password is incorrect.</p>
+                    <button (click)="onLogin(loginForm)" class="login-button" block>Login
+                    </button>
+                </ion-list>
+            </form>
+        </ion-col>
+    </ion-row>
+</ion-content>

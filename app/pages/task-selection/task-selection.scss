@@ -1,0 +1,29 @@
+//ios
+.task-item-project {
+  padding: 4px 0;
+}
+
+.center-vertically-in-list {
+  margin-top: 170px;
+}
+
+//ios
+.no-items-found {
+  color: $loading-ios-spinner-color;
+}
+
+.input-value-font-color {
+  color: inherit;
+}
+
+//ios
+.task-group-padding {
+  padding: 16px;
+}
+
+.task-selection {
+  ion-item[bookable=false] ion-label {
+    border-left: 2px solid $not-bookable-item;
+    padding-left: 10px;
+  }
+}

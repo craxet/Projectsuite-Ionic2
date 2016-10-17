@@ -1,0 +1,102 @@
+<ion-header>
+    <ion-toolbar no-border primary>
+        <ion-buttons start>
+            <button (click)="cancel()">Cancel</button>
+        </ion-buttons>
+        <ion-title>Working Step</ion-title>
+        <ion-buttons end>
+            <button (click)="createOrEditWorkingStep()">{{labelButtonMode}}</button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-list-header>Booking Date</ion-list-header>
+        <ion-item>
+            <ion-icon ios="ios-calendar-outline" md="md-calendar" item-left></ion-icon>
+            <ion-datetime disabled="{{isMinBookingDateLoading}}" displayFormat="D. MMMM YYYY"
+                          [(ngModel)]="workingStep.bookingDate"
+                          min="{{minBookingDate}}" max="{{maxBookingDate}}"></ion-datetime>
+            <div item-right [hidden]="!isMinBookingDateLoading">
+                <ion-spinner></ion-spinner>
+            </div>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Duration
+            <button clear item-right (click)="openDurationTypeActionSheet()">
+                <span class="duration-type" text-capitalize>{{durationType}}</span>
+                <ion-icon ios="ios-arrow-down" md="md-arrow-down"></ion-icon>
+            </button>
+        </ion-list-header>
+        <button ion-item (click)="openDurationPicker()">
+            <ion-icon ios="ios-time-outline" md="md-time" item-left></ion-icon>
+            {{workingStep.duration | duration}}
+        </button>
+        <ion-item>
+            <ion-segment [(ngModel)]="durationTemp" primary>
+                <ion-segment-button value="0.25" (ionSelect)="selectedDurationSegment('0.25')">
+                    15 m
+                </ion-segment-button>
+                <ion-segment-button value="0.50" (ionSelect)="selectedDurationSegment('0.50')">
+                    30 m
+                </ion-segment-button>
+                <ion-segment-button value="0.75" (ionSelect)="selectedDurationSegment('0.75')">
+                    45 m
+                </ion-segment-button>
+                <ion-segment-button value="1.00" (ionSelect)="selectedDurationSegment('1.00')">
+                    1 h
+                </ion-segment-button>
+                <ion-segment-button value="1.50" (ionSelect)="selectedDurationSegment('1.50')">
+                    1,5 h
+                </ion-segment-button>
+                <ion-segment-button value="2.00" (ionSelect)="selectedDurationSegment('2.00')">
+                    2 h
+                </ion-segment-button>
+                <ion-segment-button value="3.00" (ionSelect)="selectedDurationSegment('3.00')">
+                    3 h
+                </ion-segment-button>
+            </ion-segment>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Task</ion-list-header>
+        <button [hidden]="isTaskSelectionLoading" ion-item detail-push (click)="selectTask()" class="ion-item-value"
+                text-wrap>
+            <ion-label [class.label-placeholder]="workingStep.task == null">{{workingStep.task ==
+                null?"Taskname":workingStep.task.name}}
+            </ion-label>
+        </button>
+        <ion-item [hidden]="!isTaskSelectionLoading">
+            <ion-label class="label-placeholder">Task Name</ion-label>
+            <div item-right>
+                <ion-spinner></ion-spinner>
+            </div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select [hidden]="areTaskCategoriesAndAssigmentsLoading" disabled="{{workingStep.task === null}}"
+                        [(ngModel)]="workingStep.taskCategory">
+                <ion-option *ngFor="let category of taskCategories" value="{{category.value}}">{{category.name}}
+                </ion-option>
+            </ion-select>
+            <div item-right [hidden]="!areTaskCategoriesAndAssigmentsLoading">
+                <ion-spinner></ion-spinner>
+            </div>
+        </ion-item>
+        <ion-item *ngIf="!hideAssigment">
+            <ion-label>Assigment</ion-label>
+            <ion-select [(ngModel)]="workingStep.taskAssigment">
+                <ion-option *ngFor="let assigment of taskAssigments" value="{{assigment.value}}">{{assigment.name}}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Activity</ion-list-header>
+        <ion-item>
+            <ion-textarea maxlength="60" placeholder="Describe your Activity"
+                          [(ngModel)]="workingStep.activity"></ion-textarea>
+        </ion-item>
+    </ion-list>
+</ion-content>
