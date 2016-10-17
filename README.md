@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Projectsuite Mobile
-=======
 # Projectsuite Ionic 2
->>>>>>> 3b40c368b2941dbd1292140c29b48863ddcf29c9
 
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/projectsuite_logo.png"  width="60">
 
@@ -21,13 +16,6 @@ Android
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen_android.png" width="30%" height="30%">
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen2_android.png" width="30%" height="30%">
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/screens/screen3_android.png" width="30%" height="30%">
-<<<<<<< HEAD
-=======
-# Projectsuite Mobile App
-
-- update npm package moment. typescript definition "isoWeek" in UnitOfTime is missing. I added it to package local!!!
->>>>>>> dev
-=======
 
 
 ## Installation
@@ -88,4 +76,3 @@ Data is in `db.json` file stored in root directory.
 
 
 
->>>>>>> 3b40c368b2941dbd1292140c29b48863ddcf29c9
