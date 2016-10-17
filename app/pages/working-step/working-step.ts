@@ -22,7 +22,7 @@ enum DurationType{
 }
 
 @Component({
-    templateUrl: 'build/pages/my-time/working-step/working-step.html',
+    templateUrl: 'build/pages/working-step/working-step.html',
     providers: [BookingDeadlineService, WorkingStepService, TaskSelectionService],
     pipes: [DurationTypePipe, DurationPipe]
 })

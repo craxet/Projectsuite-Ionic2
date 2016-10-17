@@ -13,7 +13,7 @@ import {TaskSelectionService} from '../../providers/task-selection-service/task-
 import {TaskGroup} from '../../enums/enums';
 
 @Component({
-    templateUrl: 'build/components/task-selection/task-selection.html',
+    templateUrl: 'build/pages/task-selection/task-selection.html',
     providers: [TaskSelectionService],
     pipes: [DateFormatPipe],
     animations: [

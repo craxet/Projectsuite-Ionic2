@@ -5,7 +5,7 @@ import {DateFormatPipe} from 'angular2-moment';
 import {DurationPipe} from '../../pipes/duration-pipe';
 
 @Component({
-    templateUrl: 'build/pages/my-time/booking-detail/booking-detail.html',
+    templateUrl: 'build/pages/booking-detail/booking-detail.html',
     pipes:[DateFormatPipe,DurationPipe]
 })
 export class BookingDetailPage {

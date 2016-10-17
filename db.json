@@ -1,6 +1,6 @@
 {
   "login": {
-    "userName":"b1234",
+    "username": "b1234",
     "password": "1234"
   },
   "summaryEntries": [
@@ -476,23 +476,6 @@
       "number": 1234
     },
     {
-      "id": "2016-09-20T19:56:42.097Z",
-      "date": 1464904800000,
-      "taskName": "Frontend Bugfixing",
-      "projectName": "Development Project",
-      "tenant": "A",
-      "duration": 0.5833333333333334,
-      "durationType": 1,
-      "category": {
-        "name": "Analysis Design",
-        "value": "B"
-      },
-      "activity": "bugfixing of date picker component ",
-      "booked": false,
-      "task": "2016-05-01 14:48:56.086",
-      "number": 1234
-    },
-    {
       "id": "2016-09-20T20:02:15.081Z",
       "date": 1474322400000,
       "taskName": "ABC Reporting",
@@ -542,6 +525,23 @@
       "booked": false,
       "task": "2016-03-21 14:01:28.463",
       "number": 1234
+    },
+    {
+      "id": "2016-10-17T18:52:59.760Z",
+      "date": 1476655200000,
+      "taskName": "Complex Task Feature",
+      "projectName": "Complex Analysis Project",
+      "tenant": "A",
+      "duration": 1.5,
+      "durationType": 1,
+      "category": {
+        "name": "Analysis Design",
+        "value": "B"
+      },
+      "activity": "task feature ",
+      "booked": false,
+      "task": "2016-03-21 14:01:28.463",
+      "number": 1234
     }
   ],
   "tasks": [
@@ -571,7 +571,7 @@
         "id": "2015-01-07 09:04:03.7126",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -616,7 +616,7 @@
         "id": "2015-01-07 09:04:03.7126",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -661,7 +661,7 @@
         "id": "2015-01-07 09:04:03.7126",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -706,7 +706,7 @@
         "id": "2010-07-09 12:00:20.000017",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
@@ -751,7 +751,7 @@
         "id": "2010-07-09 12:00:20.000017",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
@@ -796,7 +796,7 @@
         "id": "2015-06-01 08:46:35.7224",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1433109600000,
         "dateOfLeave": 32503590000000
       },
@@ -841,7 +841,7 @@
         "id": "2007-08-30 10:26:47.3515",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -886,7 +886,7 @@
         "id": "2007-08-30 10:26:47.3515",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -931,7 +931,7 @@
         "id": "2015-06-01 08:46:35.7224",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1433109600000,
         "dateOfLeave": 32503590000000
       },
@@ -976,7 +976,7 @@
         "id": "2007-08-30 10:26:47.3515",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -1021,7 +1021,7 @@
         "id": "2010-07-09 12:00:20.000017",
         "firstName": "Max",
         "lastName": "Mustermann",
-        "userName":"b1234",
+        "userName": "b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
