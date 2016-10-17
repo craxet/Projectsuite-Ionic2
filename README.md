@@ -73,6 +73,8 @@ Projectsuite uses fake REST API [JSON Server](https://github.com/typicode/json-s
 ```
 Data is in `db.json` file stored in root directory.
 
+## Build for Mobile
 
+Follow ionic 2 instructions [here](http://ionicframework.com/docs/v2/getting-started/installation/)
 
 
