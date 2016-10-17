@@ -1,6 +1,6 @@
 {
   "login": {
-    "username": "a1234",
+    "userName":"b1234",
     "password": "1234"
   },
   "summaryEntries": [
@@ -569,9 +569,9 @@
       "tenant": "A",
       "author": {
         "id": "2015-01-07 09:04:03.7126",
-        "firstName": "Ines",
-        "lastName": "Augustin",
-        "userName": "A5514",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -614,9 +614,9 @@
       "tenant": "A",
       "author": {
         "id": "2015-01-07 09:04:03.7126",
-        "firstName": "Ines",
-        "lastName": "Augustin",
-        "userName": "A5514",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -659,9 +659,9 @@
       "tenant": "A",
       "author": {
         "id": "2015-01-07 09:04:03.7126",
-        "firstName": "Ines",
-        "lastName": "Augustin",
-        "userName": "A5514",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1420412400000,
         "dateOfLeave": 32503590000000
       },
@@ -704,9 +704,9 @@
       "tenant": "A",
       "author": {
         "id": "2010-07-09 12:00:20.000017",
-        "firstName": "Michael",
-        "lastName": "Ilger",
-        "userName": "A2895",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
@@ -749,9 +749,9 @@
       "tenant": "A",
       "author": {
         "id": "2010-07-09 12:00:20.000017",
-        "firstName": "Michael",
-        "lastName": "Ilger",
-        "userName": "A2895",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
@@ -794,9 +794,9 @@
       "tenant": "A",
       "author": {
         "id": "2015-06-01 08:46:35.7224",
-        "firstName": "Michael",
-        "lastName": "Bierbaumer",
-        "userName": "A5810",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1433109600000,
         "dateOfLeave": 32503590000000
       },
@@ -839,9 +839,9 @@
       "tenant": "A",
       "author": {
         "id": "2007-08-30 10:26:47.3515",
-        "firstName": "Branko",
-        "lastName": "Petro",
-        "userName": "A2216",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -884,9 +884,9 @@
       "tenant": "A",
       "author": {
         "id": "2007-08-30 10:26:47.3515",
-        "firstName": "Branko",
-        "lastName": "Petro",
-        "userName": "A2216",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -929,9 +929,9 @@
       "tenant": "A",
       "author": {
         "id": "2015-06-01 08:46:35.7224",
-        "firstName": "Michael",
-        "lastName": "Bierbaumer",
-        "userName": "A5810",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1433109600000,
         "dateOfLeave": 32503590000000
       },
@@ -974,9 +974,9 @@
       "tenant": "A",
       "author": {
         "id": "2007-08-30 10:26:47.3515",
-        "firstName": "Branko",
-        "lastName": "Petro",
-        "userName": "A2216",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1185919200000,
         "dateOfLeave": 32503590000000
       },
@@ -1004,7 +1004,7 @@
       },
       "project": {
         "id": "2015-09-24 12:24:21.7558",
-        "name": " Transformation Mobile Application 7856",
+        "name": " Transformation Mobile Application",
         "state": {
           "name": "In Arbeit",
           "value": "I"
@@ -1019,9 +1019,9 @@
       "tenant": "A",
       "author": {
         "id": "2010-07-09 12:00:20.000017",
-        "firstName": "Michael",
-        "lastName": "Ilger",
-        "userName": "A2895",
+        "firstName": "Max",
+        "lastName": "Mustermann",
+        "userName":"b1234",
         "dateOfEntry": 1278626400000,
         "dateOfLeave": 32503590000000
       },
