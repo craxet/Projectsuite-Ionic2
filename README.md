@@ -1,8 +1,8 @@
-# Projectsuite Mobile
+# Projectsuite Ionic 2
 
 <img src="https://github.com/msio777/projectsuite.mobile/blob/master/projectsuite_logo.png"  width="60">
 
-Projectsuite Mobile is mobile version of system that is managing working steps of employees in european largest insurance company. 
+Projectsuite Ionic 2 is mobile version of system that is managing working steps of employees in european largest insurance company written in [Ionic 2](http://ionic.io/2) 
 
 ## Screenshots
 iOS
@@ -56,3 +56,23 @@ type UnitOfTime = ("year" | "years" | "y" |
               "second" | "seconds" | "s" |
               "millisecond" | "milliseconds" | "ms");
 ```
+
+## Start 
+```shell
+ionic serve
+```
+Login `a1234` Pass: `1234`
+
+Projectsuite uses fake REST API [JSON Server](https://github.com/typicode/json-server) and is started with `ionic serve`. In root directory is config file `json-server.json` where can be set port and delay of this API. Default values are
+
+```json
+{
+  "port": 4000,
+  "delay": 200
+}
+```
+Data is in `db.json` file stored in root directory.
+
+
+
+
