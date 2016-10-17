@@ -24,8 +24,8 @@ Android
 ```shell
 npm install
 ```
-* you need to add argument `"isoWeek"` in moment typescript definition because it is missing. It will not be added until version
-[2.16.0](https://github.com/moment/moment/milestone/34). Go to `node_modules/moment/moment.d.ts` and at `line 216` add `"isoWeek" |` after `"w" |`
+* you need to add argument `"isoWeek"` to `UnitOfTime` in moment typescript definition because it is missing. It will not be added until version [2.16.0](https://github.com/moment/moment/milestone/34). 
+Go to `node_modules/moment/moment.d.ts` and  add `"isoWeek" |` after `"w" |` to type `UnitOfTime`
 
 before
 
