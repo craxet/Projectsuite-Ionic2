@@ -61,7 +61,7 @@ type UnitOfTime = ("year" | "years" | "y" |
 ```shell
 ionic serve
 ```
-Login `a1234` Pass: `1234`
+Login `b1234` Pass: `1234`
 
 Projectsuite uses fake REST API [JSON Server](https://github.com/typicode/json-server) and is started with `ionic serve`. In root directory is config file `json-server.json` where can be set port and delay of this API. Default values are
 
