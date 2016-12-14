@@ -24,38 +24,6 @@ Android
 ```shell
 npm install
 ```
-* you need to add argument `"isoWeek"` to `UnitOfTime` in moment typescript definition because it is missing. It will not be added until version [2.16.0](https://github.com/moment/moment/milestone/34). 
-Go to `node_modules/moment/moment.d.ts` and  add `"isoWeek" |` after `"w" |` to type `UnitOfTime`
-
-before
-
-```ts
-type UnitOfTime = ("year" | "years" | "y" |
-              "quarter" | "quarters" | "Q" |
-              "month" | "months" | "M" |
-              "week" | "weeks" | "w" |
-              "date" | "dates" | "d" |
-              "day" | "days" |
-              "hour" | "hours" | "h" |
-              "minute" | "minutes" | "m" |
-              "second" | "seconds" | "s" |
-              "millisecond" | "milliseconds" | "ms");
-```
-
-after
-
-```ts
-type UnitOfTime = ("year" | "years" | "y" |
-              "quarter" | "quarters" | "Q" |
-              "month" | "months" | "M" |
-              "week" | "weeks" | "w" | "isoWeek" |
-              "date" | "dates" | "d" |
-              "day" | "days" |
-              "hour" | "hours" | "h" |
-              "minute" | "minutes" | "m" |
-              "second" | "seconds" | "s" |
-              "millisecond" | "milliseconds" | "ms");
-```
 
 ## Start in Browser 
 ```shell
